@@ -216,3 +216,13 @@ After generating the code, include instructions for how to run it locally:
    - open `http://localhost:3000`
 
 Make sure the final result looks like a polished prototype, not a plain demo.
+
+
+-----
+
+instead of monthly amount, we should be able to take networth and calculate cities based on it
+
+
+-----
+
+can we add a navigation menu on top with links - Calculator, Blog, About us to the left, Sign In, Join to the right top,

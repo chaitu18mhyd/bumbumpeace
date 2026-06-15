@@ -8,15 +8,20 @@ import FilterPanel, {
 } from "@/components/FilterPanel";
 import { cities } from "@/data/cities";
 
-const DEFAULT_BUDGET = 4000;
+const DEFAULT_NET_WORTH = 1_200_000;
+const DEFAULT_WITHDRAWAL_RATE = 0.04;
 
 export default function Home() {
-  const [budget, setBudget] = useState<number>(DEFAULT_BUDGET);
+  const [netWorth, setNetWorth] = useState<number>(DEFAULT_NET_WORTH);
+  const [withdrawalRate, setWithdrawalRate] = useState<number>(
+    DEFAULT_WITHDRAWAL_RATE
+  );
   const [region, setRegion] = useState<RegionFilter>("All");
   const [lifestyle, setLifestyle] = useState<LifestyleFilter>("All");
   const [onlyUnderBudget, setOnlyUnderBudget] = useState<boolean>(false);
 
-  const safeBudget = Number.isFinite(budget) ? budget : 0;
+  const safeNetWorth = Number.isFinite(netWorth) ? Math.max(netWorth, 0) : 0;
+  const safeBudget = Math.round((safeNetWorth * withdrawalRate) / 12);
 
   const filteredCities = useMemo(() => {
     return cities.filter((city) => {
@@ -33,7 +38,7 @@ export default function Home() {
   );
 
   return (
-    <main>
+    <main id="top">
       {/* Hero */}
       <header className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-cream to-cream">
         <div
@@ -72,14 +77,17 @@ export default function Home() {
       {/* Explore section */}
       <section
         id="explore"
-        className="mx-auto max-w-6xl scroll-mt-4 px-4 pb-20 pt-6 sm:px-6 sm:pt-10"
+        className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-20 pt-6 sm:px-6 sm:pt-10"
       >
         <FilterPanel
-          budget={budget}
+          netWorth={netWorth}
+          withdrawalRate={withdrawalRate}
+          monthlyBudget={safeBudget}
           region={region}
           lifestyle={lifestyle}
           onlyUnderBudget={onlyUnderBudget}
-          onBudgetChange={setBudget}
+          onNetWorthChange={setNetWorth}
+          onWithdrawalRateChange={setWithdrawalRate}
           onRegionChange={setRegion}
           onLifestyleChange={setLifestyle}
           onOnlyUnderBudgetChange={setOnlyUnderBudget}

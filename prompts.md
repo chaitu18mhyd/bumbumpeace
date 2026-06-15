@@ -1,4 +1,4 @@
-Prompts
+Prompts I have used to create this website
 
 what is the best way to create a new website and deploy, is there a reliable online website that I can use? or should I create one from scratch?
 
@@ -250,3 +250,15 @@ generate image that is industry standard, feel free to keep versions in the repo
 add a todo folder, and add a file called logo.txt and explain what you think is left, not needed to do right now.
 
 The website has a lot of text up top, we need to get to the point quickly, can we ask the main net worth question quicker on top? and move unnecessary stuff to the bottom of the page. We can be blunt about it - Enter your current/expected net worth to know where you can retire or something more beautified version of it
+
+Right now there are too many options to choose, networth annual withdrawal rate, region, etc, we just need 1 data point as main, that is net worth, everything else should be under Filters with assumptions selected and modifiable.
+
+add country flags to UI cards
+
+suggest me a way to add rules to this repo that AI should follow everytime a prompt is made. For ex: one rule to follow is that this website needs to be apple and android friendly at all times
+
+yes, it needs to be accessible, add a rule
+
+The data is available in the console for everyone to see, is golang suggested for the server side to store some of the settings and also use it for sign ins and logins?
+
+bumbumpeace-api should co-exist within bumbumpeace for now, in a later time I can push it separately if needed

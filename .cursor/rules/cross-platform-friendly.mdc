@@ -1,0 +1,43 @@
+---
+description: BumBumSafe must stay Apple- and Android-friendly at all times
+alwaysApply: true
+---
+
+# Apple & Android Friendly (always)
+
+This website must look and work great on iPhone (Safari) **and** Android
+(Chrome) first, then scale up to tablet and desktop. Verify every UI change
+against both platforms before considering it done.
+
+## Always do
+
+- **Mobile-first, responsive**: design for ~375px width first; scale up with
+  `sm:`/`md:`/`lg:`. Never ship a layout that overflows on a phone.
+- **Touch targets ≥ 44×44px**: buttons, links, toggles, and the hamburger must
+  be comfortably tappable.
+- **No hover-only interactions**: anything reachable by hover must also work on
+  tap/focus.
+- **Respect notches/safe areas** where relevant using `env(safe-area-inset-*)`.
+- **Keep PWA/install assets in sync**: `app/icon.png`, `app/apple-icon.png`,
+  and `app/manifest.ts` (Android icons) must all stay valid.
+- **Cross-platform rendering**: prefer assets/glyphs that render identically on
+  iOS and Android. (Example: emoji country flags render as letters on some
+  Android/Windows builds — use SVG flags if pixel-consistency matters.)
+
+## Avoid
+
+- Fixed pixel widths that break on small screens.
+- Platform-only CSS without a fallback (test `backdrop-blur`, sticky headers).
+- Tiny fonts/controls that fail mobile usability.
+
+## Example
+
+```tsx
+// ❌ BAD — hover-only, tiny target
+<div className="hidden hover:block">Menu</div>
+
+// ✅ GOOD — works on tap, large enough target
+<button className="inline-flex h-10 w-10 items-center justify-center md:hidden">
+  Menu
+</button>
+```

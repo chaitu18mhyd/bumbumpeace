@@ -1,0 +1,45 @@
+---
+description: BumBumSafe must be accessible (WCAG-minded) at all times
+alwaysApply: true
+---
+
+# Accessibility (always)
+
+Every UI change must keep the site usable for keyboard, screen reader, and
+low-vision users. Treat accessibility as part of "done," not a follow-up.
+
+## Always do
+
+- **Semantic HTML first**: use `<button>`, `<a>`, `<nav>`, `<header>`,
+  `<main>`, `<section>`, `<ul>/<li>`, headings in order. Don't make a `<div>`
+  clickable when a `<button>`/`<a>` fits.
+- **Label every control**: inputs/selects need an associated `<label htmlFor>`.
+  Icon-only controls need `aria-label` (e.g. the hamburger, flag emoji).
+- **Keyboard operable**: everything works with Tab/Enter/Space. Don't put
+  focusable elements in hidden/collapsed regions without `tabIndex={-1}`.
+- **Visible focus**: keep `focus-visible:ring-*` styles; never remove outlines
+  without a replacement.
+- **State to assistive tech**: use `aria-expanded`/`aria-controls` on toggles,
+  `aria-hidden` on decorative/collapsed content, `aria-live` for dynamic text
+  (e.g. the results summary).
+- **Color contrast**: text must meet WCAG AA (~4.5:1). Don't rely on color
+  alone — pair it with text/icon (e.g. "Under budget" + dot, not just green).
+- **Respect motion**: heavy animations should honor `prefers-reduced-motion`.
+
+## Example
+
+```tsx
+// ❌ BAD — clickable div, no label, no focus state
+<div onClick={toggle}>☰</div>
+
+// ✅ GOOD — real button, labeled, keyboard + focus ready
+<button
+  type="button"
+  onClick={toggle}
+  aria-label={open ? "Close menu" : "Open menu"}
+  aria-expanded={open}
+  className="focus-visible:ring-2 focus-visible:ring-brand-400"
+>
+  <span aria-hidden="true">☰</span>
+</button>
+```

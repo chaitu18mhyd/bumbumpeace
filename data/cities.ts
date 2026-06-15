@@ -16,6 +16,22 @@ export type City = {
   tags: string[];
 };
 
+export const COUNTRY_FLAGS: Record<string, string> = {
+  Portugal: "🇵🇹",
+  Spain: "🇪🇸",
+  Colombia: "🇨🇴",
+  Mexico: "🇲🇽",
+  Thailand: "🇹🇭",
+  Malaysia: "🇲🇾",
+  Vietnam: "🇻🇳",
+  Panama: "🇵🇦",
+  Italy: "🇮🇹",
+};
+
+export function flagFor(country: string): string {
+  return COUNTRY_FLAGS[country] ?? "🏳️";
+}
+
 export const REGIONS: Region[] = [
   "North America",
   "Europe",

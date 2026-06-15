@@ -1,4 +1,4 @@
-import type { City } from "@/data/cities";
+import { type City, flagFor } from "@/data/cities";
 import { formatUSD } from "@/lib/format";
 
 type CityCardProps = {
@@ -19,13 +19,22 @@ export default function CityCard({ city, budget }: CityCardProps) {
   return (
     <article className="group flex h-full flex-col rounded-3xl border border-sand bg-white p-5 shadow-sm ring-1 ring-black/[0.03] transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-within:-translate-y-1 focus-within:shadow-lg sm:p-6">
       <header className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h3 className="truncate text-lg font-semibold tracking-tight text-ink sm:text-xl">
-            {city.city}
-          </h3>
-          <p className="mt-0.5 text-sm text-muted">
-            {city.country} · {city.region}
-          </p>
+        <div className="flex min-w-0 items-start gap-3">
+          <span
+            role="img"
+            aria-label={`Flag of ${city.country}`}
+            className="mt-0.5 shrink-0 text-2xl leading-none sm:text-3xl"
+          >
+            {flagFor(city.country)}
+          </span>
+          <div className="min-w-0">
+            <h3 className="truncate text-lg font-semibold tracking-tight text-ink sm:text-xl">
+              {city.city}
+            </h3>
+            <p className="mt-0.5 text-sm text-muted">
+              {city.country} · {city.region}
+            </p>
+          </div>
         </div>
         <span
           className={`inline-flex shrink-0 items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${

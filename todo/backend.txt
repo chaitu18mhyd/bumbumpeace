@@ -1,0 +1,51 @@
+BumBumSafe — Backend / Auth TODO
+================================
+Direction chosen: Go API + managed auth (Cognito + go-jwt-middleware),
+matching the happyreturns monorepo stack. Build in phases, smallest slice first.
+
+Location note
+-------------
+- The Go API co-exists inside the website repo at bumbumpeace/bumbumpeace-api
+  (its own Go module). It can be pushed to a separate repo later with no code
+  changes if/when needed.
+
+Done
+----
+- Phase 1: Go city-data API (bumbumpeace/bumbumpeace-api/, net/http, in-memory data).
+    - GET /cities (optional ?region= & ?lifestyle=), GET /health, CORS for
+      http://localhost:3000.
+    - Website fetches it server-side via lib/getCities.ts with automatic
+      fallback to bundled mock data if the API is down.
+    - app/page.tsx is now a Server Component; interactive logic lives in
+      components/HomeClient.tsx.
+
+What's left (not needed right now)
+----------------------------------
+1. Phase 2 — Authentication
+   - Sign up / sign in via a managed identity provider (Cognito preferred to
+     match the monorepo; Clerk/Auth0 are alternatives).
+   - Do NOT hand-roll passwords/sessions/MFA.
+   - Go validates the JWT on protected routes using go-jwt-middleware.
+   - Frontend: wire the existing "Sign In" / "Join" nav buttons to real flows;
+     store tokens in httpOnly cookies (not localStorage).
+
+2. Phase 3 — Per-user settings (requires Phase 2)
+   - GET/PUT /me/settings to persist net worth + saved cities per user.
+   - Needs a real datastore (Postgres or DynamoDB) — pick one.
+   - Authorization in Go: users can only read/write their own settings.
+
+3. Data-visibility note
+   - City data is public, so it appearing in page source/network is fine.
+   - The "data in console" concern only fully goes away for data gated behind
+     auth and only sent to authorized users (handled by Phases 2-3).
+
+4. Productionization (later)
+   - Move city data from in-memory to a datastore if it grows / needs editing.
+   - Config via env (gohelpers/config style), secrets via AWS Secrets Manager.
+   - Deploy the Go service (container/helm) the way other monorepo services are.
+   - Add tests for handlers + auth middleware.
+
+Bottom line
+-----------
+Phase 1 (data ownership) is live. Auth and per-user settings are the next,
+heavier slices — pick them up when accounts/saved settings are actually needed.

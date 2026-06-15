@@ -1,0 +1,69 @@
+BumBumSafe — Logo / Branding TODO
+=================================
+Status: the core icon set is DONE and wired in. Everything below is
+"nice to have" polish that is NOT needed right now for the prototype.
+
+Already done (for reference)
+----------------------------
+- Custom logo generated: denim back pocket with a wallet ("your money is
+  safe / retire with dignity").
+- Industry-standard, optimized icon set produced from a 1024x1024 master:
+    public/logo/bumbumsafe-logo-1024.png  (full-res master, kept)
+    public/logo/bumbumsafe-logo-512.png   (PWA)
+    public/logo/bumbumsafe-logo-192.png   (PWA)
+    public/logo/bumbumsafe-logo-128.png   (navbar @2x-3x)
+    app/apple-icon.png                    (180x180 Apple touch icon)
+    app/icon.png                          (32x32 favicon)
+    public/bumbumsafe-logo.png            (64x64 legacy fallback)
+- Web app manifest (app/manifest.ts) referencing the 192/512 icons.
+- Navbar uses /logo/bumbumsafe-logo-128.png; "BumBumSafe" wordmark.
+
+
+What's left (deferred — do later, not now)
+------------------------------------------
+1. Vector source (SVG)
+   - Current assets are raster PNGs only. A true SVG master would scale
+     infinitely and shrink file size. Would need a redraw in Figma/Inkscape
+     or an AI->SVG pass. Nice for a real launch; unnecessary for a prototype.
+
+2. Multi-resolution favicon.ico
+   - We rely on app/icon.png (32x32), which all modern browsers accept.
+     A classic favicon.ico bundling 16/32/48 is the "belt and suspenders"
+     move for very old browsers. Skipped: needs ImageMagick/png2ico; low value.
+
+3. Social / Open Graph share image
+   - No opengraph-image / twitter-image yet, so link previews (Slack, iMessage,
+     social) won't show a custom card. Add app/opengraph-image.png (1200x630)
+     when the site is actually shared publicly.
+
+4. Master aspect ratio
+   - The generated master was 1536x1024 and we center-cropped to 1024x1024.
+     The crop looks fine, but a purpose-made 1:1 master (or generous padding)
+     would guarantee no edge clipping at all sizes. Revisit only if the icon
+     ever looks tight at a given size.
+
+5. next/image optimization
+   - Navbar logo uses a plain <img>. Switching to next/image would add
+     automatic responsive sizing/lazy-loading. Marginal benefit for a single
+     tiny 32px icon; skip for now.
+
+6. Maskable PWA icon
+   - manifest icons use purpose "any". For polished Android home-screen
+     adaptive icons, add a separate "maskable" variant with safe-zone padding.
+     Only matters if BumBumSafe becomes an installable PWA.
+
+7. Dark-mode / monochrome variant
+   - A single light-background squircle today. A dark-mode-friendly or
+     monochrome mark would help if a dark theme or print/letterhead use shows up.
+
+8. Brand consistency pass
+   - Logo, favicon, and theme color (#fbf7f0) are aligned. If brand colors
+     change later, regenerate all sizes from the master with sips
+     (see commands history) to keep everything in sync.
+
+
+Bottom line
+-----------
+Nothing here blocks the prototype. The site has a correct, optimized,
+standards-compliant icon set today. Pick these up only when moving toward
+a real/public launch.

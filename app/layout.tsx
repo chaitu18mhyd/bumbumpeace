@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "RetireWell — Find Cities Where Your Retirement Money Goes Further",
+  title: "BumBumSafe — Find Cities Where Your Retirement Money Goes Further",
   description:
     "Compare estimated monthly retirement expenses across popular cities and countries. Prototype estimates only — not financial advice.",
 };

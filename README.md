@@ -1,4 +1,4 @@
-# RetireWell — Retirement City Recommendation Prototype
+# BumBumSafe — Retirement City Recommendation Prototype
 
 A mobile-first, responsive single-page prototype that helps users explore cities
 where they could retire based on expected monthly expenses.

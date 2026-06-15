@@ -39,47 +39,23 @@ export default function Home() {
 
   return (
     <main id="top">
-      {/* Hero */}
-      <header className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-cream to-cream">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-200/40 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -left-20 top-32 h-72 w-72 rounded-full bg-under-100/50 blur-3xl"
-        />
-        <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-14 text-center sm:px-6 sm:pb-16 sm:pt-20">
-          <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/70 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-brand-700">
-            Retirement city explorer
-          </p>
-          <h1 className="mx-auto mt-5 max-w-3xl text-balance text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl">
-            Find Cities Where Your Retirement Money Goes Further
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg">
-            Compare estimated monthly retirement expenses across popular cities
-            and countries.
-          </p>
-          <div className="mt-8 flex flex-col items-center gap-3">
-            <a
-              href="#explore"
-              className="inline-flex items-center justify-center rounded-full bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-            >
-              Explore Cities
-            </a>
-            <p className="text-xs text-muted">
-              Prototype estimates only — not financial advice.
-            </p>
-          </div>
-        </div>
-      </header>
-
-      {/* Explore section */}
+      {/* Get to the point: ask for net worth immediately */}
       <section
         id="explore"
         className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-20 pt-6 sm:px-6 sm:pt-10"
       >
-        <FilterPanel
+        <div className="mx-auto max-w-3xl text-center">
+          <h1 className="text-balance text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
+            Enter your net worth to see where you can retire
+          </h1>
+          <p className="mx-auto mt-3 max-w-xl text-pretty text-sm text-muted sm:text-base">
+            We turn it into a sustainable monthly budget and instantly show the
+            cities you can actually afford.
+          </p>
+        </div>
+
+        <div className="mt-6">
+          <FilterPanel
           netWorth={netWorth}
           withdrawalRate={withdrawalRate}
           monthlyBudget={safeBudget}
@@ -91,7 +67,8 @@ export default function Home() {
           onRegionChange={setRegion}
           onLifestyleChange={setLifestyle}
           onOnlyUnderBudgetChange={setOnlyUnderBudget}
-        />
+          />
+        </div>
 
         <div className="mt-6 flex flex-wrap items-baseline justify-between gap-2">
           <p
@@ -129,9 +106,36 @@ export default function Home() {
         )}
       </section>
 
+      {/* Marketing / context moved below the tool */}
+      <section
+        id="about"
+        className="relative scroll-mt-20 overflow-hidden border-t border-sand bg-gradient-to-b from-cream to-brand-50"
+      >
+        <div className="relative mx-auto max-w-5xl px-4 py-14 text-center sm:px-6 sm:py-20">
+          <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/70 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-brand-700">
+            Retirement city explorer
+          </p>
+          <h2 className="mx-auto mt-5 max-w-3xl text-balance text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
+            Find Cities Where Your Retirement Money Goes Further
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg">
+            Compare estimated monthly retirement expenses across popular cities
+            and countries. BumBumSafe turns your net worth into a realistic
+            monthly budget using a safe withdrawal rate, then ranks places where
+            you can retire comfortably — and with dignity.
+          </p>
+          <a
+            href="#top"
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+          >
+            Back to the calculator
+          </a>
+        </div>
+      </section>
+
       <footer className="border-t border-sand bg-sand/40">
         <div className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-muted sm:px-6">
-          RetireWell · Prototype with mock data · Estimates only — not financial
+          BumBumSafe · Prototype with mock data · Estimates only — not financial
           advice.
         </div>
       </footer>

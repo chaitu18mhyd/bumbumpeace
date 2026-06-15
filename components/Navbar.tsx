@@ -17,16 +17,52 @@ export default function Navbar() {
         aria-label="Primary"
         className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
       >
-        {/* Brand + left links */}
-        <div className="flex items-center gap-6">
+        {/* Left: hamburger (mobile) + brand + desktop links */}
+        <div className="flex items-center gap-3 md:gap-6">
+          {/* Mobile toggle (hamburger <-> X animation) */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-sand bg-white text-ink transition hover:bg-sand md:hidden"
+          >
+            <span className="relative flex h-5 w-5 flex-col items-center justify-center gap-[5px]">
+              <span
+                aria-hidden="true"
+                className={`block h-0.5 w-5 rounded-full bg-ink transition-transform duration-300 ease-out ${
+                  open ? "translate-y-[7px] rotate-45" : ""
+                }`}
+              />
+              <span
+                aria-hidden="true"
+                className={`block h-0.5 w-5 rounded-full bg-ink transition-all duration-200 ease-out ${
+                  open ? "scale-x-0 opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                aria-hidden="true"
+                className={`block h-0.5 w-5 rounded-full bg-ink transition-transform duration-300 ease-out ${
+                  open ? "-translate-y-[7px] -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
+
           <a
             href="#top"
             className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-ink"
+            aria-label="BumBumSafe home"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand-500 text-sm font-black text-white">
-              R
-            </span>
-            RetireWell
+            <img
+              src="/logo/bumbumsafe-logo-128.png"
+              alt="BumBumSafe logo"
+              width={32}
+              height={32}
+              className="h-8 w-8 rounded-xl object-cover"
+            />
+            <span className="hidden md:inline">BumBumSafe</span>
           </a>
 
           <ul className="hidden items-center gap-1 md:flex">
@@ -43,63 +79,37 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* Right actions */}
-        <div className="hidden items-center gap-2 md:flex">
+        {/* Right actions (always visible) */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <a
             href="#signin"
-            className="rounded-full px-4 py-2 text-sm font-semibold text-ink transition hover:bg-sand"
+            className="rounded-full px-3 py-2 text-sm font-semibold text-ink transition hover:bg-sand sm:px-4"
           >
             Sign In
           </a>
           <a
             href="#join"
-            className="rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+            className="rounded-full bg-brand-500 px-3 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream sm:px-4"
           >
             Join
           </a>
         </div>
-
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-sand bg-white text-ink transition hover:bg-sand md:hidden"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-5 w-5"
-            aria-hidden="true"
-          >
-            {open ? (
-              <>
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </>
-            ) : (
-              <>
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </>
-            )}
-          </svg>
-        </button>
       </nav>
 
-      {/* Mobile menu */}
-      {open && (
+      {/* Mobile menu (slide / fade animation) */}
+      <div
+        id="mobile-menu"
+        aria-hidden={!open}
+        className={`overflow-hidden border-t border-sand bg-cream transition-all duration-300 ease-out md:hidden ${
+          open
+            ? "max-h-96 opacity-100"
+            : "pointer-events-none max-h-0 border-transparent opacity-0"
+        }`}
+      >
         <div
-          id="mobile-menu"
-          className="border-t border-sand bg-cream px-4 py-3 md:hidden"
+          className={`px-4 py-3 transition-transform duration-300 ease-out ${
+            open ? "translate-y-0" : "-translate-y-3"
+          }`}
         >
           <ul className="flex flex-col gap-1">
             {navLinks.map((link) => (
@@ -107,6 +117,7 @@ export default function Navbar() {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
+                  tabIndex={open ? 0 : -1}
                   className="block rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition hover:bg-sand"
                 >
                   {link.label}
@@ -114,24 +125,8 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="mt-2 flex flex-col gap-2 border-t border-sand pt-3">
-            <a
-              href="#signin"
-              onClick={() => setOpen(false)}
-              className="rounded-full border border-sand px-4 py-2.5 text-center text-sm font-semibold text-ink transition hover:bg-sand"
-            >
-              Sign In
-            </a>
-            <a
-              href="#join"
-              onClick={() => setOpen(false)}
-              className="rounded-full bg-brand-500 px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-brand-600"
-            >
-              Join
-            </a>
-          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

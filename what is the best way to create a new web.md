@@ -225,4 +225,28 @@ instead of monthly amount, we should be able to take networth and calculate citi
 
 -----
 
-can we add a navigation menu on top with links - Calculator, Blog, About us to the left, Sign In, Join to the right top,
+can we add a navigation menu on top with links - Calculator, Blog, About us to the left, Sign In, Join to the right top
+
+----
+
+need slide animation in mobile while clicking the nav button, the close button appearance needs to animated as well
+
+----
+
+Sign in and join links should always be shown, for mobile, no need to show the name Retirewell or whatever - just show the logo, move the hamburger to the left, keep the sign in and join link on top right
+
+----
+
+the website is called BumBumSafe meaning your wallet is safe or your behind is safe in a funny manner of saying
+
+----
+
+the image needs to be a jeans pant pocket, might contain a wallet and should signify that this website is to help people retire with dignity
+
+---
+generate image that is industry standard, feel free to keep versions in the repo but only use the one that is of industry website standard
+
+----
+add a todo folder, and add a file called logo.txt and explain what you think is left, not needed to do right now.
+
+The website has a lot of text up top, we need to get to the point quickly, can we ask the main net worth question quicker on top? and move unnecessary stuff to the bottom of the page. We can be blunt about it - Enter your current/expected net worth to know where you can retire or something more beautified version of it

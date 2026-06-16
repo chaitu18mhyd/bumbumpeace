@@ -1,0 +1,41 @@
+---
+description: A native mobile app is planned — design features and APIs to be client-agnostic
+alwaysApply: true
+---
+
+# A Mobile App Is Coming — Build Client-Agnostic
+
+BumBumSafe currently has a web client, but a native **mobile app (iOS/Android)
+is planned**. Treat the web as *one of several* clients. When adding any feature
+or API, keep the future mobile app in mind.
+
+## Always do
+
+- **Put shared logic + data behind the Go API** (`bumbumpeace-api`), not only in
+  the Next.js layer. Mobile cannot reuse Server Components / Route Handlers — it
+  needs plain HTTP/JSON. Business rules (budget math, filtering, auth,
+  settings) should be reachable via the API so every client shares them.
+- **Keep the API client-agnostic**: clean JSON, no web-only assumptions
+  (no HTML, no cookies-only flows that mobile can't use easily — prefer
+  token-based auth that works for web *and* mobile).
+- **Version the API** (e.g. `/v1/...`) so mobile can depend on a stable contract
+  across web releases.
+- **Design auth to work cross-platform** (Cognito + JWT validated by
+  `go-jwt-middleware`); avoid web-only session assumptions.
+- **Web-specific code stays in the web app**; don't bake presentation concerns
+  into API responses.
+
+## When proposing features
+
+- State briefly how it works for **both web and a future mobile client**
+  (e.g. "expose via `GET /v1/cities`; web and mobile both consume it").
+- If something is intentionally web-only (SEO page, marketing), call it out.
+
+## Avoid
+
+- Putting durable business logic *only* in Next.js where mobile can't reach it.
+- API responses tailored to the web DOM.
+- Auth/session designs that don't translate to native apps.
+
+> Not every change needs mobile work now — just don't make choices that block a
+> mobile app later.

@@ -5,6 +5,8 @@ type CityCardProps = {
   city: City;
   budgetUsd: number;
   currency: CurrencyCode;
+  selected: boolean;
+  onSelect: () => void;
 };
 
 const lifestyleStyles: Record<City["lifestyle"], string> = {
@@ -13,12 +15,25 @@ const lifestyleStyles: Record<City["lifestyle"], string> = {
   Premium: "bg-brand-300 text-brand-700",
 };
 
-export default function CityCard({ city, budgetUsd, currency }: CityCardProps) {
+export default function CityCard({
+  city,
+  budgetUsd,
+  currency,
+  selected,
+  onSelect,
+}: CityCardProps) {
   const isUnderBudget = city.monthlyCost <= budgetUsd;
   const differenceUsd = Math.abs(city.monthlyCost - budgetUsd);
 
   return (
-    <article className="group flex h-full flex-col rounded-3xl border border-sand bg-white p-5 shadow-sm ring-1 ring-black/[0.03] transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-within:-translate-y-1 focus-within:shadow-lg sm:p-6">
+    <article
+      onClick={onSelect}
+      className={`group flex h-full cursor-pointer flex-col rounded-3xl border bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-within:-translate-y-1 focus-within:shadow-lg sm:p-6 ${
+        selected
+          ? "border-brand-400 ring-2 ring-brand-300"
+          : "border-sand ring-1 ring-black/[0.03]"
+      }`}
+    >
       <header className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
           <span
@@ -30,7 +45,18 @@ export default function CityCard({ city, budgetUsd, currency }: CityCardProps) {
           </span>
           <div className="min-w-0">
             <h3 className="truncate text-lg font-semibold tracking-tight text-ink sm:text-xl">
-              {city.city}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSelect();
+                }}
+                aria-expanded={selected}
+                aria-controls="city-detail-panel"
+                className="rounded text-left outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+              >
+                {city.city}
+              </button>
             </h3>
             <p className="mt-0.5 text-sm text-muted">
               {city.country} · {city.region}

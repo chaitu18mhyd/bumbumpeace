@@ -1,5 +1,6 @@
 Prompts I have used to create this website
 
+6/14
 what is the best way to create a new website and deploy, is there a reliable online website that I can use? or should I create one from scratch?
 
 I definitely would need database and user accounts at some point if not from the starting point
@@ -270,3 +271,17 @@ in the networth textbox, text appears without commas etc - 1200000. can we autom
 it is not straightforward to look and see if USD was clickable or if it was a dropdown
 
 how to add monthly income like social security or rental income
+
+6/15
+show a max of 3 cities at a time and add a show more button at the bottom to load more
+
+upon clicking a city we should open another card at the bottom that contains a pie chart with various expenses shown - Rent, Travel, etc 
+
+The Load more should be below the pie chart card.
+Also, the pie chart needs to be bigger. The colors should be financial friendly and not bland. Also, we should draw lines pointing from the pie chart with Rent etc instead of listing as a list.
+
+can we make the piechart look like this, the colors look nice, avoid red or warning colors, use friendly colors.
+
+Also, I need a way to point the new piechart UI card to point to the card clicked.
+
+does all the cities have the same percentages of rent/food etc categories currently, can we make this accurate per city?

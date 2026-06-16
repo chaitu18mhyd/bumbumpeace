@@ -14,6 +14,8 @@ export type City = {
   lifestyle: Lifestyle;
   description: string;
   tags: string[];
+  /** Curated per-city split of monthly cost by category label (sums to 1.0). */
+  expenseShares?: Record<string, number>;
 };
 
 export const COUNTRY_FLAGS: Record<string, string> = {

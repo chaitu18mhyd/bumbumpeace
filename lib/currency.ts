@@ -75,3 +75,28 @@ export function formatNumber(amount: number, code: CurrencyCode): string {
     maximumFractionDigits: 0,
   }).format(amount);
 }
+
+function trimNum(n: number): string {
+  return (Math.round(n * 100) / 100).toString();
+}
+
+/**
+ * A short, plain-English magnitude for an amount, to help users sanity-check
+ * what they typed. Uses the lakh/crore system for INR, otherwise
+ * thousand/million/billion.
+ */
+export function amountInWords(amount: number, code: CurrencyCode): string {
+  if (!Number.isFinite(amount) || amount <= 0) return "";
+
+  if (code === "INR") {
+    if (amount >= 1e7) return `${trimNum(amount / 1e7)} crore`;
+    if (amount >= 1e5) return `${trimNum(amount / 1e5)} lakh`;
+    if (amount >= 1e3) return `${trimNum(amount / 1e3)} thousand`;
+    return `${Math.round(amount)}`;
+  }
+
+  if (amount >= 1e9) return `${trimNum(amount / 1e9)} billion`;
+  if (amount >= 1e6) return `${trimNum(amount / 1e6)} million`;
+  if (amount >= 1e3) return `${trimNum(amount / 1e3)} thousand`;
+  return `${Math.round(amount)}`;
+}

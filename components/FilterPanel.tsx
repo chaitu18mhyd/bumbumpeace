@@ -1,8 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import {
+  type ChangeEvent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { LIFESTYLES, REGIONS } from "@/data/cities";
 import {
+  amountInWords,
   CURRENCIES,
   type CurrencyCode,
   currencyInfo,
@@ -13,6 +20,58 @@ import {
 export type RegionFilter = "All" | (typeof REGIONS)[number];
 export type LifestyleFilter = "All" | (typeof LIFESTYLES)[number];
 
+// Run layout effects only on the client (avoids SSR warnings).
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+function countDigits(s: string): number {
+  return (s.match(/\d/g) || []).length;
+}
+
+function caretFromDigits(formatted: string, digits: number): number {
+  if (digits <= 0) return 0;
+  let count = 0;
+  for (let i = 0; i < formatted.length; i++) {
+    if (formatted[i] >= "0" && formatted[i] <= "9") {
+      count++;
+      if (count === digits) return i + 1;
+    }
+  }
+  return formatted.length;
+}
+
+/**
+ * Controlled money input that formats with thousands separators while keeping
+ * the caret in place (by counting digits to the left of the cursor instead of
+ * snapping to the end). Returns props to spread onto an <input>.
+ */
+function useMoneyInput(
+  value: number,
+  currency: CurrencyCode,
+  onChange: (n: number) => void
+) {
+  const ref = useRef<HTMLInputElement>(null);
+  const pendingCaret = useRef<number | null>(null);
+  const display = Number.isFinite(value) ? formatNumber(value, currency) : "";
+
+  useIsoLayoutEffect(() => {
+    if (pendingCaret.current === null || !ref.current) return;
+    const pos = caretFromDigits(ref.current.value, pendingCaret.current);
+    ref.current.setSelectionRange(pos, pos);
+    pendingCaret.current = null;
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const el = e.target;
+    const caret = el.selectionStart ?? el.value.length;
+    pendingCaret.current = countDigits(el.value.slice(0, caret));
+    const digits = el.value.replace(/[^0-9]/g, "");
+    onChange(digits === "" ? NaN : Number(digits));
+  };
+
+  return { ref, value: display, onChange: handleChange };
+}
+
 export const WITHDRAWAL_RATES = [
   { value: 0.03, label: "3% — Conservative" },
   { value: 0.035, label: "3.5% — Cautious" },
@@ -21,7 +80,7 @@ export const WITHDRAWAL_RATES = [
 ] as const;
 
 type FilterPanelProps = {
-  netWorth: number;
+  investableAssets: number;
   monthlyIncome: number;
   currency: CurrencyCode;
   withdrawalRate: number;
@@ -29,7 +88,7 @@ type FilterPanelProps = {
   region: RegionFilter;
   lifestyle: LifestyleFilter;
   onlyUnderBudget: boolean;
-  onNetWorthChange: (value: number) => void;
+  onInvestableAssetsChange: (value: number) => void;
   onMonthlyIncomeChange: (value: number) => void;
   onCurrencyChange: (value: CurrencyCode) => void;
   onWithdrawalRateChange: (value: number) => void;
@@ -44,7 +103,7 @@ const selectClass =
 const DEFAULT_RATE = 0.04;
 
 export default function FilterPanel({
-  netWorth,
+  investableAssets,
   monthlyIncome,
   currency,
   withdrawalRate,
@@ -52,7 +111,7 @@ export default function FilterPanel({
   region,
   lifestyle,
   onlyUnderBudget,
-  onNetWorthChange,
+  onInvestableAssetsChange,
   onMonthlyIncomeChange,
   onCurrencyChange,
   onWithdrawalRateChange,
@@ -62,6 +121,17 @@ export default function FilterPanel({
 }: FilterPanelProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const info = currencyInfo(currency);
+
+  const assetsInput = useMoneyInput(
+    investableAssets,
+    currency,
+    onInvestableAssetsChange
+  );
+  const incomeInput = useMoneyInput(
+    monthlyIncome,
+    currency,
+    onMonthlyIncomeChange
+  );
 
   const ratePct = `${Math.round(withdrawalRate * 100 * 10) / 10}%`;
   const hasIncome = Number.isFinite(monthlyIncome) && monthlyIncome > 0;
@@ -87,14 +157,14 @@ export default function FilterPanel({
       aria-label="Retirement budget"
       className="sticky top-16 z-20 -mx-4 border-b border-sand bg-cream/85 px-4 py-4 backdrop-blur-md sm:static sm:mx-0 sm:rounded-3xl sm:border sm:px-6 sm:py-6 sm:shadow-sm"
     >
-      {/* Primary input: net worth */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
+      {/* Primary input: investable assets (retirement corpus) */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
         <div className="flex flex-1 flex-col gap-1.5">
           <label
-            htmlFor="netWorth"
+            htmlFor="investableAssets"
             className="text-xs font-semibold uppercase tracking-wide text-muted"
           >
-            Your net worth
+            Investable assets
           </label>
           <div className="flex">
             <div className="relative">
@@ -138,19 +208,27 @@ export default function FilterPanel({
                 {info.symbol}
               </span>
               <input
-                id="netWorth"
+                id="investableAssets"
+                ref={assetsInput.ref}
                 type="text"
                 inputMode="numeric"
-                value={Number.isFinite(netWorth) ? formatNumber(netWorth, currency) : ""}
-                onChange={(e) => {
-                  const digits = e.target.value.replace(/[^0-9]/g, "");
-                  onNetWorthChange(digits === "" ? NaN : Number(digits));
-                }}
+                value={assetsInput.value}
+                onChange={assetsInput.onChange}
                 className="w-full rounded-r-2xl border border-sand bg-cream py-3.5 pl-10 pr-4 text-2xl font-extrabold tracking-tight text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
                 placeholder={formatNumber(1200000, currency)}
               />
             </div>
           </div>
+          {amountInWords(investableAssets, currency) && (
+            <p className="text-sm font-semibold text-brand-700">
+              {info.symbol}
+              {amountInWords(investableAssets, currency)}
+            </p>
+          )}
+          <p className="text-xs text-muted">
+            Invested savings you&apos;ll draw from (brokerage, retirement
+            accounts, cash) — exclude your home.
+          </p>
         </div>
 
         <div className="flex items-center justify-between gap-4 rounded-2xl border border-brand-200 bg-brand-50 px-4 py-3 sm:flex-col sm:items-start sm:justify-center sm:py-3.5">
@@ -229,22 +307,22 @@ export default function FilterPanel({
               </span>
               <input
                 id="monthlyIncome"
+                ref={incomeInput.ref}
                 type="text"
                 inputMode="numeric"
-                value={
-                  Number.isFinite(monthlyIncome)
-                    ? formatNumber(monthlyIncome, currency)
-                    : ""
-                }
-                onChange={(e) => {
-                  const digits = e.target.value.replace(/[^0-9]/g, "");
-                  onMonthlyIncomeChange(digits === "" ? NaN : Number(digits));
-                }}
+                value={incomeInput.value}
+                onChange={incomeInput.onChange}
                 tabIndex={filtersOpen ? 0 : -1}
                 className="w-full rounded-xl border border-sand bg-cream py-2.5 pl-9 pr-4 text-sm font-semibold text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
                 placeholder="0"
               />
             </div>
+            {amountInWords(monthlyIncome, currency) && (
+              <p className="text-xs font-semibold text-brand-700">
+                {info.symbol}
+                {amountInWords(monthlyIncome, currency)}
+              </p>
+            )}
             <p className="text-xs text-muted">
               Social Security, pension, rental, etc. — added to your monthly
               budget.

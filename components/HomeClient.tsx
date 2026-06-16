@@ -17,7 +17,7 @@ import FilterPanel, {
 import type { City } from "@/data/cities";
 import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
 
-const DEFAULT_NET_WORTH = 1_200_000;
+const DEFAULT_INVESTABLE_ASSETS = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
 const PAGE_SIZE = 3;
 
@@ -26,7 +26,9 @@ type HomeClientProps = {
 };
 
 export default function HomeClient({ cities }: HomeClientProps) {
-  const [netWorth, setNetWorth] = useState<number>(DEFAULT_NET_WORTH);
+  const [investableAssets, setInvestableAssets] = useState<number>(
+    DEFAULT_INVESTABLE_ASSETS
+  );
   const [monthlyIncome, setMonthlyIncome] = useState<number>(0);
   const [currency, setCurrency] = useState<CurrencyCode>("USD");
   const [withdrawalRate, setWithdrawalRate] = useState<number>(
@@ -38,14 +40,16 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
   // Inputs are stored in the selected display currency. Convert to USD (the
   // canonical unit for the city data) for all budget comparisons.
-  const safeNetWorth = Number.isFinite(netWorth) ? Math.max(netWorth, 0) : 0;
+  const safeAssets = Number.isFinite(investableAssets)
+    ? Math.max(investableAssets, 0)
+    : 0;
   const safeIncome = Number.isFinite(monthlyIncome)
     ? Math.max(monthlyIncome, 0)
     : 0;
 
-  // Budget = safe-withdrawal draw from net worth + recurring monthly income
-  // (Social Security, pension, rental, etc.).
-  const drawUsd = (toUsd(safeNetWorth, currency) * withdrawalRate) / 12;
+  // Budget = safe-withdrawal draw from the investable corpus + recurring
+  // monthly income (Social Security, pension, rental, etc.).
+  const drawUsd = (toUsd(safeAssets, currency) * withdrawalRate) / 12;
   const incomeUsd = toUsd(safeIncome, currency);
   const budgetUsd = Math.round(drawUsd + incomeUsd);
 
@@ -53,7 +57,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   const handleCurrencyChange = (next: CurrencyCode) => {
     const convert = (v: number) =>
       Number.isFinite(v) ? Math.round(usdTo(toUsd(v, currency), next)) : v;
-    setNetWorth(convert);
+    setInvestableAssets(convert);
     setMonthlyIncome(convert);
     setCurrency(next);
   };
@@ -121,7 +125,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
     recomputeCaret,
     visibleCount,
     currency,
-    netWorth,
+    investableAssets,
     monthlyIncome,
     withdrawalRate,
     region,
@@ -136,14 +140,14 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
   return (
     <main id="top">
-      {/* Get to the point: ask for net worth immediately */}
+      {/* Get to the point: ask for investable assets immediately */}
       <section
         id="explore"
         className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-20 pt-6 sm:px-6 sm:pt-10"
       >
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-balance text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
-            Enter your net worth to see where you can retire
+            Enter your investable assets to see where you can retire
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-pretty text-sm text-muted sm:text-base">
             We turn it into a sustainable monthly budget and instantly show the
@@ -153,7 +157,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
         <div className="mt-6">
           <FilterPanel
-            netWorth={netWorth}
+            investableAssets={investableAssets}
             monthlyIncome={monthlyIncome}
             currency={currency}
             withdrawalRate={withdrawalRate}
@@ -161,7 +165,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             region={region}
             lifestyle={lifestyle}
             onlyUnderBudget={onlyUnderBudget}
-            onNetWorthChange={setNetWorth}
+            onInvestableAssetsChange={setInvestableAssets}
             onMonthlyIncomeChange={setMonthlyIncome}
             onCurrencyChange={handleCurrencyChange}
             onWithdrawalRateChange={setWithdrawalRate}
@@ -266,8 +270,9 @@ export default function HomeClient({ cities }: HomeClientProps) {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg">
             Compare estimated monthly retirement expenses across popular cities
-            and countries. BumBumSafe turns your net worth into a realistic
-            monthly budget using a safe withdrawal rate, then ranks places where
+            and countries. BumBumSafe turns your investable assets into a
+            realistic monthly budget using a safe withdrawal rate, then ranks
+            places where
             you can retire comfortably — and with dignity.
           </p>
           <a

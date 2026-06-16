@@ -299,3 +299,9 @@ remove the above text
 how did we calculate the 4000$ per month budget for 1.2million $ networth
 
 Also, should we calculate using networth or is there a better way? like corpus? or just cash?
+
+implement the recommendation, variable names update works, do it in a wholistic manner
+
+while editing the value 1,234,000 for usd, im trying to edit the value and the cursor keeps taking to the end
+
+also, can we add the value added in english there so that there is less chance of mistakes made

@@ -39,4 +39,4 @@ back to its bundled mock data so it still runs.
 ## Roadmap
 
 - Phase 2: Cognito sign in/up; validate JWTs with `go-jwt-middleware`.
-- Phase 3: `GET/PUT /me/settings` (per-user net worth + saved cities) backed by a datastore.
+- Phase 3: `GET/PUT /me/settings` (per-user investable assets + saved cities) backed by a datastore.

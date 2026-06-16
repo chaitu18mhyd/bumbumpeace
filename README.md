@@ -9,12 +9,13 @@ backend, no database, no auth — mock data only.
 ## Features
 
 - Hero section with CTA
-- Sticky, mobile-first filter panel: **net worth** input + **annual withdrawal
-  rate**, region, lifestyle, and a within-budget toggle
-- A sustainable **monthly budget is derived from net worth** using the safe
-  withdrawal rate (`netWorth × rate ÷ 12`; default 4%/yr → ~$4,000/mo from
+- Sticky, mobile-first filter panel: **investable assets** input + **annual
+  withdrawal rate**, region, lifestyle, and a within-budget toggle
+- A sustainable **monthly budget is derived from your investable assets**
+  (retirement corpus — invested + cash, excluding your home) using the safe
+  withdrawal rate (`assets × rate ÷ 12`; default 4%/yr → ~$4,000/mo from
   $1.2M), and drives the under/over-budget logic
-- 12 city cards with cost, lifestyle tier, description, tags, and an
+- City cards with cost, lifestyle tier, description, tags, and an
   under/over-budget indicator
 - Fully client-side filtering with a live summary: _"Showing X cities. Y are
   under your budget."_

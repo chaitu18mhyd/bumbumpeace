@@ -5,16 +5,16 @@ package main
 // dependence). Each share map sums to 1.0.
 func init() {
 	usStd := map[string]float64{
-		"Rent": 0.32, "Food": 0.18, "Travel": 0.13, "Healthcare": 0.13,
-		"Utilities": 0.10, "Leisure": 0.09, "Other": 0.05,
+		"Rent": 0.42, "Food": 0.14, "Travel": 0.13, "Healthcare": 0.13,
+		"Utilities": 0.09, "Leisure": 0.06, "Other": 0.03,
 	}
 	usAffluent := map[string]float64{
-		"Rent": 0.36, "Food": 0.17, "Travel": 0.12, "Healthcare": 0.12,
-		"Utilities": 0.09, "Leisure": 0.09, "Other": 0.05,
+		"Rent": 0.46, "Food": 0.13, "Travel": 0.12, "Healthcare": 0.12,
+		"Utilities": 0.08, "Leisure": 0.06, "Other": 0.03,
 	}
 	usResort := map[string]float64{
-		"Rent": 0.34, "Food": 0.18, "Travel": 0.12, "Healthcare": 0.11,
-		"Utilities": 0.09, "Leisure": 0.11, "Other": 0.05,
+		"Rent": 0.42, "Food": 0.14, "Travel": 0.12, "Healthcare": 0.11,
+		"Utilities": 0.08, "Leisure": 0.10, "Other": 0.03,
 	}
 
 	type spec struct {

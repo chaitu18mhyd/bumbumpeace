@@ -42,7 +42,28 @@ What's left (not needed right now)
    - Could default the currency from the visitor's locale (e.g. en-IN -> INR),
      still letting them change it.
 
+5. Make city cost data accurate (do this AFTER all cities are populated)
+   - IMPORTANT: every city's monthlyCost and expenseShares are currently
+     hand-picked ESTIMATES (mock data), not real figures. Example flagged:
+     Baton Rouge total ($2,300/mo) and the US rent share were guesses.
+   - Plan: once the full city list is in, replace the estimates with real
+     cost-of-living data, fetched + cached SERVER-SIDE in the Go API.
+   - Candidate data sources:
+       Global breadth (city-level): Numbeo API (paid, crowd-sourced),
+         Expatistan; Mercer/ECA (enterprise, expensive).
+       Authoritative US: HUD Fair Market Rents (rent), Census ACS (rent/income),
+         BEA Regional Price Parities (price levels), BLS CPI + Consumer
+         Expenditure Survey (category spending shares).
+       Europe / cross-country: Eurostat, OECD price levels / PPP, World Bank ICP.
+   - Recommended blend: Numbeo for breadth + government sources to anchor
+     accuracy; use BLS Consumer Expenditure shares to set realistic pie-chart
+     category percentages instead of hand-curated ones.
+   - Caveats: paid keys/licensing (Numbeo, Mercer), rate limits and coarser
+     (metro-level) granularity for free gov sources; keep clear "estimate"
+     labeling. Verify current API pricing/terms before committing.
+
 Bottom line
 -----------
-The feature works for a prototype. The only real gap is that rates are static —
-move them server-side and live when accuracy matters.
+The feature works for a prototype. The real gaps: (a) FX rates are static, and
+(b) all city cost figures are estimates. Once every city is populated, wire real
+cost-of-living data (and live FX) into the Go API for accuracy.

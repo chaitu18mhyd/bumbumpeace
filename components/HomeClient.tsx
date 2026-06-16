@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUp, MapPinOff, PiggyBank, Plus } from "lucide-react";
+import { ArrowDown, ArrowUp, MapPinOff, PiggyBank } from "lucide-react";
 import {
   useCallback,
   useEffect,
@@ -77,16 +77,24 @@ export default function HomeClient({ cities }: HomeClientProps) {
     [filteredCities, budgetUsd]
   );
 
-  // Progressive loading: show a few cities, reveal more on demand.
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  // Windowed pager: show PAGE_SIZE cities at a time.
+  const [windowStart, setWindowStart] = useState(0);
 
-  // Reset back to the first page whenever the filter criteria change.
+  // Reset to the first window whenever the filter criteria change.
   useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
+    setWindowStart(0);
   }, [region, lifestyle, onlyUnderBudget]);
 
-  const visibleCities = filteredCities.slice(0, visibleCount);
-  const remaining = filteredCities.length - visibleCities.length;
+  const total = filteredCities.length;
+  const clampedStart = Math.min(windowStart, Math.max(0, total - PAGE_SIZE));
+  const visibleCities = filteredCities.slice(
+    clampedStart,
+    clampedStart + PAGE_SIZE
+  );
+  const hasPrev = clampedStart > 0;
+  const hasNext = clampedStart + PAGE_SIZE < total;
+  const rangeStart = total === 0 ? 0 : clampedStart + 1;
+  const rangeEnd = Math.min(clampedStart + PAGE_SIZE, total);
 
   // Selected city → expense breakdown card at the bottom.
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
@@ -124,7 +132,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
     recomputeCaret();
   }, [
     recomputeCaret,
-    visibleCount,
+    clampedStart,
     currency,
     investableAssets,
     monthlyIncome,
@@ -186,41 +194,63 @@ export default function HomeClient({ cities }: HomeClientProps) {
           >
             Showing{" "}
             <span className="font-bold text-brand-700">
-              {filteredCities.length}
+              {rangeStart}–{rangeEnd}
             </span>{" "}
-            {filteredCities.length === 1 ? "city" : "cities"}.{" "}
+            of <span className="font-bold text-brand-700">{total}</span>{" "}
+            {total === 1 ? "city" : "cities"}.{" "}
             <span className="font-bold text-under-700">{underBudgetCount}</span>{" "}
             {underBudgetCount === 1 ? "is" : "are"} under your budget.
           </p>
         </div>
 
-        {filteredCities.length > 0 ? (
-          <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-            {visibleCities.map((city) => {
-              const key = `${city.city}-${city.country}`;
-              return (
-                <li
-                  key={key}
-                  ref={(el) => {
-                    if (el) cardRefs.current.set(key, el);
-                    else cardRefs.current.delete(key);
+        {total > 0 ? (
+          <>
+            {hasPrev && (
+              <div className="mt-5 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedCity(null);
+                    setWindowStart(Math.max(0, clampedStart - PAGE_SIZE));
                   }}
-                  className="h-full"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-sand bg-white px-5 py-2.5 text-sm font-semibold text-muted shadow-sm transition hover:bg-sand hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
                 >
-                  <CityCard
-                    city={city}
-                    budgetUsd={budgetUsd}
-                    currency={currency}
-                    selected={
-                      selectedCity?.city === city.city &&
-                      selectedCity?.country === city.country
-                    }
-                    onSelect={() => setSelectedCity(city)}
-                  />
-                </li>
-              );
-            })}
-          </ul>
+                  <ArrowUp aria-hidden="true" className="h-4 w-4" />
+                  Show previous
+                </button>
+              </div>
+            )}
+
+            <ul
+              key={clampedStart}
+              className="mt-5 grid animate-fade-slide grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
+            >
+              {visibleCities.map((city) => {
+                const key = `${city.city}-${city.country}`;
+                return (
+                  <li
+                    key={key}
+                    ref={(el) => {
+                      if (el) cardRefs.current.set(key, el);
+                      else cardRefs.current.delete(key);
+                    }}
+                    className="h-full"
+                  >
+                    <CityCard
+                      city={city}
+                      budgetUsd={budgetUsd}
+                      currency={currency}
+                      selected={
+                        selectedCity?.city === city.city &&
+                        selectedCity?.country === city.country
+                      }
+                      onSelect={() => setSelectedCity(city)}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </>
         ) : (
           <div className="mt-8 rounded-3xl border border-dashed border-sand bg-white/60 px-6 py-16 text-center">
             <MapPinOff
@@ -248,17 +278,17 @@ export default function HomeClient({ cities }: HomeClientProps) {
           )}
         </div>
 
-        {filteredCities.length > 0 && remaining > 0 && (
+        {hasNext && (
           <div className="mt-8 flex justify-center">
             <button
               type="button"
               onClick={() => {
-                setVisibleCount((c) => c + PAGE_SIZE);
                 setSelectedCity(null);
+                setWindowStart(clampedStart + PAGE_SIZE);
               }}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-300 bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             >
-              <Plus aria-hidden="true" className="h-4 w-4" />
+              <ArrowDown aria-hidden="true" className="h-4 w-4" />
               Load more
             </button>
           </div>

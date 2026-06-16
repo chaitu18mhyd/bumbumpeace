@@ -2,7 +2,10 @@ export type Region =
   | "North America"
   | "Europe"
   | "Latin America"
-  | "Asia";
+  | "Asia"
+  | "Middle East"
+  | "Oceania"
+  | "Africa";
 
 export type Lifestyle = "Lean" | "Comfortable" | "Premium";
 
@@ -29,6 +32,35 @@ export const COUNTRY_FLAGS: Record<string, string> = {
   Panama: "🇵🇦",
   Italy: "🇮🇹",
   India: "🇮🇳",
+  Monaco: "🇲🇨",
+  Switzerland: "🇨🇭",
+  "United Kingdom": "🇬🇧",
+  France: "🇫🇷",
+  Austria: "🇦🇹",
+  Netherlands: "🇳🇱",
+  Denmark: "🇩🇰",
+  Sweden: "🇸🇪",
+  Germany: "🇩🇪",
+  "United States": "🇺🇸",
+  Canada: "🇨🇦",
+  Uruguay: "🇺🇾",
+  Argentina: "🇦🇷",
+  Chile: "🇨🇱",
+  Brazil: "🇧🇷",
+  Singapore: "🇸🇬",
+  "Hong Kong": "🇭🇰",
+  Japan: "🇯🇵",
+  "South Korea": "🇰🇷",
+  China: "🇨🇳",
+  Indonesia: "🇮🇩",
+  "United Arab Emirates": "🇦🇪",
+  Qatar: "🇶🇦",
+  Israel: "🇮🇱",
+  Australia: "🇦🇺",
+  "New Zealand": "🇳🇿",
+  "South Africa": "🇿🇦",
+  Egypt: "🇪🇬",
+  Morocco: "🇲🇦",
 };
 
 export function flagFor(country: string): string {
@@ -40,6 +72,9 @@ export const REGIONS: Region[] = [
   "Europe",
   "Latin America",
   "Asia",
+  "Middle East",
+  "Oceania",
+  "Africa",
 ];
 
 export const LIFESTYLES: Lifestyle[] = ["Lean", "Comfortable", "Premium"];

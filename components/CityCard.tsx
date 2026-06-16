@@ -36,7 +36,7 @@ export default function CityCard({
       }`}
     >
       <header className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 items-start gap-3">
+        <div className="flex min-w-0 flex-1 items-start gap-3">
           <span
             role="img"
             aria-label={`Flag of ${city.country}`}
@@ -61,7 +61,9 @@ export default function CityCard({
             </h3>
             <p className="mt-0.5 flex items-center gap-1 text-sm text-muted">
               <MapPin aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
-              {city.country} · {city.region}
+              <span className="truncate">
+                {city.country} · {city.region}
+              </span>
             </p>
           </div>
         </div>
@@ -110,11 +112,11 @@ export default function CityCard({
         {city.description}
       </p>
 
-      <ul className="mt-auto flex flex-wrap gap-2 pt-5">
+      <ul className="mt-auto flex flex-nowrap gap-2 overflow-x-auto pt-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {city.tags.map((tag) => (
           <li
             key={tag}
-            className="rounded-full bg-sand px-2.5 py-1 text-xs font-medium text-ink/70"
+            className="shrink-0 whitespace-nowrap rounded-full bg-sand px-2.5 py-1 text-xs font-medium text-ink/70"
           >
             {tag}
           </li>

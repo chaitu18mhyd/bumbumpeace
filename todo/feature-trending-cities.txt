@@ -1,0 +1,44 @@
+BumBumSafe — Feature Request: "Recent uptick in retirements" for popular cities
+================================================================================
+Status: idea / not started.
+
+What
+----
+Surface a signal that a city is seeing a recent uptick in retirements / growing
+popularity among retirees — a "trending" indicator so users can spot momentum,
+not just cost.
+
+Why
+---
+- Social proof: people trust places others are actually moving to.
+- Adds a discovery angle beyond budget (which cities are gaining retirees now).
+- Differentiates popular/rising spots from merely cheap ones.
+
+Possible UI
+-----------
+- A small badge on the city card, e.g. "Trending ↑" or "+18% retirees YoY",
+  using a TrendingUp icon (lucide) in a friendly accent color.
+- Optional sort/filter: "Sort by: Trending" or a "Popular now" toggle.
+- In the city detail card, a short line or mini sparkline of the trend.
+  (Note: project rule says no chart libraries — hand-roll a tiny SVG sparkline
+  if we want a trend line.)
+
+Data (server-owned, per architecture)
+--------------------------------------
+- Add to the Go API City payload, e.g.:
+    "trend": { "direction": "up|flat|down", "changePct": 0.18, "period": "12mo" }
+- For the prototype, curate mock trend values per city (like expenseShares).
+- Later: back with a real source (search interest, visa/relocation data, etc.).
+- Keep it client-agnostic so web AND the future mobile app can use it.
+
+Acceptance criteria (prototype)
+-------------------------------
+- API returns a trend field per city.
+- Cards show a trending badge when direction is "up" (and maybe the %).
+- Friendly colors only (no red/warning), accessible (not color-only — include
+  text/icon), works on mobile and desktop.
+
+Not needed right now
+--------------------
+- Real trend data source, sparklines, and sorting can come later. Start with the
+  curated mock + badge.

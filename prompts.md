@@ -305,3 +305,11 @@ implement the recommendation, variable names update works, do it in a wholistic 
 while editing the value 1,234,000 for usd, im trying to edit the value and the cursor keeps taking to the end
 
 also, can we add the value added in english there so that there is less chance of mistakes made
+
+yes, lets do icons wherever necessary 
+
+see that Mexico North America is in a single line always, there is a plenty of space to the right. Also Low Cost Warm Safety etc are in 2 lines, need just one line
+
+Lets show 3 countries at most, if clicked on Load more, the top 3 should be hidden, and there should be a clickable link that shows the top 3. Add animations. Instead of Load more, add an icon here too. use icon like on top arrow, and down arrow
+
+Add 50 luxury cities across the world

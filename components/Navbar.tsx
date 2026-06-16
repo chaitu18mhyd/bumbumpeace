@@ -1,11 +1,12 @@
 "use client";
 
+import { Calculator, Info, Menu, Newspaper, X } from "lucide-react";
 import { useState } from "react";
 
 const navLinks = [
-  { label: "Calculator", href: "#explore" },
-  { label: "Blog", href: "#blog" },
-  { label: "About us", href: "#about" },
+  { label: "Calculator", href: "#explore", Icon: Calculator },
+  { label: "Blog", href: "#blog", Icon: Newspaper },
+  { label: "About us", href: "#about", Icon: Info },
 ];
 
 export default function Navbar() {
@@ -28,23 +29,21 @@ export default function Navbar() {
             aria-label={open ? "Close menu" : "Open menu"}
             className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-sand bg-white text-ink transition hover:bg-sand md:hidden"
           >
-            <span className="relative flex h-5 w-5 flex-col items-center justify-center gap-[5px]">
-              <span
+            <span className="relative h-5 w-5">
+              <Menu
                 aria-hidden="true"
-                className={`block h-0.5 w-5 rounded-full bg-ink transition-transform duration-300 ease-out ${
-                  open ? "translate-y-[7px] rotate-45" : ""
+                className={`absolute inset-0 h-5 w-5 transition-all duration-300 ease-out ${
+                  open
+                    ? "rotate-90 scale-0 opacity-0"
+                    : "rotate-0 scale-100 opacity-100"
                 }`}
               />
-              <span
+              <X
                 aria-hidden="true"
-                className={`block h-0.5 w-5 rounded-full bg-ink transition-all duration-200 ease-out ${
-                  open ? "scale-x-0 opacity-0" : "opacity-100"
-                }`}
-              />
-              <span
-                aria-hidden="true"
-                className={`block h-0.5 w-5 rounded-full bg-ink transition-transform duration-300 ease-out ${
-                  open ? "-translate-y-[7px] -rotate-45" : ""
+                className={`absolute inset-0 h-5 w-5 transition-all duration-300 ease-out ${
+                  open
+                    ? "rotate-0 scale-100 opacity-100"
+                    : "-rotate-90 scale-0 opacity-0"
                 }`}
               />
             </span>
@@ -70,8 +69,9 @@ export default function Navbar() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition hover:bg-sand hover:text-ink"
+                  className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted transition hover:bg-sand hover:text-ink"
                 >
+                  <link.Icon aria-hidden="true" className="h-4 w-4" />
                   {link.label}
                 </a>
               </li>
@@ -118,8 +118,9 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   tabIndex={open ? 0 : -1}
-                  className="block rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition hover:bg-sand"
+                  className="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition hover:bg-sand"
                 >
+                  <link.Icon aria-hidden="true" className="h-4 w-4 text-muted" />
                   {link.label}
                 </a>
               </li>

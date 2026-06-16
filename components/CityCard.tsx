@@ -1,3 +1,4 @@
+import { ArrowUp, Check, MapPin } from "lucide-react";
 import { type City, flagFor } from "@/data/cities";
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 
@@ -58,7 +59,8 @@ export default function CityCard({
                 {city.city}
               </button>
             </h3>
-            <p className="mt-0.5 text-sm text-muted">
+            <p className="mt-0.5 flex items-center gap-1 text-sm text-muted">
+              <MapPin aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
               {city.country} · {city.region}
             </p>
           </div>
@@ -70,12 +72,11 @@ export default function CityCard({
               : "bg-over-100 text-over-700"
           }`}
         >
-          <span
-            aria-hidden="true"
-            className={`h-1.5 w-1.5 rounded-full ${
-              isUnderBudget ? "bg-under-600" : "bg-over-600"
-            }`}
-          />
+          {isUnderBudget ? (
+            <Check aria-hidden="true" className="h-3.5 w-3.5" />
+          ) : (
+            <ArrowUp aria-hidden="true" className="h-3.5 w-3.5" />
+          )}
           {isUnderBudget ? "Under budget" : "Over budget"}
         </span>
       </header>

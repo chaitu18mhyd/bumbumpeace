@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowUp, MapPinOff, PiggyBank, Plus } from "lucide-react";
 import {
   useCallback,
   useEffect,
@@ -146,6 +147,9 @@ export default function HomeClient({ cities }: HomeClientProps) {
         className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-20 pt-6 sm:px-6 sm:pt-10"
       >
         <div className="mx-auto max-w-3xl text-center">
+          <span className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-100 text-brand-700">
+            <PiggyBank aria-hidden="true" className="h-6 w-6" />
+          </span>
           <h1 className="text-balance text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
             Enter your investable assets to see where you can retire
           </h1>
@@ -219,6 +223,10 @@ export default function HomeClient({ cities }: HomeClientProps) {
           </ul>
         ) : (
           <div className="mt-8 rounded-3xl border border-dashed border-sand bg-white/60 px-6 py-16 text-center">
+            <MapPinOff
+              aria-hidden="true"
+              className="mx-auto mb-3 h-8 w-8 text-muted"
+            />
             <p className="text-base font-semibold text-ink">
               No cities match your filters
             </p>
@@ -248,8 +256,9 @@ export default function HomeClient({ cities }: HomeClientProps) {
                 setVisibleCount((c) => c + PAGE_SIZE);
                 setSelectedCity(null);
               }}
-              className="inline-flex items-center justify-center rounded-full border border-brand-300 bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-300 bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             >
+              <Plus aria-hidden="true" className="h-4 w-4" />
               Load more
             </button>
           </div>
@@ -277,8 +286,9 @@ export default function HomeClient({ cities }: HomeClientProps) {
           </p>
           <a
             href="#top"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
+            <ArrowUp aria-hidden="true" className="h-4 w-4" />
             Back to the calculator
           </a>
         </div>

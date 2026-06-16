@@ -28,6 +28,7 @@ export const COUNTRY_FLAGS: Record<string, string> = {
   Vietnam: "🇻🇳",
   Panama: "🇵🇦",
   Italy: "🇮🇹",
+  India: "🇮🇳",
 };
 
 export function flagFor(country: string): string {

@@ -225,18 +225,12 @@ export default function HomeClient({ cities }: HomeClientProps) {
           </div>
         )}
 
-        <div ref={detailRef} className="relative">
-          {selectedCity && caretLeft !== null && (
-            <div
-              aria-hidden="true"
-              className="absolute z-10 h-4 w-4 rotate-45 border-l-2 border-t-2 border-brand-400 bg-white"
-              style={{ left: caretLeft - 8, top: 24 }}
-            />
-          )}
+        <div ref={detailRef}>
           {selectedCity && (
             <CityDetail
               city={selectedCity}
               currency={currency}
+              caretLeft={caretLeft}
               onClose={() => setSelectedCity(null)}
             />
           )}
@@ -246,7 +240,10 @@ export default function HomeClient({ cities }: HomeClientProps) {
           <div className="mt-8 flex justify-center">
             <button
               type="button"
-              onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+              onClick={() => {
+                setVisibleCount((c) => c + PAGE_SIZE);
+                setSelectedCity(null);
+              }}
               className="inline-flex items-center justify-center rounded-full border border-brand-300 bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             >
               Load more

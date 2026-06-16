@@ -5,6 +5,7 @@ import { expenseBreakdown } from "@/lib/expenses";
 type CityDetailProps = {
   city: City;
   currency: CurrencyCode;
+  caretLeft: number | null;
   onClose: () => void;
 };
 
@@ -20,7 +21,12 @@ function polar(radius: number, fraction: number): [number, number] {
   return [CX + radius * Math.cos(angle), CY + radius * Math.sin(angle)];
 }
 
-export default function CityDetail({ city, currency, onClose }: CityDetailProps) {
+export default function CityDetail({
+  city,
+  currency,
+  caretLeft,
+  onClose,
+}: CityDetailProps) {
   const slices = expenseBreakdown(city.monthlyCost, city.expenseShares);
 
   // Build full-pie wedge paths + centroid label positions.
@@ -47,8 +53,16 @@ export default function CityDetail({ city, currency, onClose }: CityDetailProps)
     <section
       id="city-detail-panel"
       aria-label={`Estimated monthly expense breakdown for ${city.city}`}
-      className="mt-8 scroll-mt-24 rounded-3xl border border-sand bg-white p-5 shadow-sm ring-1 ring-black/[0.03] sm:p-7"
+      className="relative mt-8 scroll-mt-24 rounded-3xl border border-sand bg-white p-5 shadow-sm ring-1 ring-black/[0.03] sm:p-7"
     >
+      {caretLeft !== null && (
+        <span
+          aria-hidden="true"
+          style={{ left: caretLeft - 7 }}
+          className="absolute -top-[7px] z-10 h-3.5 w-3.5 rotate-45 border-l border-t border-sand bg-white"
+        />
+      )}
+
       <header className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <span

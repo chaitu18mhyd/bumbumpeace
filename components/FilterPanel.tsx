@@ -210,10 +210,6 @@ export default function FilterPanel({
               : "pointer-events-none max-h-0 opacity-0"
           }`}
         >
-          <p className="px-1 pt-1 text-xs text-muted">
-            Assumptions are pre-filled — adjust any of them below.
-          </p>
-
           <div className="mt-3 flex flex-col gap-1.5">
             <label
               htmlFor="monthlyIncome"

@@ -285,3 +285,17 @@ can we make the piechart look like this, the colors look nice, avoid red or warn
 Also, I need a way to point the new piechart UI card to point to the card clicked.
 
 does all the cities have the same percentages of rent/food etc categories currently, can we make this accurate per city?
+
+The pointing caret is not at the right place, the outer box should have the caret, right now it is floating
+
+Also, upon clicking Load more, the piechart card should automatically close
+
+add 25 cities in india
+
+Assumptions are pre-filled — adjust any of them below.
+
+remove the above text
+
+how did we calculate the 4000$ per month budget for 1.2million $ networth
+
+Also, should we calculate using networth or is there a better way? like corpus? or just cash?

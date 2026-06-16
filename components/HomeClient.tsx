@@ -7,6 +7,7 @@ import FilterPanel, {
   type RegionFilter,
 } from "@/components/FilterPanel";
 import type { City } from "@/data/cities";
+import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
 
 const DEFAULT_NET_WORTH = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
@@ -17,6 +18,8 @@ type HomeClientProps = {
 
 export default function HomeClient({ cities }: HomeClientProps) {
   const [netWorth, setNetWorth] = useState<number>(DEFAULT_NET_WORTH);
+  const [monthlyIncome, setMonthlyIncome] = useState<number>(0);
+  const [currency, setCurrency] = useState<CurrencyCode>("USD");
   const [withdrawalRate, setWithdrawalRate] = useState<number>(
     DEFAULT_WITHDRAWAL_RATE
   );
@@ -24,21 +27,40 @@ export default function HomeClient({ cities }: HomeClientProps) {
   const [lifestyle, setLifestyle] = useState<LifestyleFilter>("All");
   const [onlyUnderBudget, setOnlyUnderBudget] = useState<boolean>(false);
 
+  // Inputs are stored in the selected display currency. Convert to USD (the
+  // canonical unit for the city data) for all budget comparisons.
   const safeNetWorth = Number.isFinite(netWorth) ? Math.max(netWorth, 0) : 0;
-  const safeBudget = Math.round((safeNetWorth * withdrawalRate) / 12);
+  const safeIncome = Number.isFinite(monthlyIncome)
+    ? Math.max(monthlyIncome, 0)
+    : 0;
+
+  // Budget = safe-withdrawal draw from net worth + recurring monthly income
+  // (Social Security, pension, rental, etc.).
+  const drawUsd = (toUsd(safeNetWorth, currency) * withdrawalRate) / 12;
+  const incomeUsd = toUsd(safeIncome, currency);
+  const budgetUsd = Math.round(drawUsd + incomeUsd);
+
+  // Switching currency keeps real values constant by converting the inputs.
+  const handleCurrencyChange = (next: CurrencyCode) => {
+    const convert = (v: number) =>
+      Number.isFinite(v) ? Math.round(usdTo(toUsd(v, currency), next)) : v;
+    setNetWorth(convert);
+    setMonthlyIncome(convert);
+    setCurrency(next);
+  };
 
   const filteredCities = useMemo(() => {
     return cities.filter((city) => {
       if (region !== "All" && city.region !== region) return false;
       if (lifestyle !== "All" && city.lifestyle !== lifestyle) return false;
-      if (onlyUnderBudget && city.monthlyCost > safeBudget) return false;
+      if (onlyUnderBudget && city.monthlyCost > budgetUsd) return false;
       return true;
     });
-  }, [cities, region, lifestyle, onlyUnderBudget, safeBudget]);
+  }, [cities, region, lifestyle, onlyUnderBudget, budgetUsd]);
 
   const underBudgetCount = useMemo(
-    () => filteredCities.filter((city) => city.monthlyCost <= safeBudget).length,
-    [filteredCities, safeBudget]
+    () => filteredCities.filter((city) => city.monthlyCost <= budgetUsd).length,
+    [filteredCities, budgetUsd]
   );
 
   return (
@@ -61,12 +83,16 @@ export default function HomeClient({ cities }: HomeClientProps) {
         <div className="mt-6">
           <FilterPanel
             netWorth={netWorth}
+            monthlyIncome={monthlyIncome}
+            currency={currency}
             withdrawalRate={withdrawalRate}
-            monthlyBudget={safeBudget}
+            monthlyBudgetUsd={budgetUsd}
             region={region}
             lifestyle={lifestyle}
             onlyUnderBudget={onlyUnderBudget}
             onNetWorthChange={setNetWorth}
+            onMonthlyIncomeChange={setMonthlyIncome}
+            onCurrencyChange={handleCurrencyChange}
             onWithdrawalRateChange={setWithdrawalRate}
             onRegionChange={setRegion}
             onLifestyleChange={setLifestyle}
@@ -93,7 +119,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
           <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {filteredCities.map((city) => (
               <li key={`${city.city}-${city.country}`} className="h-full">
-                <CityCard city={city} budget={safeBudget} />
+                <CityCard city={city} budgetUsd={budgetUsd} currency={currency} />
               </li>
             ))}
           </ul>

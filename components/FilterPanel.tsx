@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import { LIFESTYLES, REGIONS } from "@/data/cities";
-import { formatUSD } from "@/lib/format";
+import {
+  CURRENCIES,
+  type CurrencyCode,
+  currencyInfo,
+  formatNumber,
+  formatUsdAs,
+} from "@/lib/currency";
 
 export type RegionFilter = "All" | (typeof REGIONS)[number];
 export type LifestyleFilter = "All" | (typeof LIFESTYLES)[number];
@@ -16,12 +22,16 @@ export const WITHDRAWAL_RATES = [
 
 type FilterPanelProps = {
   netWorth: number;
+  monthlyIncome: number;
+  currency: CurrencyCode;
   withdrawalRate: number;
-  monthlyBudget: number;
+  monthlyBudgetUsd: number;
   region: RegionFilter;
   lifestyle: LifestyleFilter;
   onlyUnderBudget: boolean;
   onNetWorthChange: (value: number) => void;
+  onMonthlyIncomeChange: (value: number) => void;
+  onCurrencyChange: (value: CurrencyCode) => void;
   onWithdrawalRateChange: (value: number) => void;
   onRegionChange: (value: RegionFilter) => void;
   onLifestyleChange: (value: LifestyleFilter) => void;
@@ -35,28 +45,36 @@ const DEFAULT_RATE = 0.04;
 
 export default function FilterPanel({
   netWorth,
+  monthlyIncome,
+  currency,
   withdrawalRate,
-  monthlyBudget,
+  monthlyBudgetUsd,
   region,
   lifestyle,
   onlyUnderBudget,
   onNetWorthChange,
+  onMonthlyIncomeChange,
+  onCurrencyChange,
   onWithdrawalRateChange,
   onRegionChange,
   onLifestyleChange,
   onOnlyUnderBudgetChange,
 }: FilterPanelProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const info = currencyInfo(currency);
 
   const ratePct = `${Math.round(withdrawalRate * 100 * 10) / 10}%`;
+  const hasIncome = Number.isFinite(monthlyIncome) && monthlyIncome > 0;
   const activeCount =
     (region !== "All" ? 1 : 0) +
     (lifestyle !== "All" ? 1 : 0) +
     (withdrawalRate !== DEFAULT_RATE ? 1 : 0) +
+    (hasIncome ? 1 : 0) +
     (onlyUnderBudget ? 1 : 0);
 
   const summary = [
     `${ratePct} withdrawal`,
+    hasIncome ? `${formatNumber(monthlyIncome, currency)} income` : null,
     region === "All" ? "All regions" : region,
     lifestyle === "All" ? "All lifestyles" : lifestyle,
     onlyUnderBudget ? "Within budget only" : null,
@@ -78,24 +96,60 @@ export default function FilterPanel({
           >
             Your net worth
           </label>
-          <div className="relative">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-xl font-bold text-muted"
-            >
-              $
-            </span>
-            <input
-              id="netWorth"
-              type="number"
-              inputMode="numeric"
-              min={0}
-              step={50000}
-              value={Number.isNaN(netWorth) ? "" : netWorth}
-              onChange={(e) => onNetWorthChange(Number(e.target.value))}
-              className="w-full rounded-2xl border border-sand bg-cream py-3.5 pl-9 pr-4 text-2xl font-extrabold tracking-tight text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
-              placeholder="1200000"
-            />
+          <div className="flex">
+            <div className="relative">
+              <label htmlFor="currency" className="sr-only">
+                Currency
+              </label>
+              <select
+                id="currency"
+                value={currency}
+                onChange={(e) =>
+                  onCurrencyChange(e.target.value as CurrencyCode)
+                }
+                className="h-full cursor-pointer appearance-none rounded-l-2xl border border-r-0 border-sand bg-sand/60 py-3.5 pl-4 pr-9 text-sm font-bold text-ink outline-none transition hover:bg-sand focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+                aria-label="Currency"
+              >
+                {CURRENCIES.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.code}
+                  </option>
+                ))}
+              </select>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-600"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+            <div className="relative flex-1">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-xl font-bold text-muted"
+              >
+                {info.symbol}
+              </span>
+              <input
+                id="netWorth"
+                type="text"
+                inputMode="numeric"
+                value={Number.isFinite(netWorth) ? formatNumber(netWorth, currency) : ""}
+                onChange={(e) => {
+                  const digits = e.target.value.replace(/[^0-9]/g, "");
+                  onNetWorthChange(digits === "" ? NaN : Number(digits));
+                }}
+                className="w-full rounded-r-2xl border border-sand bg-cream py-3.5 pl-10 pr-4 text-2xl font-extrabold tracking-tight text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+                placeholder={formatNumber(1200000, currency)}
+              />
+            </div>
           </div>
         </div>
 
@@ -104,7 +158,7 @@ export default function FilterPanel({
             Monthly budget
           </p>
           <p className="text-2xl font-bold tracking-tight text-brand-700">
-            {formatUSD(monthlyBudget)}
+            {formatUsdAs(monthlyBudgetUsd, currency)}
             <span className="ml-1 text-sm font-medium text-muted">/mo</span>
           </p>
         </div>
@@ -152,14 +206,56 @@ export default function FilterPanel({
           aria-hidden={!filtersOpen}
           className={`overflow-hidden transition-all duration-300 ease-out ${
             filtersOpen
-              ? "max-h-[28rem] opacity-100"
+              ? "max-h-[44rem] opacity-100"
               : "pointer-events-none max-h-0 opacity-0"
           }`}
         >
           <p className="px-1 pt-1 text-xs text-muted">
             Assumptions are pre-filled — adjust any of them below.
           </p>
-          <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-3">
+
+          <div className="mt-3 flex flex-col gap-1.5">
+            <label
+              htmlFor="monthlyIncome"
+              className="text-xs font-semibold uppercase tracking-wide text-muted"
+            >
+              Monthly income{" "}
+              <span className="font-normal normal-case text-muted/70">
+                (optional)
+              </span>
+            </label>
+            <div className="relative sm:max-w-xs">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-base font-bold text-muted"
+              >
+                {info.symbol}
+              </span>
+              <input
+                id="monthlyIncome"
+                type="text"
+                inputMode="numeric"
+                value={
+                  Number.isFinite(monthlyIncome)
+                    ? formatNumber(monthlyIncome, currency)
+                    : ""
+                }
+                onChange={(e) => {
+                  const digits = e.target.value.replace(/[^0-9]/g, "");
+                  onMonthlyIncomeChange(digits === "" ? NaN : Number(digits));
+                }}
+                tabIndex={filtersOpen ? 0 : -1}
+                className="w-full rounded-xl border border-sand bg-cream py-2.5 pl-9 pr-4 text-sm font-semibold text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+                placeholder="0"
+              />
+            </div>
+            <p className="text-xs text-muted">
+              Social Security, pension, rental, etc. — added to your monthly
+              budget.
+            </p>
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="withdrawalRate"

@@ -1,0 +1,48 @@
+BumBumSafe — Currency / FX Rates TODO
+=====================================
+Currency selection is live (USD, EUR, GBP, INR, CAD, AUD, MXN, THB). Users can
+enter net worth in any of these and see all costs in that currency.
+
+Current state
+-------------
+- City data is canonical in USD (Go API). Comparisons happen in USD; display
+  currency is converted only for the UI.
+- Exchange rates are APPROXIMATE and STATIC, hardcoded in lib/currency.ts
+  (the `rate` field per currency). They are directionally right, not real-time.
+
+What's left (not needed right now)
+----------------------------------
+1. Live FX rates
+   - Replace the hardcoded rates with live values from a real source
+     (e.g. exchangerate.host, OpenExchangeRates, ECB feed).
+   - Fetch + cache them SERVER-SIDE (Go API), not in the browser, so the API
+     key stays secret and we control caching/rate limits.
+   - Suggested: GET /rates on bumbumpeace-api returning { base: "USD",
+     rates: { EUR: 0.9x, INR: 8x, ... }, fetchedAt }. Cache for N hours.
+   - Frontend: load rates from the API; keep the static table as a fallback if
+     the rates endpoint is unavailable (same pattern as getCities()).
+
+2. Rate freshness in the UI
+   - Show "rates as of <date>" near the currency selector once live.
+   - Consider a small disclaimer that conversions are estimates.
+
+3. More currencies / precision
+   - Currently 8 currencies in the selector (USD, EUR, GBP, INR, CAD, AUD,
+     MXN, THB). Real world has ~180 (ISO 4217).
+   - Near-term: add currencies for the countries already shown on the cards
+     that are missing — Colombia (COP), Malaysia (MYR), Vietnam (VND).
+     (Portugal/Spain/Italy already use EUR; Panama uses USD.)
+   - Longer-term: support a broader global ISO 4217 set.
+   - Each currency is one row in the CURRENCIES array in lib/currency.ts
+     (code, symbol, label, locale, rate, step).
+   - Revisit per-currency input `step` values and rounding rules
+     (whole units now via maximumFractionDigits: 0).
+
+4. Optional: locale-aware defaults
+   - Could default the currency from the visitor's locale (e.g. en-IN -> INR),
+     still letting them change it.
+
+Bottom line
+-----------
+The feature works for a prototype. The only real gap is that rates are static —
+move them server-side and live when accuracy matters.

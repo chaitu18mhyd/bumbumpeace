@@ -1,9 +1,10 @@
 import { type City, flagFor } from "@/data/cities";
-import { formatUSD } from "@/lib/format";
+import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 
 type CityCardProps = {
   city: City;
-  budget: number;
+  budgetUsd: number;
+  currency: CurrencyCode;
 };
 
 const lifestyleStyles: Record<City["lifestyle"], string> = {
@@ -12,9 +13,9 @@ const lifestyleStyles: Record<City["lifestyle"], string> = {
   Premium: "bg-brand-300 text-brand-700",
 };
 
-export default function CityCard({ city, budget }: CityCardProps) {
-  const isUnderBudget = city.monthlyCost <= budget;
-  const difference = Math.abs(city.monthlyCost - budget);
+export default function CityCard({ city, budgetUsd, currency }: CityCardProps) {
+  const isUnderBudget = city.monthlyCost <= budgetUsd;
+  const differenceUsd = Math.abs(city.monthlyCost - budgetUsd);
 
   return (
     <article className="group flex h-full flex-col rounded-3xl border border-sand bg-white p-5 shadow-sm ring-1 ring-black/[0.03] transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-within:-translate-y-1 focus-within:shadow-lg sm:p-6">
@@ -56,7 +57,7 @@ export default function CityCard({ city, budget }: CityCardProps) {
       <div className="mt-4 flex items-end justify-between gap-3">
         <div>
           <p className="text-3xl font-bold tracking-tight text-ink sm:text-[2rem]">
-            {formatUSD(city.monthlyCost)}
+            {formatUsdAs(city.monthlyCost, currency)}
             <span className="ml-1 text-sm font-medium text-muted">/mo</span>
           </p>
           <p
@@ -65,8 +66,8 @@ export default function CityCard({ city, budget }: CityCardProps) {
             }`}
           >
             {isUnderBudget
-              ? `${formatUSD(difference)} under your budget`
-              : `${formatUSD(difference)} over your budget`}
+              ? `${formatUsdAs(differenceUsd, currency)} under your budget`
+              : `${formatUsdAs(differenceUsd, currency)} over your budget`}
           </p>
         </div>
         <span

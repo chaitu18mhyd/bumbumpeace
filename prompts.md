@@ -262,3 +262,11 @@ yes, it needs to be accessible, add a rule
 The data is available in the console for everyone to see, is golang suggested for the server side to store some of the settings and also use it for sign ins and logins?
 
 bumbumpeace-api should co-exist within bumbumpeace for now, in a later time I can push it separately if needed
+
+The currency should be changeable, if india wants to enter in rupees they should be able to
+
+in the networth textbox, text appears without commas etc - 1200000. can we automatically format it according to currency
+
+it is not straightforward to look and see if USD was clickable or if it was a dropdown
+
+how to add monthly income like social security or rental income

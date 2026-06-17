@@ -89,6 +89,8 @@ type FilterPanelProps = {
   region: RegionFilter;
   lifestyle: LifestyleFilter;
   onlyUnderBudget: boolean;
+  availableTags: string[];
+  selectedTags: string[];
   onInvestableAssetsChange: (value: number) => void;
   onMonthlyIncomeChange: (value: number) => void;
   onCurrencyChange: (value: CurrencyCode) => void;
@@ -96,6 +98,7 @@ type FilterPanelProps = {
   onRegionChange: (value: RegionFilter) => void;
   onLifestyleChange: (value: LifestyleFilter) => void;
   onOnlyUnderBudgetChange: (value: boolean) => void;
+  onToggleTag: (tag: string) => void;
 };
 
 const selectClass =
@@ -112,6 +115,8 @@ export default function FilterPanel({
   region,
   lifestyle,
   onlyUnderBudget,
+  availableTags,
+  selectedTags,
   onInvestableAssetsChange,
   onMonthlyIncomeChange,
   onCurrencyChange,
@@ -119,6 +124,7 @@ export default function FilterPanel({
   onRegionChange,
   onLifestyleChange,
   onOnlyUnderBudgetChange,
+  onToggleTag,
 }: FilterPanelProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const info = currencyInfo(currency);
@@ -141,13 +147,17 @@ export default function FilterPanel({
     (lifestyle !== "All" ? 1 : 0) +
     (withdrawalRate !== DEFAULT_RATE ? 1 : 0) +
     (hasIncome ? 1 : 0) +
-    (onlyUnderBudget ? 1 : 0);
+    (onlyUnderBudget ? 1 : 0) +
+    selectedTags.length;
 
   const summary = [
     `${ratePct} withdrawal`,
     hasIncome ? `${formatNumber(monthlyIncome, currency)} income` : null,
     region === "All" ? "All regions" : region,
     lifestyle === "All" ? "All lifestyles" : lifestyle,
+    selectedTags.length > 0
+      ? `${selectedTags.length} tag${selectedTags.length === 1 ? "" : "s"}`
+      : null,
     onlyUnderBudget ? "Within budget only" : null,
   ]
     .filter(Boolean)
@@ -272,7 +282,7 @@ export default function FilterPanel({
           aria-hidden={!filtersOpen}
           className={`overflow-hidden transition-all duration-300 ease-out ${
             filtersOpen
-              ? "max-h-[44rem] opacity-100"
+              ? "max-h-[80rem] opacity-100"
               : "pointer-events-none max-h-0 opacity-0"
           }`}
         >
@@ -388,6 +398,38 @@ export default function FilterPanel({
               </select>
             </div>
           </div>
+
+          {availableTags.length > 0 && (
+            <fieldset className="mt-4">
+              <legend className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                Tags{" "}
+                <span className="font-normal normal-case text-muted/70">
+                  (match all selected)
+                </span>
+              </legend>
+              <div className="flex flex-wrap gap-2">
+                {availableTags.map((tag) => {
+                  const active = selectedTags.includes(tag);
+                  return (
+                    <button
+                      key={tag}
+                      type="button"
+                      onClick={() => onToggleTag(tag)}
+                      aria-pressed={active}
+                      tabIndex={filtersOpen ? 0 : -1}
+                      className={`rounded-full px-3 py-1.5 text-xs font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
+                        active
+                          ? "bg-brand-500 text-white shadow-sm"
+                          : "bg-sand text-ink/70 hover:bg-brand-100 hover:text-brand-700"
+                      }`}
+                    >
+                      {tag}
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
+          )}
 
           <label
             htmlFor="onlyUnderBudget"

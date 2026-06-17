@@ -38,6 +38,17 @@ export default function HomeClient({ cities }: HomeClientProps) {
   const [region, setRegion] = useState<RegionFilter>("All");
   const [lifestyle, setLifestyle] = useState<LifestyleFilter>("All");
   const [onlyUnderBudget, setOnlyUnderBudget] = useState<boolean>(false);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const allTags = useMemo(
+    () => Array.from(new Set(cities.flatMap((c) => c.tags))).sort(),
+    [cities]
+  );
+
+  const toggleTag = (tag: string) =>
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
 
   // Inputs are stored in the selected display currency. Convert to USD (the
   // canonical unit for the city data) for all budget comparisons.
@@ -68,9 +79,15 @@ export default function HomeClient({ cities }: HomeClientProps) {
       if (region !== "All" && city.region !== region) return false;
       if (lifestyle !== "All" && city.lifestyle !== lifestyle) return false;
       if (onlyUnderBudget && city.monthlyCost > budgetUsd) return false;
+      if (
+        selectedTags.length > 0 &&
+        !selectedTags.every((t) => city.tags.includes(t))
+      ) {
+        return false;
+      }
       return true;
     });
-  }, [cities, region, lifestyle, onlyUnderBudget, budgetUsd]);
+  }, [cities, region, lifestyle, onlyUnderBudget, budgetUsd, selectedTags]);
 
   const underBudgetCount = useMemo(
     () => filteredCities.filter((city) => city.monthlyCost <= budgetUsd).length,
@@ -83,7 +100,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // Reset to the first window whenever the filter criteria change.
   useEffect(() => {
     setWindowStart(0);
-  }, [region, lifestyle, onlyUnderBudget]);
+  }, [region, lifestyle, onlyUnderBudget, selectedTags]);
 
   const total = filteredCities.length;
   const clampedStart = Math.min(windowStart, Math.max(0, total - PAGE_SIZE));
@@ -140,6 +157,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
     region,
     lifestyle,
     onlyUnderBudget,
+    selectedTags,
   ]);
 
   useEffect(() => {
@@ -177,6 +195,8 @@ export default function HomeClient({ cities }: HomeClientProps) {
             region={region}
             lifestyle={lifestyle}
             onlyUnderBudget={onlyUnderBudget}
+            availableTags={allTags}
+            selectedTags={selectedTags}
             onInvestableAssetsChange={setInvestableAssets}
             onMonthlyIncomeChange={setMonthlyIncome}
             onCurrencyChange={handleCurrencyChange}
@@ -184,6 +204,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             onRegionChange={setRegion}
             onLifestyleChange={setLifestyle}
             onOnlyUnderBudgetChange={setOnlyUnderBudget}
+            onToggleTag={toggleTag}
           />
         </div>
 
@@ -261,7 +282,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
               No cities match your filters
             </p>
             <p className="mt-1 text-sm text-muted">
-              Try raising your budget or widening the region and lifestyle
+              Try raising your budget or widening the region, lifestyle, or tag
               filters.
             </p>
           </div>
@@ -293,35 +314,6 @@ export default function HomeClient({ cities }: HomeClientProps) {
             </button>
           </div>
         )}
-      </section>
-
-      {/* Marketing / context moved below the tool */}
-      <section
-        id="about"
-        className="relative scroll-mt-20 overflow-hidden border-t border-sand bg-gradient-to-b from-cream to-brand-50"
-      >
-        <div className="relative mx-auto max-w-5xl px-4 py-14 text-center sm:px-6 sm:py-20">
-          <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/70 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-brand-700">
-            Retirement city explorer
-          </p>
-          <h2 className="mx-auto mt-5 max-w-3xl text-balance text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
-            Find Cities Where Your Retirement Money Goes Further
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg">
-            Compare estimated monthly retirement expenses across popular cities
-            and countries. BumBumSafe turns your investable assets into a
-            realistic monthly budget using a safe withdrawal rate, then ranks
-            places where
-            you can retire comfortably — and with dignity.
-          </p>
-          <a
-            href="#top"
-            className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-          >
-            <ArrowUp aria-hidden="true" className="h-4 w-4" />
-            Back to the calculator
-          </a>
-        </div>
       </section>
 
       <footer className="border-t border-sand bg-sand/40">

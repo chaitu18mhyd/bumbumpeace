@@ -13,7 +13,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-sand bg-cream/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-sand bg-cream/90 backdrop-blur-md relative">
       <nav
         aria-label="Primary"
         className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
@@ -100,7 +100,7 @@ export default function Navbar() {
       <div
         id="mobile-menu"
         aria-hidden={!open}
-        className={`overflow-hidden border-t border-sand bg-cream transition-all duration-300 ease-out md:hidden ${
+        className={`absolute inset-x-0 top-full overflow-hidden border-t border-sand bg-cream shadow-xl transition-all duration-300 ease-out md:hidden ${
           open
             ? "max-h-96 opacity-100"
             : "pointer-events-none max-h-0 border-transparent opacity-0"

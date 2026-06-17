@@ -6,6 +6,7 @@ import { expenseBreakdown } from "@/lib/expenses";
 type CityDetailProps = {
   city: City;
   currency: CurrencyCode;
+  people: number;
   caretLeft: number | null;
   onClose: () => void;
 };
@@ -25,10 +26,12 @@ function polar(radius: number, fraction: number): [number, number] {
 export default function CityDetail({
   city,
   currency,
+  people,
   caretLeft,
   onClose,
 }: CityDetailProps) {
-  const slices = expenseBreakdown(city.monthlyCost, city.expenseShares);
+  const slices = expenseBreakdown(city.monthlyCost, city.expenseShares, people);
+  const totalUsd = slices.reduce((sum, s) => sum + s.amountUsd, 0);
 
   // Build full-pie wedge paths + centroid label positions.
   let cumulative = 0;
@@ -80,7 +83,7 @@ export default function CityDetail({
             <p className="text-sm text-muted">
               Estimated monthly expenses ·{" "}
               <span className="font-semibold text-ink">
-                {formatUsdAs(city.monthlyCost, currency)}/mo
+                {formatUsdAs(totalUsd, currency)}/mo
               </span>
             </p>
           </div>

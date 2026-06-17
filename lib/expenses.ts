@@ -22,16 +22,50 @@ export const EXPENSE_CATEGORIES: ExpenseCategory[] = [
 export type ExpenseSlice = ExpenseCategory & { amountUsd: number };
 
 /**
- * Break a total monthly cost (USD) into per-category amounts.
- * Uses curated per-city `shares` (keyed by category label) when provided,
- * otherwise falls back to the default category percentages.
+ * How much each category grows per additional person (elasticity 0–1).
+ * 0 = fully shared/fixed (housing), 1 = fully per-person (linear).
+ * cost(n) = base × (1 + elasticity × (n − 1)).
+ */
+export const CATEGORY_ELASTICITY: Record<string, number> = {
+  Rent: 0.2, // a couple needs a slightly bigger place, mostly shared
+  Utilities: 0.15,
+  Food: 0.9,
+  Healthcare: 1.0,
+  Travel: 0.85,
+  Leisure: 0.8,
+  Other: 0.5,
+};
+
+function householdFactor(label: string, people: number): number {
+  const e = CATEGORY_ELASTICITY[label] ?? 0.7;
+  return 1 + e * (Math.max(1, people) - 1);
+}
+
+/**
+ * Break a single-person monthly cost (USD) into per-category amounts, scaled
+ * for `people` in the household. Uses curated per-city `shares` when provided,
+ * otherwise the default category percentages.
  */
 export function expenseBreakdown(
   monthlyCostUsd: number,
-  shares?: Record<string, number>
+  shares?: Record<string, number>,
+  people: number = 1
 ): ExpenseSlice[] {
   return EXPENSE_CATEGORIES.map((cat) => {
     const pct = shares?.[cat.label] ?? cat.pct;
-    return { ...cat, pct, amountUsd: monthlyCostUsd * pct };
+    const amountUsd = monthlyCostUsd * pct * householdFactor(cat.label, people);
+    return { ...cat, pct, amountUsd };
   });
+}
+
+/** Total monthly cost (USD) for a household of `people`, from the breakdown. */
+export function scaledMonthlyCost(
+  monthlyCostUsd: number,
+  shares: Record<string, number> | undefined,
+  people: number
+): number {
+  return expenseBreakdown(monthlyCostUsd, shares, people).reduce(
+    (sum, s) => sum + s.amountUsd,
+    0
+  );
 }

@@ -9,6 +9,7 @@ type ComparePanelProps = {
   cities: City[];
   currency: CurrencyCode;
   budgetUsd: number;
+  people: number;
   onClose: () => void;
   onUnpin: (city: City) => void;
 };
@@ -17,6 +18,7 @@ export default function ComparePanel({
   cities,
   currency,
   budgetUsd,
+  people,
   onClose,
   onUnpin,
 }: ComparePanelProps) {
@@ -49,8 +51,13 @@ export default function ComparePanel({
         <div className="overflow-auto p-5">
           <div className="flex gap-4">
             {cities.map((city) => {
-              const isUnder = city.monthlyCost <= budgetUsd;
-              const slices = expenseBreakdown(city.monthlyCost, city.expenseShares);
+              const slices = expenseBreakdown(
+                city.monthlyCost,
+                city.expenseShares,
+                people
+              );
+              const totalUsd = slices.reduce((sum, s) => sum + s.amountUsd, 0);
+              const isUnder = totalUsd <= budgetUsd;
               return (
                 <div
                   key={`${city.city}-${city.country}`}
@@ -85,7 +92,7 @@ export default function ComparePanel({
                   </div>
 
                   <p className="mt-3 text-2xl font-bold tracking-tight text-ink">
-                    {formatUsdAs(city.monthlyCost, currency)}
+                    {formatUsdAs(totalUsd, currency)}
                     <span className="ml-1 text-xs font-medium text-muted">
                       /mo
                     </span>

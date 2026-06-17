@@ -18,6 +18,7 @@ import FilterPanel, {
 } from "@/components/FilterPanel";
 import type { City } from "@/data/cities";
 import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
+import { scaledMonthlyCost } from "@/lib/expenses";
 
 const DEFAULT_INVESTABLE_ASSETS = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
@@ -42,6 +43,8 @@ export default function HomeClient({ cities }: HomeClientProps) {
   const [lifestyle, setLifestyle] = useState<LifestyleFilter>("All");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  // Household size — defaults to a couple.
+  const [householdSize, setHouseholdSize] = useState(2);
 
   // Pin / compare
   const [pinned, setPinned] = useState<string[]>([]);
@@ -92,6 +95,12 @@ export default function HomeClient({ cities }: HomeClientProps) {
   };
 
   const q = searchQuery.trim().toLowerCase();
+  const costFor = useCallback(
+    (city: City) =>
+      scaledMonthlyCost(city.monthlyCost, city.expenseShares, householdSize),
+    [householdSize]
+  );
+
   const filteredCities = useMemo(() => {
     return cities.filter((city) => {
       if (region !== "All" && city.region !== region) return false;
@@ -107,13 +116,13 @@ export default function HomeClient({ cities }: HomeClientProps) {
       if (q) {
         return `${city.city} ${city.country}`.toLowerCase().includes(q);
       }
-      return city.monthlyCost <= budgetUsd;
+      return costFor(city) <= budgetUsd;
     });
-  }, [cities, region, lifestyle, selectedTags, q, budgetUsd]);
+  }, [cities, region, lifestyle, selectedTags, q, budgetUsd, costFor]);
 
   const underBudgetCount = useMemo(
-    () => filteredCities.filter((city) => city.monthlyCost <= budgetUsd).length,
-    [filteredCities, budgetUsd]
+    () => filteredCities.filter((city) => costFor(city) <= budgetUsd).length,
+    [filteredCities, budgetUsd, costFor]
   );
 
   // Windowed pager: show PAGE_SIZE cities at a time.
@@ -130,7 +139,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // Reset to the first window whenever the filter criteria change.
   useEffect(() => {
     setWindowStart(0);
-  }, [region, lifestyle, selectedTags, q]);
+  }, [region, lifestyle, selectedTags, q, householdSize]);
 
   const total = filteredCities.length;
   const clampedStart = Math.min(windowStart, Math.max(0, total - PAGE_SIZE));
@@ -188,6 +197,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
     lifestyle,
     selectedTags,
     q,
+    householdSize,
   ]);
 
   useEffect(() => {
@@ -225,8 +235,10 @@ export default function HomeClient({ cities }: HomeClientProps) {
             region={region}
             lifestyle={lifestyle}
             searchQuery={searchQuery}
+            householdSize={householdSize}
             availableTags={allTags}
             selectedTags={selectedTags}
+            onHouseholdSizeChange={setHouseholdSize}
             onInvestableAssetsChange={setInvestableAssets}
             onMonthlyIncomeChange={setMonthlyIncome}
             onCurrencyChange={handleCurrencyChange}
@@ -292,6 +304,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
                       city={city}
                       budgetUsd={budgetUsd}
                       currency={currency}
+                      people={householdSize}
                       selected={
                         selectedCity?.city === city.city &&
                         selectedCity?.country === city.country
@@ -326,6 +339,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             <CityDetail
               city={selectedCity}
               currency={currency}
+              people={householdSize}
               caretLeft={caretLeft}
               onClose={() => setSelectedCity(null)}
             />
@@ -390,6 +404,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
           cities={pinnedCities}
           currency={currency}
           budgetUsd={budgetUsd}
+          people={householdSize}
           onClose={() => setCompareOpen(false)}
           onUnpin={togglePin}
         />

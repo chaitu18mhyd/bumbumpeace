@@ -1,6 +1,15 @@
 "use client";
 
-import { ChevronDown, Search, SlidersHorizontal, Wallet, X } from "lucide-react";
+import {
+  ChevronDown,
+  Minus,
+  Plus,
+  Search,
+  SlidersHorizontal,
+  Users,
+  Wallet,
+  X,
+} from "lucide-react";
 import {
   type ChangeEvent,
   useEffect,
@@ -89,6 +98,7 @@ type FilterPanelProps = {
   region: RegionFilter;
   lifestyle: LifestyleFilter;
   searchQuery: string;
+  householdSize: number;
   availableTags: string[];
   selectedTags: string[];
   onInvestableAssetsChange: (value: number) => void;
@@ -98,8 +108,17 @@ type FilterPanelProps = {
   onRegionChange: (value: RegionFilter) => void;
   onLifestyleChange: (value: LifestyleFilter) => void;
   onSearchChange: (value: string) => void;
+  onHouseholdSizeChange: (value: number) => void;
   onToggleTag: (tag: string) => void;
 };
+
+const MAX_HOUSEHOLD = 8;
+
+function householdLabel(n: number): string {
+  if (n === 1) return "Single";
+  if (n === 2) return "Couple";
+  return `${n} people`;
+}
 
 const selectClass =
   "w-full appearance-none rounded-xl border border-sand bg-cream px-3.5 py-2.5 text-sm font-medium text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200";
@@ -115,6 +134,7 @@ export default function FilterPanel({
   region,
   lifestyle,
   searchQuery,
+  householdSize,
   availableTags,
   selectedTags,
   onInvestableAssetsChange,
@@ -124,6 +144,7 @@ export default function FilterPanel({
   onRegionChange,
   onLifestyleChange,
   onSearchChange,
+  onHouseholdSizeChange,
   onToggleTag,
 }: FilterPanelProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -147,9 +168,11 @@ export default function FilterPanel({
     (lifestyle !== "All" ? 1 : 0) +
     (withdrawalRate !== DEFAULT_RATE ? 1 : 0) +
     (hasIncome ? 1 : 0) +
+    (householdSize !== 2 ? 1 : 0) +
     selectedTags.length;
 
   const summary = [
+    householdLabel(householdSize),
     `${ratePct} withdrawal`,
     hasIncome ? `${formatNumber(monthlyIncome, currency)} income` : null,
     region === "All" ? "All regions" : region,
@@ -312,6 +335,56 @@ export default function FilterPanel({
           }`}
         >
           <div className="mt-3 flex flex-col gap-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted">
+              <Users aria-hidden="true" className="h-3.5 w-3.5" />
+              Household
+            </span>
+            <div className="flex items-center gap-3">
+              <div className="inline-flex items-center rounded-xl border border-sand bg-cream">
+                <button
+                  type="button"
+                  onClick={() =>
+                    onHouseholdSizeChange(Math.max(1, householdSize - 1))
+                  }
+                  disabled={householdSize <= 1}
+                  tabIndex={filtersOpen ? 0 : -1}
+                  aria-label="Fewer people"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-l-xl text-ink transition hover:bg-sand disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <Minus aria-hidden="true" className="h-4 w-4" />
+                </button>
+                <span
+                  className="w-10 text-center text-sm font-bold text-ink"
+                  aria-live="polite"
+                >
+                  {householdSize}
+                </span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    onHouseholdSizeChange(
+                      Math.min(MAX_HOUSEHOLD, householdSize + 1)
+                    )
+                  }
+                  disabled={householdSize >= MAX_HOUSEHOLD}
+                  tabIndex={filtersOpen ? 0 : -1}
+                  aria-label="More people"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-r-xl text-ink transition hover:bg-sand disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <Plus aria-hidden="true" className="h-4 w-4" />
+                </button>
+              </div>
+              <span className="text-sm font-medium text-ink">
+                {householdLabel(householdSize)}
+              </span>
+            </div>
+            <p className="text-xs text-muted">
+              Costs scale for more people — housing is mostly shared; food &amp;
+              healthcare are roughly per person.
+            </p>
+          </div>
+
+          <div className="mt-4 flex flex-col gap-1.5">
             <label
               htmlFor="monthlyIncome"
               className="text-xs font-semibold uppercase tracking-wide text-muted"

@@ -1,11 +1,13 @@
 import { ArrowUp, Check, MapPin, Pin } from "lucide-react";
 import { type City, flagFor } from "@/data/cities";
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
+import { scaledMonthlyCost } from "@/lib/expenses";
 
 type CityCardProps = {
   city: City;
   budgetUsd: number;
   currency: CurrencyCode;
+  people: number;
   selected: boolean;
   pinned: boolean;
   onSelect: () => void;
@@ -22,13 +24,15 @@ export default function CityCard({
   city,
   budgetUsd,
   currency,
+  people,
   selected,
   pinned,
   onSelect,
   onTogglePin,
 }: CityCardProps) {
-  const isUnderBudget = city.monthlyCost <= budgetUsd;
-  const differenceUsd = Math.abs(city.monthlyCost - budgetUsd);
+  const cost = scaledMonthlyCost(city.monthlyCost, city.expenseShares, people);
+  const isUnderBudget = cost <= budgetUsd;
+  const differenceUsd = Math.abs(cost - budgetUsd);
 
   return (
     <article
@@ -113,7 +117,7 @@ export default function CityCard({
       <div className="mt-4 flex items-end justify-between gap-3">
         <div>
           <p className="text-3xl font-bold tracking-tight text-ink sm:text-[2rem]">
-            {formatUsdAs(city.monthlyCost, currency)}
+            {formatUsdAs(cost, currency)}
             <span className="ml-1 text-sm font-medium text-muted">/mo</span>
           </p>
           <p

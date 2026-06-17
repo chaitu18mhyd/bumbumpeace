@@ -1,7 +1,14 @@
-import { ArrowUp, Check, MapPin, Pin } from "lucide-react";
+import { ArrowUp, Check, MapPin, Pin, Star } from "lucide-react";
 import { type City, flagFor } from "@/data/cities";
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
+import { cityRating } from "@/lib/rating";
+
+function ratingClasses(rating: number): string {
+  if (rating >= 8) return "bg-under-100 text-under-700";
+  if (rating >= 6.5) return "bg-brand-100 text-brand-700";
+  return "bg-sand text-muted";
+}
 
 type CityCardProps = {
   city: City;
@@ -33,6 +40,7 @@ export default function CityCard({
   const cost = scaledMonthlyCost(city.monthlyCost, city.expenseShares, people);
   const isUnderBudget = cost <= budgetUsd;
   const differenceUsd = Math.abs(cost - budgetUsd);
+  const rating = cityRating(city);
 
   return (
     <article
@@ -130,13 +138,24 @@ export default function CityCard({
               : `${formatUsdAs(differenceUsd, currency)} over your budget`}
           </p>
         </div>
-        <span
-          className={`rounded-full px-3 py-1 text-xs font-semibold ${
-            lifestyleStyles[city.lifestyle]
-          }`}
-        >
-          {city.lifestyle}
-        </span>
+        <div className="flex shrink-0 flex-col items-end gap-2">
+          <span
+            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${ratingClasses(
+              rating
+            )}`}
+            aria-label={`Rating ${rating} out of 10`}
+          >
+            <Star aria-hidden="true" className="h-3.5 w-3.5 fill-current" />
+            {rating.toFixed(1)}
+          </span>
+          <span
+            className={`rounded-full px-3 py-1 text-xs font-semibold ${
+              lifestyleStyles[city.lifestyle]
+            }`}
+          >
+            {city.lifestyle}
+          </span>
+        </div>
       </div>
 
       <p className="mt-4 text-sm leading-relaxed text-muted">

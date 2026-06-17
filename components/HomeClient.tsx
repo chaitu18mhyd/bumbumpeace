@@ -19,6 +19,9 @@ import FilterPanel, {
 import type { City } from "@/data/cities";
 import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
+import { cityRating } from "@/lib/rating";
+
+type SortBy = "featured" | "rating" | "cost-asc" | "cost-desc";
 
 const DEFAULT_INVESTABLE_ASSETS = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
@@ -45,6 +48,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   // Household size — defaults to a couple.
   const [householdSize, setHouseholdSize] = useState(2);
+  const [sortBy, setSortBy] = useState<SortBy>("featured");
 
   // Pin / compare
   const [pinned, setPinned] = useState<string[]>([]);
@@ -125,6 +129,14 @@ export default function HomeClient({ cities }: HomeClientProps) {
     [filteredCities, budgetUsd, costFor]
   );
 
+  const sortedCities = useMemo(() => {
+    const arr = [...filteredCities];
+    if (sortBy === "rating") arr.sort((a, b) => cityRating(b) - cityRating(a));
+    else if (sortBy === "cost-asc") arr.sort((a, b) => costFor(a) - costFor(b));
+    else if (sortBy === "cost-desc") arr.sort((a, b) => costFor(b) - costFor(a));
+    return arr;
+  }, [filteredCities, sortBy, costFor]);
+
   // Windowed pager: show PAGE_SIZE cities at a time.
   const [windowStart, setWindowStart] = useState(0);
   // Direction of the last page change, to slide the grid the right way.
@@ -136,14 +148,14 @@ export default function HomeClient({ cities }: HomeClientProps) {
         ? "animate-slide-in-down"
         : "animate-fade-slide";
 
-  // Reset to the first window whenever the filter criteria change.
+  // Reset to the first window whenever the filter/sort criteria change.
   useEffect(() => {
     setWindowStart(0);
-  }, [region, lifestyle, selectedTags, q, householdSize]);
+  }, [region, lifestyle, selectedTags, q, householdSize, sortBy]);
 
-  const total = filteredCities.length;
+  const total = sortedCities.length;
   const clampedStart = Math.min(windowStart, Math.max(0, total - PAGE_SIZE));
-  const visibleCities = filteredCities.slice(
+  const visibleCities = sortedCities.slice(
     clampedStart,
     clampedStart + PAGE_SIZE
   );
@@ -250,7 +262,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
           />
         </div>
 
-        <div className="mt-6 flex flex-wrap items-baseline justify-between gap-2">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
           <p
             aria-live="polite"
             className="text-sm font-medium text-ink sm:text-base"
@@ -264,6 +276,23 @@ export default function HomeClient({ cities }: HomeClientProps) {
             <span className="font-bold text-under-700">{underBudgetCount}</span>{" "}
             {underBudgetCount === 1 ? "is" : "are"} under your budget.
           </p>
+
+          <div className="flex items-center gap-2">
+            <label htmlFor="sort" className="text-xs font-medium text-muted">
+              Sort
+            </label>
+            <select
+              id="sort"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as SortBy)}
+              className="appearance-none rounded-lg border border-sand bg-cream px-3 py-1.5 text-sm font-medium text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+            >
+              <option value="featured">Featured</option>
+              <option value="rating">Rating (high to low)</option>
+              <option value="cost-asc">Cost (low to high)</option>
+              <option value="cost-desc">Cost (high to low)</option>
+            </select>
+          </div>
         </div>
 
         {total > 0 ? (

@@ -1,4 +1,4 @@
-import { ArrowUp, Check, MapPin } from "lucide-react";
+import { ArrowUp, Check, MapPin, Pin } from "lucide-react";
 import { type City, flagFor } from "@/data/cities";
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 
@@ -7,7 +7,9 @@ type CityCardProps = {
   budgetUsd: number;
   currency: CurrencyCode;
   selected: boolean;
+  pinned: boolean;
   onSelect: () => void;
+  onTogglePin: () => void;
 };
 
 const lifestyleStyles: Record<City["lifestyle"], string> = {
@@ -21,7 +23,9 @@ export default function CityCard({
   budgetUsd,
   currency,
   selected,
+  pinned,
   onSelect,
+  onTogglePin,
 }: CityCardProps) {
   const isUnderBudget = city.monthlyCost <= budgetUsd;
   const differenceUsd = Math.abs(city.monthlyCost - budgetUsd);
@@ -67,20 +71,43 @@ export default function CityCard({
             </p>
           </div>
         </div>
-        <span
-          className={`inline-flex shrink-0 items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
-            isUnderBudget
-              ? "bg-under-100 text-under-700"
-              : "bg-over-100 text-over-700"
-          }`}
-        >
-          {isUnderBudget ? (
-            <Check aria-hidden="true" className="h-3.5 w-3.5" />
-          ) : (
-            <ArrowUp aria-hidden="true" className="h-3.5 w-3.5" />
-          )}
-          {isUnderBudget ? "Under budget" : "Over budget"}
-        </span>
+        <div className="flex shrink-0 flex-col items-end gap-2">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onTogglePin();
+            }}
+            aria-pressed={pinned}
+            aria-label={
+              pinned ? `Unpin ${city.city}` : `Pin ${city.city} to compare`
+            }
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full border transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
+              pinned
+                ? "border-brand-400 bg-brand-500 text-white"
+                : "border-sand bg-white text-muted hover:bg-sand hover:text-ink"
+            }`}
+          >
+            <Pin
+              aria-hidden="true"
+              className={`h-4 w-4 ${pinned ? "fill-current" : ""}`}
+            />
+          </button>
+          <span
+            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
+              isUnderBudget
+                ? "bg-under-100 text-under-700"
+                : "bg-over-100 text-over-700"
+            }`}
+          >
+            {isUnderBudget ? (
+              <Check aria-hidden="true" className="h-3.5 w-3.5" />
+            ) : (
+              <ArrowUp aria-hidden="true" className="h-3.5 w-3.5" />
+            )}
+            {isUnderBudget ? "Under budget" : "Over budget"}
+          </span>
+        </div>
       </header>
 
       <div className="mt-4 flex items-end justify-between gap-3">

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUp, MapPinOff, PiggyBank } from "lucide-react";
+import { ArrowDown, ArrowUp, MapPinOff, PiggyBank, Scale, X } from "lucide-react";
 import {
   useCallback,
   useEffect,
@@ -11,6 +11,7 @@ import {
 } from "react";
 import CityCard from "@/components/CityCard";
 import CityDetail from "@/components/CityDetail";
+import ComparePanel from "@/components/ComparePanel";
 import FilterPanel, {
   type LifestyleFilter,
   type RegionFilter,
@@ -21,6 +22,8 @@ import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
 const DEFAULT_INVESTABLE_ASSETS = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
 const PAGE_SIZE = 3;
+
+const cityKey = (c: City) => `${c.city}-${c.country}`;
 
 type HomeClientProps = {
   cities: City[];
@@ -37,8 +40,22 @@ export default function HomeClient({ cities }: HomeClientProps) {
   );
   const [region, setRegion] = useState<RegionFilter>("All");
   const [lifestyle, setLifestyle] = useState<LifestyleFilter>("All");
-  const [onlyUnderBudget, setOnlyUnderBudget] = useState<boolean>(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Pin / compare
+  const [pinned, setPinned] = useState<string[]>([]);
+  const [compareOpen, setCompareOpen] = useState(false);
+  const togglePin = (c: City) =>
+    setPinned((prev) =>
+      prev.includes(cityKey(c))
+        ? prev.filter((k) => k !== cityKey(c))
+        : [...prev, cityKey(c)]
+    );
+  const pinnedCities = useMemo(
+    () => cities.filter((c) => pinned.includes(cityKey(c))),
+    [cities, pinned]
+  );
 
   const allTags = useMemo(
     () => Array.from(new Set(cities.flatMap((c) => c.tags))).sort(),
@@ -74,20 +91,25 @@ export default function HomeClient({ cities }: HomeClientProps) {
     setCurrency(next);
   };
 
+  const q = searchQuery.trim().toLowerCase();
   const filteredCities = useMemo(() => {
     return cities.filter((city) => {
       if (region !== "All" && city.region !== region) return false;
       if (lifestyle !== "All" && city.lifestyle !== lifestyle) return false;
-      if (onlyUnderBudget && city.monthlyCost > budgetUsd) return false;
       if (
         selectedTags.length > 0 &&
         !selectedTags.every((t) => city.tags.includes(t))
       ) {
         return false;
       }
-      return true;
+      // With a search query, match by name across ALL cities (ignore budget)
+      // so you can look up any city. Otherwise default to within-budget only.
+      if (q) {
+        return `${city.city} ${city.country}`.toLowerCase().includes(q);
+      }
+      return city.monthlyCost <= budgetUsd;
     });
-  }, [cities, region, lifestyle, onlyUnderBudget, budgetUsd, selectedTags]);
+  }, [cities, region, lifestyle, selectedTags, q, budgetUsd]);
 
   const underBudgetCount = useMemo(
     () => filteredCities.filter((city) => city.monthlyCost <= budgetUsd).length,
@@ -108,7 +130,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // Reset to the first window whenever the filter criteria change.
   useEffect(() => {
     setWindowStart(0);
-  }, [region, lifestyle, onlyUnderBudget, selectedTags]);
+  }, [region, lifestyle, selectedTags, q]);
 
   const total = filteredCities.length;
   const clampedStart = Math.min(windowStart, Math.max(0, total - PAGE_SIZE));
@@ -164,8 +186,8 @@ export default function HomeClient({ cities }: HomeClientProps) {
     withdrawalRate,
     region,
     lifestyle,
-    onlyUnderBudget,
     selectedTags,
+    q,
   ]);
 
   useEffect(() => {
@@ -202,7 +224,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             monthlyBudgetUsd={budgetUsd}
             region={region}
             lifestyle={lifestyle}
-            onlyUnderBudget={onlyUnderBudget}
+            searchQuery={searchQuery}
             availableTags={allTags}
             selectedTags={selectedTags}
             onInvestableAssetsChange={setInvestableAssets}
@@ -211,7 +233,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             onWithdrawalRateChange={setWithdrawalRate}
             onRegionChange={setRegion}
             onLifestyleChange={setLifestyle}
-            onOnlyUnderBudgetChange={setOnlyUnderBudget}
+            onSearchChange={setSearchQuery}
             onToggleTag={toggleTag}
           />
         </div>
@@ -274,7 +296,9 @@ export default function HomeClient({ cities }: HomeClientProps) {
                         selectedCity?.city === city.city &&
                         selectedCity?.country === city.country
                       }
+                      pinned={pinned.includes(key)}
                       onSelect={() => setSelectedCity(city)}
+                      onTogglePin={() => togglePin(city)}
                     />
                   </li>
                 );
@@ -332,6 +356,44 @@ export default function HomeClient({ cities }: HomeClientProps) {
           advice.
         </div>
       </footer>
+
+      {/* Floating compare bar */}
+      {pinnedCities.length > 0 && (
+        <div className="fixed inset-x-0 bottom-4 z-30 flex justify-center px-4">
+          <div className="flex items-center gap-2 rounded-full border border-sand bg-white/95 px-3 py-2 shadow-lg backdrop-blur sm:gap-3 sm:px-4">
+            <span className="text-sm font-semibold text-ink">
+              {pinnedCities.length} pinned
+            </span>
+            <button
+              type="button"
+              onClick={() => setCompareOpen(true)}
+              disabled={pinnedCities.length < 2}
+              className="inline-flex items-center gap-1.5 rounded-full bg-brand-500 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <Scale aria-hidden="true" className="h-4 w-4" />
+              Compare
+            </button>
+            <button
+              type="button"
+              onClick={() => setPinned([])}
+              className="inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-medium text-muted transition hover:text-ink"
+            >
+              <X aria-hidden="true" className="h-4 w-4" />
+              Clear
+            </button>
+          </div>
+        </div>
+      )}
+
+      {compareOpen && pinnedCities.length > 0 && (
+        <ComparePanel
+          cities={pinnedCities}
+          currency={currency}
+          budgetUsd={budgetUsd}
+          onClose={() => setCompareOpen(false)}
+          onUnpin={togglePin}
+        />
+      )}
     </main>
   );
 }

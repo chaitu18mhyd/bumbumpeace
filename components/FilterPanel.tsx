@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, SlidersHorizontal, Wallet } from "lucide-react";
+import { ChevronDown, Search, SlidersHorizontal, Wallet, X } from "lucide-react";
 import {
   type ChangeEvent,
   useEffect,
@@ -88,7 +88,7 @@ type FilterPanelProps = {
   monthlyBudgetUsd: number;
   region: RegionFilter;
   lifestyle: LifestyleFilter;
-  onlyUnderBudget: boolean;
+  searchQuery: string;
   availableTags: string[];
   selectedTags: string[];
   onInvestableAssetsChange: (value: number) => void;
@@ -97,7 +97,7 @@ type FilterPanelProps = {
   onWithdrawalRateChange: (value: number) => void;
   onRegionChange: (value: RegionFilter) => void;
   onLifestyleChange: (value: LifestyleFilter) => void;
-  onOnlyUnderBudgetChange: (value: boolean) => void;
+  onSearchChange: (value: string) => void;
   onToggleTag: (tag: string) => void;
 };
 
@@ -114,7 +114,7 @@ export default function FilterPanel({
   monthlyBudgetUsd,
   region,
   lifestyle,
-  onlyUnderBudget,
+  searchQuery,
   availableTags,
   selectedTags,
   onInvestableAssetsChange,
@@ -123,7 +123,7 @@ export default function FilterPanel({
   onWithdrawalRateChange,
   onRegionChange,
   onLifestyleChange,
-  onOnlyUnderBudgetChange,
+  onSearchChange,
   onToggleTag,
 }: FilterPanelProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -147,7 +147,6 @@ export default function FilterPanel({
     (lifestyle !== "All" ? 1 : 0) +
     (withdrawalRate !== DEFAULT_RATE ? 1 : 0) +
     (hasIncome ? 1 : 0) +
-    (onlyUnderBudget ? 1 : 0) +
     selectedTags.length;
 
   const summary = [
@@ -158,7 +157,6 @@ export default function FilterPanel({
     selectedTags.length > 0
       ? `${selectedTags.length} tag${selectedTags.length === 1 ? "" : "s"}`
       : null,
-    onlyUnderBudget ? "Within budget only" : null,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -243,6 +241,33 @@ export default function FilterPanel({
             <span className="ml-1 text-sm font-medium text-muted">/mo</span>
           </p>
         </div>
+      </div>
+
+      {/* Search any city by name (ignores budget) */}
+      <div className="relative mt-4">
+        <Search
+          aria-hidden="true"
+          className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
+        />
+        <input
+          id="citySearch"
+          type="search"
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
+          placeholder="Search any city or country…"
+          aria-label="Search cities"
+          className="w-full rounded-xl border border-sand bg-cream py-2.5 pl-10 pr-10 text-sm font-medium text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+        />
+        {searchQuery && (
+          <button
+            type="button"
+            onClick={() => onSearchChange("")}
+            aria-label="Clear search"
+            className="absolute right-2.5 top-1/2 inline-flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full text-muted transition hover:bg-sand hover:text-ink"
+          >
+            <X aria-hidden="true" className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       {/* Filters disclosure */}
@@ -431,22 +456,6 @@ export default function FilterPanel({
             </fieldset>
           )}
 
-          <label
-            htmlFor="onlyUnderBudget"
-            className="mt-4 flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-sand bg-cream px-4 py-3 shadow-sm transition hover:border-brand-300"
-          >
-            <span className="text-sm font-medium text-ink">
-              Only show cities within my budget
-            </span>
-            <input
-              id="onlyUnderBudget"
-              type="checkbox"
-              checked={onlyUnderBudget}
-              onChange={(e) => onOnlyUnderBudgetChange(e.target.checked)}
-              tabIndex={filtersOpen ? 0 : -1}
-              className="h-5 w-5 shrink-0 rounded-md border-sand text-brand-500 accent-brand-500 focus:ring-2 focus:ring-brand-200"
-            />
-          </label>
         </div>
       </div>
     </section>

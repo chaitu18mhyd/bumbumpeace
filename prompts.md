@@ -313,3 +313,5 @@ see that Mexico North America is in a single line always, there is a plenty of s
 Lets show 3 countries at most, if clicked on Load more, the top 3 should be hidden, and there should be a clickable link that shows the top 3. Add animations. Instead of Load more, add an icon here too. use icon like on top arrow, and down arrow
 
 Add 50 luxury cities across the world
+
+remove this filter - Only show cities within my budget. default to only show cities within my budget - but also add the ability to search for a city, pin a CityCard, and compare between cities

@@ -96,6 +96,14 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
   // Windowed pager: show PAGE_SIZE cities at a time.
   const [windowStart, setWindowStart] = useState(0);
+  // Direction of the last page change, to slide the grid the right way.
+  const [slideDir, setSlideDir] = useState<"next" | "prev" | null>(null);
+  const slideClass =
+    slideDir === "next"
+      ? "animate-slide-in-up"
+      : slideDir === "prev"
+        ? "animate-slide-in-down"
+        : "animate-fade-slide";
 
   // Reset to the first window whenever the filter criteria change.
   useEffect(() => {
@@ -231,6 +239,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
                 <button
                   type="button"
                   onClick={() => {
+                    setSlideDir("prev");
                     setSelectedCity(null);
                     setWindowStart(Math.max(0, clampedStart - PAGE_SIZE));
                   }}
@@ -244,7 +253,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
             <ul
               key={clampedStart}
-              className="mt-5 grid animate-fade-slide grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
+              className={`mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 ${slideClass}`}
             >
               {visibleCities.map((city) => {
                 const key = `${city.city}-${city.country}`;
@@ -304,6 +313,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             <button
               type="button"
               onClick={() => {
+                setSlideDir("next");
                 setSelectedCity(null);
                 setWindowStart(clampedStart + PAGE_SIZE);
               }}

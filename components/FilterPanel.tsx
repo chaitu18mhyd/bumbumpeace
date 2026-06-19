@@ -194,9 +194,9 @@ export default function FilterPanel({
         <div className="flex flex-1 flex-col gap-1.5">
           <label
             htmlFor="investableAssets"
-            className="text-xs font-semibold uppercase tracking-wide text-muted"
+            className="text-xs font-semibold tracking-wide text-muted"
           >
-            Investable assets
+            INVESTABLE ASSETS (brokerage, retirement accounts, cash) — exclude your home.
           </label>
           <div className="flex">
             <div className="relative">
@@ -248,10 +248,6 @@ export default function FilterPanel({
               {amountInWords(investableAssets, currency)}
             </p>
           )}
-          <p className="text-xs text-muted">
-            Invested savings you&apos;ll draw from (brokerage, retirement
-            accounts, cash) — exclude your home.
-          </p>
         </div>
 
         <div className="flex items-center justify-between gap-4 rounded-2xl border border-brand-200 bg-brand-50 px-4 py-3 sm:flex-col sm:items-start sm:justify-center sm:py-3.5">

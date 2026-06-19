@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import GoogleAnalyticsPageViews from "@/components/GoogleAnalyticsPageViews";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
@@ -22,8 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen antialiased">
+        <GoogleAnalytics />
         <Suspense fallback={null}>
-          <GoogleAnalytics />
+          <GoogleAnalyticsPageViews />
         </Suspense>
         <Navbar />
         {children}

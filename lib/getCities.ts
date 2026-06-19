@@ -1,10 +1,14 @@
-import { cities, type City } from "@/data/cities";
+import type { City } from "@/data/cities";
+import { fetchCitiesFromDatabase } from "@/lib/retirementCities";
 
 /**
- * City data for the page. The dataset lives in `data/cities.ts` and is read
- * directly (server-side) for the website. The same data is also exposed as a
- * JSON API at `/api/cities` for external clients (e.g. a future mobile app).
+ * City data for the page. This app is database-backed and requires Supabase.
  */
 export async function getCities(): Promise<{ cities: City[] }> {
-  return { cities };
+  const { data } = await fetchCitiesFromDatabase();
+  if (data !== null) {
+    return { cities: data };
+  }
+
+  throw new Error("Supabase city dataset unavailable.");
 }

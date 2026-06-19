@@ -17,7 +17,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { LIFESTYLES, REGIONS } from "@/data/cities";
+import type { Lifestyle, Region } from "@/data/cities";
 import {
   amountInWords,
   CURRENCIES,
@@ -27,8 +27,8 @@ import {
   formatUsdAs,
 } from "@/lib/currency";
 
-export type RegionFilter = "All" | (typeof REGIONS)[number];
-export type LifestyleFilter = "All" | (typeof LIFESTYLES)[number];
+export type RegionFilter = "All" | Region;
+export type LifestyleFilter = "All" | Lifestyle;
 
 // Run layout effects only on the client (avoids SSR warnings).
 const useIsoLayoutEffect =
@@ -97,6 +97,8 @@ type FilterPanelProps = {
   monthlyBudgetUsd: number;
   region: RegionFilter;
   lifestyle: LifestyleFilter;
+  availableRegions: Region[];
+  availableLifestyles: Lifestyle[];
   searchQuery: string;
   householdSize: number;
   availableTags: string[];
@@ -133,6 +135,8 @@ export default function FilterPanel({
   monthlyBudgetUsd,
   region,
   lifestyle,
+  availableRegions,
+  availableLifestyles,
   searchQuery,
   householdSize,
   availableTags,
@@ -459,7 +463,7 @@ export default function FilterPanel({
                 tabIndex={filtersOpen ? 0 : -1}
               >
                 <option value="All">All regions</option>
-                {REGIONS.map((r) => (
+                {availableRegions.map((r) => (
                   <option key={r} value={r}>
                     {r}
                   </option>
@@ -484,7 +488,7 @@ export default function FilterPanel({
                 tabIndex={filtersOpen ? 0 : -1}
               >
                 <option value="All">All lifestyles</option>
-                {LIFESTYLES.map((l) => (
+                {availableLifestyles.map((l) => (
                   <option key={l} value={l}>
                     {l}
                   </option>

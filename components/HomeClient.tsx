@@ -16,7 +16,7 @@ import FilterPanel, {
   type LifestyleFilter,
   type RegionFilter,
 } from "@/components/FilterPanel";
-import type { City } from "@/data/cities";
+import { LIFESTYLES, REGIONS, type City } from "@/data/cities";
 import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
 import { cityRating } from "@/lib/rating";
@@ -66,6 +66,17 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
   const allTags = useMemo(
     () => Array.from(new Set(cities.flatMap((c) => c.tags))).sort(),
+    [cities]
+  );
+  const availableRegions = useMemo(
+    () => REGIONS.filter((region) => cities.some((city) => city.region === region)),
+    [cities]
+  );
+  const availableLifestyles = useMemo(
+    () =>
+      LIFESTYLES.filter((lifestyle) =>
+        cities.some((city) => city.lifestyle === lifestyle)
+      ),
     [cities]
   );
 
@@ -152,6 +163,18 @@ export default function HomeClient({ cities }: HomeClientProps) {
   useEffect(() => {
     setWindowStart(0);
   }, [region, lifestyle, selectedTags, q, householdSize, sortBy]);
+
+  useEffect(() => {
+    if (region !== "All" && !availableRegions.includes(region)) {
+      setRegion("All");
+    }
+  }, [availableRegions, region]);
+
+  useEffect(() => {
+    if (lifestyle !== "All" && !availableLifestyles.includes(lifestyle)) {
+      setLifestyle("All");
+    }
+  }, [availableLifestyles, lifestyle]);
 
   const total = sortedCities.length;
   const clampedStart = Math.min(windowStart, Math.max(0, total - PAGE_SIZE));
@@ -246,6 +269,8 @@ export default function HomeClient({ cities }: HomeClientProps) {
             monthlyBudgetUsd={budgetUsd}
             region={region}
             lifestyle={lifestyle}
+            availableRegions={availableRegions}
+            availableLifestyles={availableLifestyles}
             searchQuery={searchQuery}
             householdSize={householdSize}
             availableTags={allTags}

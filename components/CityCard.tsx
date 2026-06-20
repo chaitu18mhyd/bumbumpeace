@@ -1,5 +1,5 @@
 import { ArrowUp, Check, MapPin, Pin, Star } from "lucide-react";
-import { type City, flagFor } from "@/data/cities";
+import { displayCountry, displayRegion, type City, flagFor } from "@/data/cities";
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
 import { cityRating } from "@/lib/rating";
@@ -37,6 +37,8 @@ export default function CityCard({
   onSelect,
   onTogglePin,
 }: CityCardProps) {
+  const countryLabel = displayCountry(city.country);
+  const regionLabel = displayRegion(city.region);
   const cost = scaledMonthlyCost(city.monthlyCost, city.expenseShares, people);
   const isUnderBudget = cost <= budgetUsd;
   const differenceUsd = Math.abs(cost - budgetUsd);
@@ -78,7 +80,7 @@ export default function CityCard({
             <p className="mt-0.5 flex items-center gap-1 text-sm text-muted">
               <MapPin aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
               <span className="truncate">
-                {city.country} · {city.region}
+                {countryLabel} · {regionLabel}
               </span>
             </p>
           </div>

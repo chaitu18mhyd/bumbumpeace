@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUp, Check, X } from "lucide-react";
-import { type City, flagFor } from "@/data/cities";
+import { displayCountry, type City, flagFor } from "@/data/cities";
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 import { expenseBreakdown } from "@/lib/expenses";
 
@@ -51,6 +51,7 @@ export default function ComparePanel({
         <div className="overflow-auto p-5">
           <div className="flex gap-4">
             {cities.map((city) => {
+              const countryLabel = displayCountry(city.country);
               const slices = expenseBreakdown(
                 city.monthlyCost,
                 city.expenseShares,
@@ -77,7 +78,7 @@ export default function ComparePanel({
                           {city.city}
                         </h3>
                         <p className="truncate text-xs text-muted">
-                          {city.country} · {city.region}
+                          {countryLabel} · {city.region}
                         </p>
                       </div>
                     </div>

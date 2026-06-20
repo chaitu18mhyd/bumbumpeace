@@ -67,6 +67,24 @@ export function flagFor(country: string): string {
   return COUNTRY_FLAGS[country] ?? "🏳️";
 }
 
+export function displayCountry(country: string): string {
+  const normalized = country.trim().toLowerCase();
+  if (
+    normalized === "united states" ||
+    normalized === "united states of america"
+  ) {
+    return "USA";
+  }
+  return country;
+}
+
+export function displayRegion(region: string): string {
+  const normalized = region.trim().toLowerCase();
+  if (normalized === "north america") return "N. Am.";
+  if (normalized === "south america") return "S. Am.";
+  return region;
+}
+
 export const REGIONS: Region[] = [
   "North America",
   "Europe",

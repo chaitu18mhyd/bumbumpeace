@@ -60,6 +60,14 @@ export default function HomeClient({ cities }: HomeClientProps) {
       if (prev.length >= MAX_COMPARE) return prev;
       return [...prev, key];
     });
+
+  const handleUnpin = (city: City) => {
+    const item = citiesWithKeys.find((item) => item.city === city);
+    if (item) {
+      togglePin(item.key);
+    }
+  };
+
   const pinnedCities = useMemo(
     () =>
       citiesWithKeys
@@ -405,7 +413,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
           budgetUsd={budgetUsd}
           people={householdSize}
           onClose={() => setCompareOpen(false)}
-          onUnpin={togglePin}
+          onUnpin={handleUnpin}
         />
       )}
     </main>

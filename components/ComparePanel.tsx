@@ -49,7 +49,7 @@ export default function ComparePanel({
         </header>
 
         <div className="overflow-auto p-5">
-          <div className="flex gap-4">
+          <div className="flex justify-center gap-4">
             {cities.map((city) => {
               const countryLabel = displayCountry(city.country);
               const slices = expenseBreakdown(
@@ -67,12 +67,11 @@ export default function ComparePanel({
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex min-w-0 items-start gap-2">
                       <span
-                        role="img"
+                        className={`shrink-0 h-6 w-8 overflow-hidden rounded-sm fi fi-${flagFor(
+                          city.country
+                        ).toLowerCase()}`}
                         aria-label={`Flag of ${city.country}`}
-                        className="text-2xl leading-none"
-                      >
-                        {flagFor(city.country)}
-                      </span>
+                      />
                       <div className="min-w-0">
                         <h3 className="truncate font-semibold text-ink">
                           {city.city}
@@ -103,11 +102,7 @@ export default function ComparePanel({
                   <div className="mt-2 h-6" />
 
                   <dl className="mt-3 space-y-1 border-t border-sand pt-3 text-sm">
-                    <div className="flex justify-between gap-2">
-                      <dt className="text-muted">Lifestyle</dt>
-                      <dd className="font-medium text-ink">{city.lifestyle}</dd>
-                    </div>
-                    {slices.map((s) => (
+                      {slices.map((s) => (
                       <div key={s.label} className="flex justify-between gap-2">
                         <dt className="flex items-center gap-1.5 text-muted">
                           <span

@@ -1,4 +1,5 @@
-import { ArrowUp, Check, MapPin, Pin, Star } from "lucide-react";
+import { MapPin, Pin, Star } from "lucide-react";
+import CityDetail from "@/components/CityDetail";
 import { displayCountry, displayRegion, type City, flagFor } from "@/data/cities";
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
@@ -15,26 +16,20 @@ type CityCardProps = {
   budgetUsd: number;
   currency: CurrencyCode;
   people: number;
-  selected: boolean;
   pinned: boolean;
-  onSelect: () => void;
+  allowPin: boolean;
   onTogglePin: () => void;
 };
 
-const lifestyleStyles: Record<City["lifestyle"], string> = {
-  Lean: "bg-brand-100 text-brand-700",
-  Comfortable: "bg-brand-200 text-brand-700",
-  Premium: "bg-brand-300 text-brand-700",
-};
+
 
 export default function CityCard({
   city,
   budgetUsd,
   currency,
   people,
-  selected,
   pinned,
-  onSelect,
+  allowPin,
   onTogglePin,
 }: CityCardProps) {
   const countryLabel = displayCountry(city.country);
@@ -45,14 +40,7 @@ export default function CityCard({
   const rating = cityRating(city);
 
   return (
-    <article
-      onClick={onSelect}
-      className={`group flex h-full cursor-pointer flex-col rounded-3xl border bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg focus-within:-translate-y-1 focus-within:shadow-lg sm:p-6 ${
-        selected
-          ? "border-brand-400 ring-2 ring-brand-300"
-          : "border-sand ring-1 ring-black/[0.03]"
-      }`}
-    >
+    <article className="group flex h-full flex-col rounded-3xl border border-sand bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg sm:p-6">
       <header className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <span
@@ -61,18 +49,7 @@ export default function CityCard({
           />
           <div className="min-w-0">
             <h3 className="truncate text-lg font-semibold tracking-tight text-ink sm:text-xl">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSelect();
-                }}
-                aria-expanded={selected}
-                aria-controls="city-detail-panel"
-                className="rounded text-left outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
-              >
-                {city.city}
-              </button>
+              {city.city}
             </h3>
             <p className="mt-0.5 flex items-center gap-1 text-sm text-muted">
               <MapPin aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
@@ -97,7 +74,8 @@ export default function CityCard({
               pinned
                 ? "border-brand-400 bg-brand-500 text-white"
                 : "border-sand bg-white text-muted hover:bg-sand hover:text-ink"
-            }`}
+            } ${!allowPin && !pinned ? "cursor-not-allowed opacity-50" : ""}`}
+            disabled={!allowPin && !pinned}
           >
             <Pin
               aria-hidden="true"
@@ -152,6 +130,10 @@ export default function CityCard({
           </li>
         ))}
       </ul>
+
+      <div className="mt-0">
+        <CityDetail city={city} currency={currency} people={people} />
+      </div>
     </article>
   );
 }

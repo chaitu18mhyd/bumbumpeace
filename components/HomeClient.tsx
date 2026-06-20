@@ -1,22 +1,11 @@
 "use client";
 
-import { ArrowDown, ArrowUp, MapPinOff, PiggyBank, Scale, X } from "lucide-react";
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ArrowDown, ArrowUp, MapPinOff, Scale, X } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import CityCard from "@/components/CityCard";
-import CityDetail from "@/components/CityDetail";
 import ComparePanel from "@/components/ComparePanel";
-import FilterPanel, {
-  type LifestyleFilter,
-  type RegionFilter,
-} from "@/components/FilterPanel";
-import { LIFESTYLES, REGIONS, type City } from "@/data/cities";
+import FilterPanel, { type RegionFilter } from "@/components/FilterPanel";
+import { REGIONS, type City } from "@/data/cities";
 import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
 import { cityRating } from "@/lib/rating";
@@ -27,13 +16,25 @@ const DEFAULT_INVESTABLE_ASSETS = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
 const PAGE_SIZE = 3;
 
-const cityKey = (c: City) => `${c.city}-${c.country}`;
+type CityItem = {
+  city: City;
+  key: string;
+};
 
 type HomeClientProps = {
   cities: City[];
 };
 
 export default function HomeClient({ cities }: HomeClientProps) {
+  const citiesWithKeys = useMemo(
+    () =>
+      cities.map((city, index) => ({
+        city,
+        key: `${city.city}-${city.country}-${index}`,
+      })),
+    [cities]
+  );
+
   const [investableAssets, setInvestableAssets] = useState<number>(
     DEFAULT_INVESTABLE_ASSETS
   );
@@ -43,7 +44,6 @@ export default function HomeClient({ cities }: HomeClientProps) {
     DEFAULT_WITHDRAWAL_RATE
   );
   const [region, setRegion] = useState<RegionFilter>("All");
-  const [lifestyle, setLifestyle] = useState<LifestyleFilter>("All");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   // Household size — defaults to a couple.
@@ -53,15 +53,19 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // Pin / compare
   const [pinned, setPinned] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
-  const togglePin = (c: City) =>
-    setPinned((prev) =>
-      prev.includes(cityKey(c))
-        ? prev.filter((k) => k !== cityKey(c))
-        : [...prev, cityKey(c)]
-    );
+  const MAX_COMPARE = 2;
+  const togglePin = (key: string) =>
+    setPinned((prev) => {
+      if (prev.includes(key)) return prev.filter((k) => k !== key);
+      if (prev.length >= MAX_COMPARE) return prev;
+      return [...prev, key];
+    });
   const pinnedCities = useMemo(
-    () => cities.filter((c) => pinned.includes(cityKey(c))),
-    [cities, pinned]
+    () =>
+      citiesWithKeys
+        .filter((item) => pinned.includes(item.key))
+        .map((item) => item.city),
+    [citiesWithKeys, pinned]
   );
 
   const allTags = useMemo(
@@ -70,13 +74,6 @@ export default function HomeClient({ cities }: HomeClientProps) {
   );
   const availableRegions = useMemo(
     () => REGIONS.filter((region) => cities.some((city) => city.region === region)),
-    [cities]
-  );
-  const availableLifestyles = useMemo(
-    () =>
-      LIFESTYLES.filter((lifestyle) =>
-        cities.some((city) => city.lifestyle === lifestyle)
-      ),
     [cities]
   );
 
@@ -117,9 +114,8 @@ export default function HomeClient({ cities }: HomeClientProps) {
   );
 
   const filteredCities = useMemo(() => {
-    return cities.filter((city) => {
+    return citiesWithKeys.filter(({ city }) => {
       if (region !== "All" && city.region !== region) return false;
-      if (lifestyle !== "All" && city.lifestyle !== lifestyle) return false;
       if (
         selectedTags.length > 0 &&
         !selectedTags.every((t) => city.tags.includes(t))
@@ -133,18 +129,19 @@ export default function HomeClient({ cities }: HomeClientProps) {
       }
       return costFor(city) <= budgetUsd;
     });
-  }, [cities, region, lifestyle, selectedTags, q, budgetUsd, costFor]);
+  }, [citiesWithKeys, region, selectedTags, q, budgetUsd, costFor]);
 
   const underBudgetCount = useMemo(
-    () => filteredCities.filter((city) => costFor(city) <= budgetUsd).length,
+    () => filteredCities.filter((item) => costFor(item.city) <= budgetUsd).length,
     [filteredCities, budgetUsd, costFor]
   );
 
   const sortedCities = useMemo(() => {
     const arr = [...filteredCities];
-    if (sortBy === "rating") arr.sort((a, b) => cityRating(b) - cityRating(a));
-    else if (sortBy === "cost-asc") arr.sort((a, b) => costFor(a) - costFor(b));
-    else if (sortBy === "cost-desc") arr.sort((a, b) => costFor(b) - costFor(a));
+    if (sortBy === "rating")
+      arr.sort((a, b) => cityRating(b.city) - cityRating(a.city));
+    else if (sortBy === "cost-asc") arr.sort((a, b) => costFor(a.city) - costFor(b.city));
+    else if (sortBy === "cost-desc") arr.sort((a, b) => costFor(b.city) - costFor(a.city));
     return arr;
   }, [filteredCities, sortBy, costFor]);
 
@@ -162,7 +159,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // Reset to the first window whenever the filter/sort criteria change.
   useEffect(() => {
     setWindowStart(0);
-  }, [region, lifestyle, selectedTags, q, householdSize, sortBy]);
+  }, [region, selectedTags, q, householdSize, sortBy]);
 
   useEffect(() => {
     if (region !== "All" && !availableRegions.includes(region)) {
@@ -170,11 +167,9 @@ export default function HomeClient({ cities }: HomeClientProps) {
     }
   }, [availableRegions, region]);
 
-  useEffect(() => {
-    if (lifestyle !== "All" && !availableLifestyles.includes(lifestyle)) {
-      setLifestyle("All");
-    }
-  }, [availableLifestyles, lifestyle]);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
 
   const total = sortedCities.length;
   const clampedStart = Math.min(windowStart, Math.max(0, total - PAGE_SIZE));
@@ -182,63 +177,20 @@ export default function HomeClient({ cities }: HomeClientProps) {
     clampedStart,
     clampedStart + PAGE_SIZE
   );
+  const displayedCities = visibleCities;
   const hasPrev = clampedStart > 0;
   const hasNext = clampedStart + PAGE_SIZE < total;
   const rangeStart = total === 0 ? 0 : clampedStart + 1;
   const rangeEnd = Math.min(clampedStart + PAGE_SIZE, total);
 
-  // Selected city → expense breakdown card at the bottom.
-  const [selectedCity, setSelectedCity] = useState<City | null>(null);
-  const detailRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<Map<string, HTMLLIElement>>(new Map());
-  const [caretLeft, setCaretLeft] = useState<number | null>(null);
-
   useEffect(() => {
-    if (selectedCity) {
-      detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [selectedCity]);
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
 
-  // Position the detail card's caret under the horizontal center of the
-  // clicked city card, so it visually points back to it.
-  const recomputeCaret = useCallback(() => {
-    if (!selectedCity) {
-      setCaretLeft(null);
-      return;
-    }
-    const key = `${selectedCity.city}-${selectedCity.country}`;
-    const card = cardRefs.current.get(key);
-    const wrap = detailRef.current;
-    if (!card || !wrap) {
-      setCaretLeft(null);
-      return;
-    }
-    const cardRect = card.getBoundingClientRect();
-    const wrapRect = wrap.getBoundingClientRect();
-    const center = cardRect.left + cardRect.width / 2 - wrapRect.left;
-    setCaretLeft(Math.max(24, Math.min(center, wrapRect.width - 24)));
-  }, [selectedCity]);
-
-  useLayoutEffect(() => {
-    recomputeCaret();
-  }, [
-    recomputeCaret,
-    clampedStart,
-    currency,
-    investableAssets,
-    monthlyIncome,
-    withdrawalRate,
-    region,
-    lifestyle,
-    selectedTags,
-    q,
-    householdSize,
-  ]);
-
-  useEffect(() => {
-    window.addEventListener("resize", recomputeCaret);
-    return () => window.removeEventListener("resize", recomputeCaret);
-  }, [recomputeCaret]);
 
   return (
     <main id="top">
@@ -264,9 +216,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             withdrawalRate={withdrawalRate}
             monthlyBudgetUsd={budgetUsd}
             region={region}
-            lifestyle={lifestyle}
             availableRegions={availableRegions}
-            availableLifestyles={availableLifestyles}
             searchQuery={searchQuery}
             householdSize={householdSize}
             availableTags={allTags}
@@ -277,7 +227,6 @@ export default function HomeClient({ cities }: HomeClientProps) {
             onCurrencyChange={handleCurrencyChange}
             onWithdrawalRateChange={setWithdrawalRate}
             onRegionChange={setRegion}
-            onLifestyleChange={setLifestyle}
             onSearchChange={setSearchQuery}
             onToggleTag={toggleTag}
             onClearTags={() => setSelectedTags([])}
@@ -325,7 +274,6 @@ export default function HomeClient({ cities }: HomeClientProps) {
                   type="button"
                   onClick={() => {
                     setSlideDir("prev");
-                    setSelectedCity(null);
                     setWindowStart(Math.max(0, clampedStart - PAGE_SIZE));
                   }}
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-sand bg-white px-5 py-2.5 text-sm font-semibold text-muted shadow-sm transition hover:bg-sand hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
@@ -340,29 +288,17 @@ export default function HomeClient({ cities }: HomeClientProps) {
               key={clampedStart}
               className={`mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 ${slideClass}`}
             >
-              {visibleCities.map((city) => {
-                const key = `${city.city}-${city.country}`;
+              {displayedCities.map((item) => {
                 return (
-                  <li
-                    key={key}
-                    ref={(el) => {
-                      if (el) cardRefs.current.set(key, el);
-                      else cardRefs.current.delete(key);
-                    }}
-                    className="h-full"
-                  >
+                  <li key={item.key} className="h-full">
                     <CityCard
-                      city={city}
+                      city={item.city}
                       budgetUsd={budgetUsd}
                       currency={currency}
                       people={householdSize}
-                      selected={
-                        selectedCity?.city === city.city &&
-                        selectedCity?.country === city.country
-                      }
-                      pinned={pinned.includes(key)}
-                      onSelect={() => setSelectedCity(city)}
-                      onTogglePin={() => togglePin(city)}
+                      pinned={pinned.includes(item.key)}
+                      allowPin={!pinned.includes(item.key) && pinned.length < MAX_COMPARE}
+                      onTogglePin={() => togglePin(item.key)}
                     />
                   </li>
                 );
@@ -379,23 +315,11 @@ export default function HomeClient({ cities }: HomeClientProps) {
               No cities match your filters
             </p>
             <p className="mt-1 text-sm text-muted">
-              Try raising your budget or widening the region, lifestyle, or tag
-              filters.
+              Try raising your budget or widening the region or tag filters.
             </p>
           </div>
         )}
 
-        <div ref={detailRef}>
-          {selectedCity && (
-            <CityDetail
-              city={selectedCity}
-              currency={currency}
-              people={householdSize}
-              caretLeft={caretLeft}
-              onClose={() => setSelectedCity(null)}
-            />
-          )}
-        </div>
 
         {hasNext && (
           <div className="mt-8 flex justify-center">
@@ -403,7 +327,6 @@ export default function HomeClient({ cities }: HomeClientProps) {
               type="button"
               onClick={() => {
                 setSlideDir("next");
-                setSelectedCity(null);
                 setWindowStart(clampedStart + PAGE_SIZE);
               }}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-300 bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
@@ -477,7 +400,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
       {compareOpen && pinnedCities.length > 0 && (
         <ComparePanel
-          cities={pinnedCities}
+          cities={pinnedCities.slice(0, MAX_COMPARE)}
           currency={currency}
           budgetUsd={budgetUsd}
           people={householdSize}

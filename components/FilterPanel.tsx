@@ -17,7 +17,7 @@ import {
   useRef,
   useState,
 } from "react";
-import type { Lifestyle, Region } from "@/data/cities";
+import type { Region } from "@/data/cities";
 import {
   amountInWords,
   CURRENCIES,
@@ -28,7 +28,6 @@ import {
 } from "@/lib/currency";
 
 export type RegionFilter = "All" | Region;
-export type LifestyleFilter = "All" | Lifestyle;
 
 // Run layout effects only on the client (avoids SSR warnings).
 const useIsoLayoutEffect =
@@ -96,9 +95,7 @@ type FilterPanelProps = {
   withdrawalRate: number;
   monthlyBudgetUsd: number;
   region: RegionFilter;
-  lifestyle: LifestyleFilter;
   availableRegions: Region[];
-  availableLifestyles: Lifestyle[];
   searchQuery: string;
   householdSize: number;
   availableTags: string[];
@@ -108,7 +105,6 @@ type FilterPanelProps = {
   onCurrencyChange: (value: CurrencyCode) => void;
   onWithdrawalRateChange: (value: number) => void;
   onRegionChange: (value: RegionFilter) => void;
-  onLifestyleChange: (value: LifestyleFilter) => void;
   onSearchChange: (value: string) => void;
   onHouseholdSizeChange: (value: number) => void;
   onToggleTag: (tag: string) => void;
@@ -135,9 +131,7 @@ export default function FilterPanel({
   withdrawalRate,
   monthlyBudgetUsd,
   region,
-  lifestyle,
   availableRegions,
-  availableLifestyles,
   searchQuery,
   householdSize,
   availableTags,
@@ -147,7 +141,6 @@ export default function FilterPanel({
   onCurrencyChange,
   onWithdrawalRateChange,
   onRegionChange,
-  onLifestyleChange,
   onSearchChange,
   onHouseholdSizeChange,
   onToggleTag,
@@ -171,7 +164,6 @@ export default function FilterPanel({
   const hasIncome = Number.isFinite(monthlyIncome) && monthlyIncome > 0;
   const activeCount =
     (region !== "All" ? 1 : 0) +
-    (lifestyle !== "All" ? 1 : 0) +
     (withdrawalRate !== DEFAULT_RATE ? 1 : 0) +
     (hasIncome ? 1 : 0) +
     (householdSize !== 2 ? 1 : 0) +
@@ -182,7 +174,6 @@ export default function FilterPanel({
     `${ratePct} withdrawal`,
     hasIncome ? `${formatNumber(monthlyIncome, currency)} income` : null,
     region === "All" ? "All regions" : region,
-    lifestyle === "All" ? "All lifestyles" : lifestyle,
     selectedTags.length > 0
       ? `${selectedTags.length} tag${selectedTags.length === 1 ? "" : "s"}`
       : null,
@@ -473,30 +464,6 @@ export default function FilterPanel({
               </select>
             </div>
 
-            <div className="flex flex-col gap-1.5">
-              <label
-                htmlFor="lifestyle"
-                className="text-xs font-semibold uppercase tracking-wide text-muted"
-              >
-                Lifestyle
-              </label>
-              <select
-                id="lifestyle"
-                value={lifestyle}
-                onChange={(e) =>
-                  onLifestyleChange(e.target.value as LifestyleFilter)
-                }
-                className={selectClass}
-                tabIndex={filtersOpen ? 0 : -1}
-              >
-                <option value="All">All lifestyles</option>
-                {availableLifestyles.map((l) => (
-                  <option key={l} value={l}>
-                    {l}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
 
           {availableTags.length > 0 && (

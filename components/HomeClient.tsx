@@ -414,10 +414,35 @@ export default function HomeClient({ cities }: HomeClientProps) {
         )}
       </section>
 
+      <section
+        id="about"
+        className="mx-auto max-w-6xl scroll-mt-20 border-t border-sand bg-white/70 px-4 py-16 sm:px-6"
+      >
+        <div className="mx-auto max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-brand-700">
+            About me
+          </p>
+          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Built by a single person for dignified retirement.
+          </h2>
+          <p className="mt-6 text-base leading-8 text-muted sm:text-lg">
+            This is an independent effort to help people choose a retirement city that
+            lets them stretch savings, preserve dignity, and avoid running out of
+            money. I built this tool to make retirement planning more transparent,
+            more realistic, and more focused on living well without exhausting
+            assets.
+          </p>
+          <p className="mt-4 text-base leading-8 text-muted sm:text-lg">
+            If you have an idea for an improvement, please request a feature so I
+            can keep shaping the experience around what matters most: peace of mind,
+            affordable living, and a retirement plan that feels sustainable.
+          </p>
+        </div>
+      </section>
+
       <footer className="border-t border-sand bg-sand/40">
         <div className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-muted sm:px-6">
-          BumBumSafe · Prototype with mock data · Estimates only — not financial
-          advice.
+          Estimates only. Not financial advice.
         </div>
       </footer>
 

@@ -99,20 +99,8 @@ export default function ComparePanel({
                     </span>
                   </p>
 
-                  <span
-                    className={`mt-2 inline-flex w-fit items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
-                      isUnder
-                        ? "bg-under-100 text-under-700"
-                        : "bg-over-100 text-over-700"
-                    }`}
-                  >
-                    {isUnder ? (
-                      <Check aria-hidden="true" className="h-3.5 w-3.5" />
-                    ) : (
-                      <ArrowUp aria-hidden="true" className="h-3.5 w-3.5" />
-                    )}
-                    {isUnder ? "Under budget" : "Over budget"}
-                  </span>
+                  {/* Budget badge disabled for now; show later when ready */}
+                  <div className="mt-2 h-6" />
 
                   <dl className="mt-3 space-y-1 border-t border-sand pt-3 text-sm">
                     <div className="flex justify-between gap-2">

@@ -54,9 +54,9 @@ export default function CityCard({
       }`}
     >
       <header className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 flex-1 items-start gap-3">
+        <div className="flex min-w-0 flex-1 items-center gap-3">
           <span
-            className={`mt-0.5 shrink-0 h-6 w-8 overflow-hidden rounded-sm fi fi-${flagFor(city.country).toLowerCase()}`}
+            className={`shrink-0 h-6 w-8 overflow-hidden rounded-sm fi fi-${flagFor(city.country).toLowerCase()}`}
             aria-label={`Flag of ${city.country}`}
           />
           <div className="min-w-0">
@@ -104,24 +104,12 @@ export default function CityCard({
               className={`h-4 w-4 ${pinned ? "fill-current" : ""}`}
             />
           </button>
-          <span
-            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${
-              isUnderBudget
-                ? "bg-under-100 text-under-700"
-                : "bg-over-100 text-over-700"
-            }`}
-          >
-            {isUnderBudget ? (
-              <Check aria-hidden="true" className="h-3.5 w-3.5" />
-            ) : (
-              <ArrowUp aria-hidden="true" className="h-3.5 w-3.5" />
-            )}
-            {isUnderBudget ? "Under budget" : "Over budget"}
-          </span>
+          {/* Budget badge disabled for now; show later when ready */}
+          <div className="h-7" />
         </div>
       </header>
 
-      <div className="mt-4 flex items-end justify-between gap-3">
+      <div className="flex items-end justify-between gap-3">
         <div>
           <p className="text-3xl font-bold tracking-tight text-ink sm:text-[2rem]">
             {formatUsdAs(cost, currency)}
@@ -139,20 +127,13 @@ export default function CityCard({
         </div>
         <div className="flex shrink-0 flex-col items-end gap-2">
           <span
-            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${ratingClasses(
+            className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-3xl font-bold ${ratingClasses(
               rating
             )}`}
             aria-label={`Rating ${rating} out of 10`}
           >
-            <Star aria-hidden="true" className="h-3.5 w-3.5 fill-current" />
+            <Star aria-hidden="true" className="h-5 w-5 fill-current" />
             {rating.toFixed(1)}
-          </span>
-          <span
-            className={`rounded-full px-3 py-1 text-xs font-semibold ${
-              lifestyleStyles[city.lifestyle]
-            }`}
-          >
-            {city.lifestyle}
           </span>
         </div>
       </div>

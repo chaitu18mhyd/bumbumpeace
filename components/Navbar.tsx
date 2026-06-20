@@ -1,11 +1,12 @@
 "use client";
 
-import { Calculator, Info, Menu, Newspaper, X } from "lucide-react";
+import { Calculator, Info, Menu, X, MessageSquare } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-  { label: "Calculator", href: "#explore", Icon: Calculator },
-  { label: "About me", href: "#about", Icon: Info },
+  { label: "About me", href: "/#about", Icon: Info },
+  { label: "Request Feature", href: "/request-feature", Icon: MessageSquare },
 ];
 
 export default function Navbar() {
@@ -48,8 +49,8 @@ export default function Navbar() {
             </span>
           </button>
 
-          <a
-            href="#top"
+          <Link
+            href="/"
             className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-ink"
             aria-label="BumBumSafe home"
           >
@@ -61,7 +62,7 @@ export default function Navbar() {
               className="h-8 w-8 rounded-xl object-cover"
             />
             <span className="hidden md:inline uppercase">Retopian</span>
-          </a>
+          </Link>
 
           <ul className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => (
@@ -78,21 +79,6 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* Right actions (always visible) */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          {/* <a
-            href="#signin"
-            className="rounded-full px-3 py-2 text-sm font-semibold text-ink transition hover:bg-sand sm:px-4"
-          >
-            Sign In
-          </a>
-          <a
-            href="#join"
-            className="rounded-full bg-brand-500 px-3 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream sm:px-4"
-          >
-            Join
-          </a> */}
-        </div>
       </nav>
 
       {/* Mobile menu (slide / fade animation) */}

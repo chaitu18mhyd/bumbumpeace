@@ -56,12 +56,9 @@ export default function CityCard({
       <header className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-1 items-start gap-3">
           <span
-            role="img"
+            className={`mt-0.5 shrink-0 h-6 w-8 overflow-hidden rounded-sm fi fi-${flagFor(city.country).toLowerCase()}`}
             aria-label={`Flag of ${city.country}`}
-            className="mt-0.5 shrink-0 text-2xl leading-none sm:text-3xl"
-          >
-            {flagFor(city.country)}
-          </span>
+          />
           <div className="min-w-0">
             <h3 className="truncate text-lg font-semibold tracking-tight text-ink sm:text-xl">
               <button

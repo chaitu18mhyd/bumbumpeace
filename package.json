@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed:supabase": "node scripts/seed-retirement-cities.mjs"
+    "seed:supabase": "node scripts/seed-retirement-cities.mjs",
+    "seed:supabase:oceania": "node scripts/seed-retirement-cities-oceania.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",
+    "flag-icons": "^7.5.0",
     "lucide-react": "^1.18.0",
     "next": "^15.1.6",
     "react": "^19.0.0",

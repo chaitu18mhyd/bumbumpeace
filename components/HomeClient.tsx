@@ -49,6 +49,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // Household size — defaults to a couple.
   const [householdSize, setHouseholdSize] = useState(2);
   const [sortBy, setSortBy] = useState<SortBy>("featured");
+  const [hydrated, setHydrated] = useState(false);
 
   // Pin / compare
   const [pinned, setPinned] = useState<string[]>([]);
@@ -81,8 +82,15 @@ export default function HomeClient({ cities }: HomeClientProps) {
     [cities]
   );
   const availableRegions = useMemo(
-    () => REGIONS.filter((region) => cities.some((city) => city.region === region)),
-    [cities]
+    () => {
+      // During SSR and initial hydration, filter by existing cities to avoid mismatch.
+      // After hydration (when hydrated=true), show all configured regions.
+      if (hydrated) {
+        return REGIONS;
+      }
+      return REGIONS.filter((region) => cities.some((city) => city.region === region));
+    },
+    [cities, hydrated]
   );
 
   const toggleTag = (tag: string) =>
@@ -169,6 +177,11 @@ export default function HomeClient({ cities }: HomeClientProps) {
   useEffect(() => {
     setWindowStart(0);
   }, [region, selectedTags, q, householdSize, sortBy]);
+
+  // Mark component as hydrated after mount to show all regions (avoids hydration mismatch).
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     if (region !== "All" && !availableRegions.includes(region)) {

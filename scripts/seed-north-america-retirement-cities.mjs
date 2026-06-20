@@ -13,13 +13,13 @@ if (!supabaseUrl || !serviceRoleKey) {
   process.exit(1);
 }
 
-const datasetPath = resolve(process.cwd(), "data/oceania_retirement_cities.json");
+const datasetPath = resolve(process.cwd(), "data/north_america_retirement_cities.json");
 const dataset = JSON.parse(await readFile(datasetPath, "utf8"));
 const cities = Array.isArray(dataset.cities) ? dataset.cities : [];
-const source = "oceania";
+const source = "north-america";
 
 if (cities.length === 0) {
-  console.error("No cities found in data/oceania_retirement_cities.json");
+  console.error("No cities found in data/north_america_retirement_cities.json");
   process.exit(1);
 }
 
@@ -78,4 +78,4 @@ if (error) {
   process.exit(1);
 }
 
-console.log(`Seeded ${rows.length} Oceania retirement city records from source: ${source}`);
+console.log(`Seeded ${rows.length} North America retirement city records from source: ${source}`);

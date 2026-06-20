@@ -16,6 +16,7 @@ if (!supabaseUrl || !serviceRoleKey) {
 const datasetPath = resolve(process.cwd(), "data/retirement-cities.seed.json");
 const dataset = JSON.parse(await readFile(datasetPath, "utf8"));
 const cities = Array.isArray(dataset.cities) ? dataset.cities : [];
+const source = "retirement-cities.seed";
 
 if (cities.length === 0) {
   console.error("No cities found in data/retirement-cities.seed.json");
@@ -23,6 +24,7 @@ if (cities.length === 0) {
 }
 
 const rows = cities.map((city) => ({
+  source,
   source_id: city.id,
   city: city.city,
   country: city.country,
@@ -57,13 +59,23 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
   auth: { persistSession: false },
 });
 
-const { error } = await supabase.from("retirement_cities").upsert(rows, {
-  onConflict: "source_id",
-});
+// Delete existing cities from this source to avoid conflicts
+console.log(`Deleting existing cities from source: ${source}...`);
+const { error: deleteError } = await supabase
+  .from("retirement_cities")
+  .delete()
+  .eq("source", source);
 
-if (error) {
-  console.error("Seed failed:", error.message);
+if (deleteError) {
+  console.error("Delete failed:", deleteError.message);
   process.exit(1);
 }
 
-console.log(`Seeded ${rows.length} retirement city records.`);
+const { error } = await supabase.from("retirement_cities").insert(rows);
+
+if (error) {
+  console.error("Insert failed:", error.message);
+  process.exit(1);
+}
+
+console.log(`Seeded ${rows.length} retirement city records from source: ${source}`);

@@ -4,6 +4,7 @@ import { ArrowUp, Check, X } from "lucide-react";
 import { displayCountry, type City, flagFor } from "@/data/cities";
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 import { expenseBreakdown } from "@/lib/expenses";
+import { trackComparePanel, trackCityPin } from "@/lib/analytics";
 
 type ComparePanelProps = {
   cities: City[];
@@ -40,7 +41,10 @@ export default function ComparePanel({
           </h2>
           <button
             type="button"
-            onClick={onClose}
+            onClick={() => {
+              trackComparePanel("close");
+              onClose();
+            }}
             aria-label="Close comparison"
             className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-sand bg-white text-muted transition hover:bg-sand hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
           >
@@ -83,7 +87,10 @@ export default function ComparePanel({
                     </div>
                     <button
                       type="button"
-                      onClick={() => onUnpin(city)}
+                      onClick={() => {
+                        trackCityPin("unpin", city.city, city.country);
+                        onUnpin(city);
+                      }}
                       aria-label={`Remove ${city.city} from comparison`}
                       className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-sand hover:text-ink"
                     >

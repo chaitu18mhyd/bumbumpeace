@@ -4,6 +4,7 @@ import { displayCountry, displayRegion, type City, flagFor } from "@/data/cities
 import { type CurrencyCode, formatUsdAs } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
 import { cityRating } from "@/lib/rating";
+import { trackCityPin } from "@/lib/analytics";
 
 function ratingClasses(rating: number): string {
   if (rating >= 8) return "bg-under-100 text-under-700";
@@ -65,6 +66,7 @@ export default function CityCard({
             type="button"
             onClick={(e) => {
               e.stopPropagation();
+              trackCityPin(pinned ? "unpin" : "pin", city.city, city.country);
               onTogglePin();
             }}
             aria-pressed={pinned}

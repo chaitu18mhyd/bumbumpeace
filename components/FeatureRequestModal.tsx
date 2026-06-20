@@ -2,6 +2,7 @@
 
 import { X } from "lucide-react";
 import { useState } from "react";
+import { trackFeatureRequest } from "@/lib/analytics";
 
 interface FeatureRequestModalProps {
   isOpen: boolean;
@@ -41,6 +42,7 @@ export default function FeatureRequestModal({
         throw new Error("Failed to submit feature request");
       }
 
+      trackFeatureRequest(title);
       setSubmitMessage({
         type: "success",
         text: "Thank you! Your feature request has been submitted.",

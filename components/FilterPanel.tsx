@@ -19,6 +19,11 @@ import {
 } from "react";
 import type { Region } from "@/data/cities";
 import {
+  trackFilterChange,
+  trackCurrencyChange,
+  trackBudgetAdjustment,
+} from "@/lib/analytics";
+import {
   amountInWords,
   CURRENCIES,
   type CurrencyCode,
@@ -203,9 +208,11 @@ export default function FilterPanel({
               <select
                 id="currency"
                 value={currency}
-                onChange={(e) =>
-                  onCurrencyChange(e.target.value as CurrencyCode)
-                }
+                onChange={(e) => {
+                  const newCurrency = e.target.value as CurrencyCode;
+                  trackCurrencyChange(newCurrency);
+                  onCurrencyChange(newCurrency);
+                }}
                 className="h-full cursor-pointer appearance-none rounded-l-2xl border border-r-0 border-sand bg-sand/60 py-3.5 pl-4 pr-9 text-sm font-bold text-ink outline-none transition hover:bg-sand focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
                 aria-label="Currency"
               >
@@ -451,7 +458,11 @@ export default function FilterPanel({
               <select
                 id="region"
                 value={region}
-                onChange={(e) => onRegionChange(e.target.value as RegionFilter)}
+                onChange={(e) => {
+                  const newRegion = e.target.value as RegionFilter;
+                  trackFilterChange("region", newRegion);
+                  onRegionChange(newRegion);
+                }}
                 className={selectClass}
                 tabIndex={filtersOpen ? 0 : -1}
               >
@@ -506,6 +517,7 @@ export default function FilterPanel({
                       const currentlySelected = selectedTags.includes(tag);
                       const shouldBeSelected = nextSelected.includes(tag);
                       if (currentlySelected !== shouldBeSelected) {
+                        trackFilterChange("tags", tag);
                         onToggleTag(tag);
                       }
                     });

@@ -9,6 +9,13 @@ import { REGIONS, type City } from "@/data/cities";
 import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
 import { cityRating } from "@/lib/rating";
+import {
+  trackPagination,
+  trackComparePanel,
+  trackClearFilters,
+  trackBudgetAdjustment,
+  trackCurrencyChange,
+} from "@/lib/analytics";
 
 type SortBy = "featured" | "rating" | "cost-asc" | "cost-desc";
 
@@ -356,6 +363,10 @@ export default function HomeClient({ cities }: HomeClientProps) {
             <button
               type="button"
               onClick={() => {
+                trackPagination(
+                  Math.floor(clampedStart / PAGE_SIZE) + 2,
+                  filteredCities.length
+                );
                 setSlideDir("next");
                 setWindowStart(clampedStart + PAGE_SIZE);
               }}
@@ -409,7 +420,10 @@ export default function HomeClient({ cities }: HomeClientProps) {
             </span>
             <button
               type="button"
-              onClick={() => setCompareOpen(true)}
+              onClick={() => {
+                trackComparePanel("open");
+                setCompareOpen(true);
+              }}
               disabled={pinnedCities.length < 2}
               className="inline-flex items-center gap-1.5 rounded-full bg-brand-500 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -418,7 +432,10 @@ export default function HomeClient({ cities }: HomeClientProps) {
             </button>
             <button
               type="button"
-              onClick={() => setPinned([])}
+              onClick={() => {
+                trackClearFilters();
+                setPinned([]);
+              }}
               className="inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-medium text-muted transition hover:text-ink"
             >
               <X aria-hidden="true" className="h-4 w-4" />

@@ -3,6 +3,7 @@
 import { Calculator, Info, Menu, X, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { trackMobileMenuToggle } from "@/lib/analytics";
 
 const navLinks = [
   { label: "About me", href: "/#about", Icon: Info },
@@ -23,7 +24,11 @@ export default function Navbar() {
           {/* Mobile toggle (hamburger <-> X animation) */}
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => {
+              const newOpen = !open;
+              trackMobileMenuToggle(newOpen ? "open" : "close");
+              setOpen(newOpen);
+            }}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}

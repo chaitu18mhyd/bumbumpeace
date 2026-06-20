@@ -43,9 +43,10 @@ export default function CityCard({
     <article className="group flex h-full flex-col rounded-3xl border border-sand bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg sm:p-6">
       <header className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-1 items-center gap-3">
-          <span
-            className={`shrink-0 h-6 w-8 overflow-hidden rounded-sm fi fi-${flagFor(city.country).toLowerCase()}`}
-            aria-label={`Flag of ${city.country}`}
+          <img
+            src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.5.0/flags/4x3/${flagFor(city.country).toLowerCase()}.svg`}
+            alt={`Flag of ${city.country}`}
+            className="h-6 w-8 rounded-sm flex-shrink-0"
           />
           <div className="min-w-0">
             <h3 className="truncate text-lg font-semibold tracking-tight text-ink sm:text-xl">

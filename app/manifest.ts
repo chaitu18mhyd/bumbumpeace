@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Compare estimated monthly retirement expenses across popular cities and countries.",
     start_url: "/",
     display: "standalone",
-    background_color: "#fbf7f0",
-    theme_color: "#fbf7f0",
+    background_color: "#f2f7ff",
+    theme_color: "#f2f7ff",
     icons: [
       {
         src: "/logo/bumbumsafe-logo-192.png",

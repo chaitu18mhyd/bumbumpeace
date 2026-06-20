@@ -128,7 +128,7 @@ export default function ComparePanel({
                     {city.tags.map((tag) => (
                       <li
                         key={tag}
-                        className="rounded-full bg-sand px-2 py-0.5 text-[11px] font-medium text-ink/70"
+                        className="rounded-full bg-[var(--color-tag)] px-2 py-0.5 text-[11px] font-medium text-ink/70"
                       >
                         {tag}
                       </li>

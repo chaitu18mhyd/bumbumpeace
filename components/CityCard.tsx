@@ -146,7 +146,7 @@ export default function CityCard({
         {city.tags.map((tag) => (
           <li
             key={tag}
-            className="shrink-0 whitespace-nowrap rounded-full bg-sand px-2.5 py-1 text-xs font-medium text-ink/70"
+            className="shrink-0 whitespace-nowrap rounded-full bg-[var(--color-tag)] px-2.5 py-1 text-xs font-medium text-ink/70"
           >
             {tag}
           </li>

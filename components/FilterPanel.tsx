@@ -112,6 +112,7 @@ type FilterPanelProps = {
   onSearchChange: (value: string) => void;
   onHouseholdSizeChange: (value: number) => void;
   onToggleTag: (tag: string) => void;
+  onClearTags: () => void;
 };
 
 const MAX_HOUSEHOLD = 8;
@@ -150,6 +151,7 @@ export default function FilterPanel({
   onSearchChange,
   onHouseholdSizeChange,
   onToggleTag,
+  onClearTags,
 }: FilterPanelProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const info = currencyInfo(currency);
@@ -499,32 +501,57 @@ export default function FilterPanel({
 
           {availableTags.length > 0 && (
             <fieldset className="mt-4">
-              <legend className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                Tags{" "}
-                <span className="font-normal normal-case text-muted/70">
-                  (match all selected)
-                </span>
-              </legend>
-              <div className="flex flex-wrap gap-2">
-                {availableTags.map((tag) => {
-                  const active = selectedTags.includes(tag);
-                  return (
-                    <button
-                      key={tag}
-                      type="button"
-                      onClick={() => onToggleTag(tag)}
-                      aria-pressed={active}
-                      tabIndex={filtersOpen ? 0 : -1}
-                      className={`rounded-full px-3 py-1.5 text-xs font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
-                        active
-                          ? "bg-brand-500 text-white shadow-sm"
-                          : "bg-sand text-ink/70 hover:bg-brand-100 hover:text-brand-700"
-                      }`}
-                    >
+              <div className="flex items-center justify-between gap-3">
+                <legend className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                  Tags{" "}
+                  <span className="font-normal normal-case text-muted/70">
+                    (match all selected)
+                  </span>
+                </legend>
+                {selectedTags.length > 0 ? (
+                  <button
+                    type="button"
+                    onClick={onClearTags}
+                    className="text-xs font-semibold text-brand-700 transition hover:text-brand-900"
+                    tabIndex={filtersOpen ? 0 : -1}
+                  >
+                    Clear all
+                  </button>
+                ) : null}
+              </div>
+
+              <div>
+                <label htmlFor="tagsSelect" className="sr-only">
+                  Select tags
+                </label>
+                <select
+                  id="tagsSelect"
+                  multiple
+                  size={Math.min(6, availableTags.length)}
+                  value={selectedTags}
+                  onChange={(e) => {
+                    const nextSelected = Array.from(
+                      e.target.selectedOptions,
+                      (option) => option.value
+                    );
+
+                    availableTags.forEach((tag) => {
+                      const currentlySelected = selectedTags.includes(tag);
+                      const shouldBeSelected = nextSelected.includes(tag);
+                      if (currentlySelected !== shouldBeSelected) {
+                        onToggleTag(tag);
+                      }
+                    });
+                  }}
+                  tabIndex={filtersOpen ? 0 : -1}
+                  className="w-full max-h-52 min-h-[10rem] overflow-auto rounded-3xl border border-sand bg-cream p-3 text-sm text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+                >
+                  {availableTags.map((tag) => (
+                    <option key={tag} value={tag}>
                       {tag}
-                    </button>
-                  );
-                })}
+                    </option>
+                  ))}
+                </select>
               </div>
             </fieldset>
           )}

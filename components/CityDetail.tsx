@@ -70,12 +70,11 @@ export default function CityDetail({
       <header className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <span
-            role="img"
+            className={`shrink-0 h-8 w-10 overflow-hidden rounded-sm fi fi-${flagFor(
+              city.country
+            ).toLowerCase()}`}
             aria-label={`Flag of ${city.country}`}
-            className="text-2xl leading-none sm:text-3xl"
-          >
-            {flagFor(city.country)}
-          </span>
+          />
           <div>
             <h3 className="text-lg font-bold tracking-tight text-ink sm:text-xl">
               {city.city}

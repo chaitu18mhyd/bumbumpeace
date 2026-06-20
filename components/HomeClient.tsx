@@ -280,6 +280,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             onLifestyleChange={setLifestyle}
             onSearchChange={setSearchQuery}
             onToggleTag={toggleTag}
+            onClearTags={() => setSelectedTags([])}
           />
         </div>
 

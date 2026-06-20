@@ -1,8 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MessageSquare } from "lucide-react";
+
+type FeatureRequest = {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+  created_at: string;
+};
 
 export default function RequestFeaturePage() {
   const [title, setTitle] = useState("City is missing");
@@ -12,6 +20,37 @@ export default function RequestFeaturePage() {
     type: "success" | "error";
     text: string;
   } | null>(null);
+  const [requests, setRequests] = useState<FeatureRequest[]>([]);
+  const [isLoadingRequests, setIsLoadingRequests] = useState(true);
+  const [requestError, setRequestError] = useState<string | null>(null);
+
+  const fetchRequests = useCallback(async () => {
+    setIsLoadingRequests(true);
+    setRequestError(null);
+
+    try {
+      const response = await fetch("/api/feature-requests");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData?.error || "Failed to load feature requests");
+      }
+
+      const result = await response.json();
+      setRequests(result.data ?? []);
+    } catch (error) {
+      setRequestError(
+        error instanceof Error
+          ? error.message
+          : "Failed to load feature requests"
+      );
+    } finally {
+      setIsLoadingRequests(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchRequests();
+  }, [fetchRequests]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -38,6 +77,7 @@ export default function RequestFeaturePage() {
       });
       setTitle("City is missing");
       setDescription("");
+      await fetchRequests();
     } catch (error) {
       setSubmitMessage({
         type: "error",
@@ -132,6 +172,61 @@ export default function RequestFeaturePage() {
           </div>
         </form>
       </div>
+
+      <section className="mt-10 rounded-3xl border border-sand bg-white p-6 shadow-sm sm:p-8">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-brand-700">
+              Current requests under consideration
+            </p>
+          </div>
+        </div>
+
+        {isLoadingRequests ? (
+          <p className="text-sm text-muted">Loading feature requests...</p>
+        ) : requestError ? (
+          <p className="text-sm text-red-700">{requestError}</p>
+        ) : requests.length === 0 ? (
+          <p className="text-sm text-muted">
+            No feature requests have been submitted yet.
+          </p>
+        ) : (
+          <div className="overflow-hidden rounded-3xl border border-sand">
+            <table className="min-w-full divide-y divide-sand text-left text-sm">
+              <thead className="bg-cream text-ink">
+                <tr>
+                  <th className="px-4 py-3 font-semibold">Request</th>
+                  <th className="px-4 py-3 font-semibold">Details</th>
+                  <th className="px-4 py-3 font-semibold">Status</th>
+                  <th className="px-4 py-3 font-semibold">Submitted</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-sand bg-white">
+                {requests.map((request) => (
+                  <tr key={request.id}>
+                    <td className="px-4 py-4 align-top text-sm font-semibold text-ink">
+                      {request.title}
+                    </td>
+                    <td className="px-4 py-4 align-top text-sm text-muted whitespace-pre-line">
+                      {request.description}
+                    </td>
+                    <td className="px-4 py-4 align-top text-sm text-ink">
+                      {request.status}
+                    </td>
+                    <td className="px-4 py-4 align-top text-sm text-muted">
+                      {new Date(request.created_at).toLocaleDateString(undefined, {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
     </main>
   );
 }

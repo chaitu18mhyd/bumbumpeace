@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown, ArrowUp, MapPinOff, Scale, X } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import CityCard from "@/components/CityCard";
 import ComparePanel from "@/components/ComparePanel";
 import FilterPanel, { type RegionFilter } from "@/components/FilterPanel";
@@ -155,6 +155,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
   // Windowed pager: show PAGE_SIZE cities at a time.
   const [windowStart, setWindowStart] = useState(0);
+  const listTopRef = useRef<HTMLDivElement | null>(null);
   // Direction of the last page change, to slide the grid the right way.
   const [slideDir, setSlideDir] = useState<"next" | "prev" | null>(null);
   const slideClass =
@@ -199,6 +200,12 @@ export default function HomeClient({ cities }: HomeClientProps) {
     return () => mediaQuery.removeEventListener("change", update);
   }, []);
 
+  useEffect(() => {
+    if (!isMobile) return;
+    if (listTopRef.current) {
+      listTopRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [windowStart, isMobile]);
 
   return (
     <main id="top">
@@ -276,26 +283,27 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
         {total > 0 ? (
           <>
-            {hasPrev && (
-              <div className="mt-5 flex justify-center">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSlideDir("prev");
-                    setWindowStart(Math.max(0, clampedStart - PAGE_SIZE));
-                  }}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-sand bg-white px-5 py-2.5 text-sm font-semibold text-muted shadow-sm transition hover:bg-sand hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-                >
-                  <ArrowUp aria-hidden="true" className="h-4 w-4" />
-                  Show previous
-                </button>
-              </div>
-            )}
+            <div ref={listTopRef}>
+              {hasPrev && (
+                <div className="mt-5 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSlideDir("prev");
+                      setWindowStart(Math.max(0, clampedStart - PAGE_SIZE));
+                    }}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-sand bg-white px-5 py-2.5 text-sm font-semibold text-muted shadow-sm transition hover:bg-sand hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                  >
+                    <ArrowUp aria-hidden="true" className="h-4 w-4" />
+                    Show previous
+                  </button>
+                </div>
+              )}
 
-            <ul
-              key={clampedStart}
-              className={`mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 ${slideClass}`}
-            >
+              <ul
+                key={clampedStart}
+                className={`mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 ${slideClass}`}
+              >
               {displayedCities.map((item) => {
                 return (
                   <li key={item.key} className="h-full">
@@ -312,6 +320,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
                 );
               })}
             </ul>
+          </div>
           </>
         ) : (
           <div className="mt-8 rounded-3xl border border-dashed border-sand bg-white/60 px-6 py-16 text-center">

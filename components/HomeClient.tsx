@@ -248,16 +248,12 @@ export default function HomeClient({ cities }: HomeClientProps) {
         className="mx-auto max-w-6xl scroll-mt-20 px-4 pb-20 pt-6 sm:px-6 sm:pt-10"
       >
         <div className="mx-auto max-w-3xl text-center">
-          <span className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-100 text-brand-700">
+          {/* <span className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-100 text-brand-700">
             <PiggyBank aria-hidden="true" className="h-6 w-6" />
-          </span>
+          </span> */}
           <h1 className="text-balance text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
-            Enter your investable assets to see where you can retire
+            See where you can retire
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-pretty text-sm text-muted sm:text-base">
-            We turn it into a sustainable monthly budget and instantly show the
-            cities you can actually afford.
-          </p>
         </div>
 
         <div className="mt-6">

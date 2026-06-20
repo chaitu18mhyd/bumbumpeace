@@ -5,8 +5,7 @@ import { useState } from "react";
 
 const navLinks = [
   { label: "Calculator", href: "#explore", Icon: Calculator },
-  { label: "Blog", href: "#blog", Icon: Newspaper },
-  { label: "About us", href: "#about", Icon: Info },
+  { label: "About me", href: "#about", Icon: Info },
 ];
 
 export default function Navbar() {
@@ -61,7 +60,7 @@ export default function Navbar() {
               height={32}
               className="h-8 w-8 rounded-xl object-cover"
             />
-            <span className="hidden md:inline">BumBumSafe</span>
+            <span className="hidden md:inline uppercase">Retopian</span>
           </a>
 
           <ul className="hidden items-center gap-1 md:flex">
@@ -81,7 +80,7 @@ export default function Navbar() {
 
         {/* Right actions (always visible) */}
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <a
+          {/* <a
             href="#signin"
             className="rounded-full px-3 py-2 text-sm font-semibold text-ink transition hover:bg-sand sm:px-4"
           >
@@ -92,7 +91,7 @@ export default function Navbar() {
             className="rounded-full bg-brand-500 px-3 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-500/25 transition hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream sm:px-4"
           >
             Join
-          </a>
+          </a> */}
         </div>
       </nav>
 

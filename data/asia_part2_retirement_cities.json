@@ -1,0 +1,3263 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "last_updated": "2026-06-19",
+    "seeded_cities": 58,
+    "description": "Retirement city dataset seed. Scores are 1-10 (10 = best). Monthly costs in USD for a single person, comfortable lifestyle."
+  },
+  "cities": [
+    {
+      "id": 1,
+      "city": "Kathmandu",
+      "country": "Nepal",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 27.7172,
+      "longitude": 85.324,
+      "monthly_cost_usd": 900,
+      "lifestyle_label": "Budget",
+      "description": "The Himalayan kingdom's spiritual capital \u2014 Boudhanath stupa, Pashupatinath temple, trekking gateways to Everest and Annapurna, and some of Asia's most affordable urban living.",
+      "tags": [
+        "Trekking",
+        "Spirituality",
+        "Budget",
+        "Himalayas",
+        "UNESCO"
+      ],
+      "visa_ease_score": 8,
+      "healthcare_score": 4,
+      "safety_score": 6,
+      "climate_score": 6,
+      "expat_community_score": 6,
+      "internet_score": 5,
+      "overall_retirement_score": 6.0,
+      "climate_type": "Subtropical Highland",
+      "language": "Nepali",
+      "currency": "NPR",
+      "time_zone": "UTC+5:45",
+      "popular_neighborhoods": [
+        "Thamel",
+        "Patan",
+        "Lazimpat",
+        "Boudhanath",
+        "Bhaktapur"
+      ],
+      "visa_notes": "Nepal offers a Tourist Visa extendable up to 150 days per year. No dedicated retirement visa exists. Most retirees use successive tourist visa renewals or overland border runs. No income or capital gains tax on foreign-sourced income.",
+      "healthcare_notes": "B&B Hospital and CIWEC Clinic (expat-focused) are Kathmandu's best. Serious conditions require evacuation to Bangkok or Delhi.",
+      "best_for": [
+        "Trekking and adventure lovers",
+        "Spiritual seekers (Hindu/Buddhist heritage)",
+        "Ultra-budget retirees"
+      ],
+      "avoid_if": [
+        "Those needing quality healthcare locally",
+        "Those sensitive to air pollution (Kathmandu Valley smog is severe seasonally)"
+      ],
+      "expense_shares": {
+        "Rent": 0.25,
+        "Food": 0.26,
+        "Travel": 0.1,
+        "Healthcare": 0.13,
+        "Utilities": 0.08,
+        "Leisure": 0.12,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 2,
+      "city": "Pokhara",
+      "country": "Nepal",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 28.2096,
+      "longitude": 83.9856,
+      "monthly_cost_usd": 800,
+      "lifestyle_label": "Budget",
+      "description": "Nepal's lakeside adventure capital \u2014 Phewa Lake reflecting the Annapurna massif, paragliding, the Annapurna Circuit trailhead, and a laid-back traveler culture at ultra-low costs.",
+      "tags": [
+        "Trekking",
+        "Lake",
+        "Paragliding",
+        "Scenic",
+        "Budget"
+      ],
+      "visa_ease_score": 8,
+      "healthcare_score": 3,
+      "safety_score": 7,
+      "climate_score": 7,
+      "expat_community_score": 5,
+      "internet_score": 5,
+      "overall_retirement_score": 6.1,
+      "climate_type": "Subtropical Highland",
+      "language": "Nepali",
+      "currency": "NPR",
+      "time_zone": "UTC+5:45",
+      "popular_neighborhoods": [
+        "Lakeside (Baidam)",
+        "Damside",
+        "Pokhara Bazar",
+        "Sarangkot",
+        "Begnas Lake"
+      ],
+      "visa_notes": "Same Tourist Visa framework as Kathmandu. Pokhara is more peaceful and less polluted than Kathmandu, making it increasingly popular with long-term expats.",
+      "healthcare_notes": "Manipal Teaching Hospital provides basic care. Serious conditions require Kathmandu (6\u20138 hrs by road) or air evacuation to Bangkok.",
+      "best_for": [
+        "Those wanting Himalayan scenery without Kathmandu's chaos",
+        "Trekkers using it as a base",
+        "Paragliding and adventure enthusiasts"
+      ],
+      "avoid_if": [
+        "Those needing reliable internet or medical care",
+        "Retirees wanting urban amenities"
+      ],
+      "expense_shares": {
+        "Rent": 0.23,
+        "Food": 0.27,
+        "Travel": 0.1,
+        "Healthcare": 0.13,
+        "Utilities": 0.08,
+        "Leisure": 0.13,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 3,
+      "city": "Dhaka",
+      "country": "Bangladesh",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 23.8103,
+      "longitude": 90.4125,
+      "monthly_cost_usd": 900,
+      "lifestyle_label": "Budget",
+      "description": "One of the world's most densely populated megacities \u2014 a chaotic, vibrant Delta capital with ultra-cheap living, extraordinary street food, and the gateway to the Sundarbans mangrove forest.",
+      "tags": [
+        "Budget",
+        "Megacity",
+        "Street Food",
+        "Authentic",
+        "Delta"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 5,
+      "safety_score": 5,
+      "climate_score": 5,
+      "expat_community_score": 4,
+      "internet_score": 6,
+      "overall_retirement_score": 5.2,
+      "climate_type": "Tropical Monsoon",
+      "language": "Bengali",
+      "currency": "BDT",
+      "time_zone": "UTC+6",
+      "popular_neighborhoods": [
+        "Gulshan",
+        "Banani",
+        "Dhanmondi",
+        "Baridhara",
+        "Uttara"
+      ],
+      "visa_notes": "Bangladesh offers On-Arrival Visa (30 days) for most Western nationalities. Long-term stays require a Bangladesh Visa from embassy. No retirement visa program exists. Bureaucracy can be challenging.",
+      "healthcare_notes": "Square Hospital and Apollo Hospitals Dhaka provide the best private care. Standards well below Western levels; serious cases go to Bangkok or Singapore.",
+      "best_for": [
+        "Adventure retirees wanting the most off-the-beaten-path South Asia experience",
+        "Those with Bangladeshi heritage"
+      ],
+      "avoid_if": [
+        "Most retirees \u2014 extreme traffic, pollution, flooding risk, and limited infrastructure make Dhaka very challenging"
+      ],
+      "expense_shares": {
+        "Rent": 0.26,
+        "Food": 0.27,
+        "Travel": 0.09,
+        "Healthcare": 0.13,
+        "Utilities": 0.09,
+        "Leisure": 0.1,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 4,
+      "city": "Islamabad",
+      "country": "Pakistan",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 33.6844,
+      "longitude": 73.0479,
+      "monthly_cost_usd": 800,
+      "lifestyle_label": "Budget",
+      "description": "Pakistan's purpose-built modern capital \u2014 clean, tree-lined, with the Margalla Hills as a backdrop, a more relaxed pace than Karachi or Lahore, and very low costs for the quality of life available.",
+      "tags": [
+        "Budget",
+        "Modern Capital",
+        "Green",
+        "Mountains",
+        "Safe (by Pakistan standards)"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 6,
+      "safety_score": 5,
+      "climate_score": 7,
+      "expat_community_score": 4,
+      "internet_score": 6,
+      "overall_retirement_score": 5.4,
+      "climate_type": "Humid Subtropical",
+      "language": "Urdu, English (official)",
+      "currency": "PKR",
+      "time_zone": "UTC+5",
+      "popular_neighborhoods": [
+        "F-6 Sector",
+        "F-7 Sector",
+        "E-7 Sector",
+        "G-6 Sector",
+        "Bahria Town"
+      ],
+      "visa_notes": "Pakistan offers an e-Visa and On-Arrival Visa for many nationalities. Long-stay requires a Pakistan Resident Permit. Pakistan launched visa-on-arrival for 50+ countries in 2019. Security situation requires careful research.",
+      "healthcare_notes": "Shifa International Hospital and Pakistan Institute of Medical Sciences (PIMS) provide the best care in the capital. Private sector standards are acceptable for most needs.",
+      "best_for": [
+        "Those with Pakistani heritage",
+        "Adventurous retirees with South Asia connections"
+      ],
+      "avoid_if": [
+        "Most Western retirees \u2014 security concerns, bureaucratic complexity, and limited expat infrastructure make this a specialist destination"
+      ],
+      "expense_shares": {
+        "Rent": 0.25,
+        "Food": 0.27,
+        "Travel": 0.09,
+        "Healthcare": 0.13,
+        "Utilities": 0.09,
+        "Leisure": 0.11,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 5,
+      "city": "Lahore",
+      "country": "Pakistan",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 31.5497,
+      "longitude": 74.3436,
+      "monthly_cost_usd": 700,
+      "lifestyle_label": "Budget",
+      "description": "Pakistan's cultural soul and Mughal capital \u2014 the Lahore Fort, Badshahi Mosque, legendary food street, and a city whose hospitality and history rival any in South Asia.",
+      "tags": [
+        "History",
+        "Mughal Heritage",
+        "Budget",
+        "Culinary",
+        "Culture"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 6,
+      "safety_score": 5,
+      "climate_score": 6,
+      "expat_community_score": 3,
+      "internet_score": 6,
+      "overall_retirement_score": 5.2,
+      "climate_type": "Humid Subtropical",
+      "language": "Punjabi, Urdu",
+      "currency": "PKR",
+      "time_zone": "UTC+5",
+      "popular_neighborhoods": [
+        "Gulberg",
+        "DHA (Defence Housing Authority)",
+        "Model Town",
+        "Cantt",
+        "Garden Town"
+      ],
+      "visa_notes": "Pakistan e-Visa / On-Arrival framework. Lahore is more culturally immersive than Islamabad but less convenient for foreign bureaucratic processes.",
+      "healthcare_notes": "Shaukat Khanum Cancer Hospital (world-class oncology) and Services Hospital provide the best care. Shaukat Khanum is genuinely excellent by any standard.",
+      "best_for": [
+        "History and Mughal architecture lovers",
+        "Those with Punjabi heritage",
+        "Food culture adventurers"
+      ],
+      "avoid_if": [
+        "Most Western retirees given security concerns, air quality (frequently worst in the world), and infrastructure challenges"
+      ],
+      "expense_shares": {
+        "Rent": 0.24,
+        "Food": 0.28,
+        "Travel": 0.09,
+        "Healthcare": 0.13,
+        "Utilities": 0.09,
+        "Leisure": 0.11,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 6,
+      "city": "Karachi",
+      "country": "Pakistan",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 24.8607,
+      "longitude": 67.0011,
+      "monthly_cost_usd": 700,
+      "lifestyle_label": "Budget",
+      "description": "Pakistan's chaotic coastal megacity and financial capital \u2014 the Arabian Sea coast, extraordinary street food, a kaleidoscopic cultural mix, and living costs among Asia's very lowest.",
+      "tags": [
+        "Budget",
+        "Megacity",
+        "Coastal",
+        "Street Food",
+        "Financial Hub"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 6,
+      "safety_score": 4,
+      "climate_score": 7,
+      "expat_community_score": 3,
+      "internet_score": 6,
+      "overall_retirement_score": 5.0,
+      "climate_type": "Hot Desert",
+      "language": "Urdu, Sindhi, English",
+      "currency": "PKR",
+      "time_zone": "UTC+5",
+      "popular_neighborhoods": [
+        "Clifton",
+        "DHA Karachi",
+        "PECHS",
+        "Gulshan-e-Iqbal",
+        "Bahria Town Karachi"
+      ],
+      "visa_notes": "Pakistan e-Visa / On-Arrival framework. Karachi's security situation has improved significantly since 2013 but remains a serious consideration.",
+      "healthcare_notes": "Aga Khan University Hospital is genuinely world-class and one of South Asia's finest institutions. Private sector generally better than public.",
+      "best_for": [
+        "Those with Karachi heritage",
+        "Adventurous retirees comfortable with large developing-world megacity life"
+      ],
+      "avoid_if": [
+        "Almost all Western retirees \u2014 security, traffic, pollution, and infrastructure make this an extremely challenging choice"
+      ],
+      "expense_shares": {
+        "Rent": 0.24,
+        "Food": 0.28,
+        "Travel": 0.09,
+        "Healthcare": 0.13,
+        "Utilities": 0.09,
+        "Leisure": 0.11,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 7,
+      "city": "Almaty",
+      "country": "Kazakhstan",
+      "region": "Asia",
+      "subregion": "Central Asia",
+      "latitude": 43.222,
+      "longitude": 76.8512,
+      "monthly_cost_usd": 1500,
+      "lifestyle_label": "Affordable",
+      "description": "Kazakhstan's cultural and financial capital beneath the Tian Shan mountains \u2014 a surprisingly cosmopolitan city with excellent ski resorts, growing expat scene, and visa-free entry for most Western nationalities.",
+      "tags": [
+        "Mountains",
+        "Skiing",
+        "Cosmopolitan",
+        "Affordable",
+        "Emerging"
+      ],
+      "visa_ease_score": 8,
+      "healthcare_score": 6,
+      "safety_score": 7,
+      "climate_score": 6,
+      "expat_community_score": 5,
+      "internet_score": 7,
+      "overall_retirement_score": 6.5,
+      "climate_type": "Continental",
+      "language": "Kazakh, Russian",
+      "currency": "KZT",
+      "time_zone": "UTC+5",
+      "popular_neighborhoods": [
+        "Almaty Center",
+        "Medeu",
+        "Bostandyk",
+        "Alatau",
+        "Turksib"
+      ],
+      "visa_notes": "Kazakhstan offers 30-day visa-free entry for most Western nationalities and up to 1-year e-Visa for many others. Long-term residence permits are available. Kazakhstan's growing economy and strategic position attract a small but growing expat community.",
+      "healthcare_notes": "MedClinic and Interteach hospitals provide the best private care. Government facilities vary significantly. Serious cases go to Moscow, Istanbul, or Bangkok.",
+      "best_for": [
+        "Skiing enthusiasts (Shymbulak resort)",
+        "Those wanting a Central Asian adventure city",
+        "USD/EUR income earners"
+      ],
+      "avoid_if": [
+        "Those wanting warm weather (harsh winters)",
+        "Retirees needing reliable high-quality healthcare"
+      ],
+      "expense_shares": {
+        "Rent": 0.29,
+        "Food": 0.24,
+        "Travel": 0.09,
+        "Healthcare": 0.12,
+        "Utilities": 0.09,
+        "Leisure": 0.12,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 8,
+      "city": "Tashkent",
+      "country": "Uzbekistan",
+      "region": "Asia",
+      "subregion": "Central Asia",
+      "latitude": 41.2995,
+      "longitude": 69.2401,
+      "monthly_cost_usd": 1000,
+      "lifestyle_label": "Budget",
+      "description": "Central Asia's largest city \u2014 Soviet-wide boulevards, stunning Islamic architecture in nearby Samarkand and Bukhara, emerging hospitality infrastructure, and very low costs.",
+      "tags": [
+        "History",
+        "Islamic Heritage",
+        "Budget",
+        "Silk Road",
+        "Emerging"
+      ],
+      "visa_ease_score": 8,
+      "healthcare_score": 5,
+      "safety_score": 7,
+      "climate_score": 7,
+      "expat_community_score": 4,
+      "internet_score": 6,
+      "overall_retirement_score": 6.0,
+      "climate_type": "Semi-Arid Continental",
+      "language": "Uzbek, Russian",
+      "currency": "UZS",
+      "time_zone": "UTC+5",
+      "popular_neighborhoods": [
+        "Yunusabad",
+        "Mirzo Ulugbek",
+        "Chilanzar",
+        "Shaykhantakhur",
+        "Bektemir"
+      ],
+      "visa_notes": "Uzbekistan offers 30-day visa-free entry for 90+ countries and e-Visa for most others. No dedicated retirement visa. Uzbekistan has been rapidly liberalizing since 2016 with growing tourist and expat infrastructure.",
+      "healthcare_notes": "International SOS clinic and private clinics in Tashkent provide expat-quality basic care. Advanced care requires medical evacuation to Istanbul or Moscow.",
+      "best_for": [
+        "Silk Road history enthusiasts",
+        "Budget adventurers",
+        "Those wanting to experience rapid economic transformation"
+      ],
+      "avoid_if": [
+        "Those needing reliable healthcare",
+        "Retirees wanting familiar Western comforts"
+      ],
+      "expense_shares": {
+        "Rent": 0.25,
+        "Food": 0.27,
+        "Travel": 0.1,
+        "Healthcare": 0.13,
+        "Utilities": 0.08,
+        "Leisure": 0.11,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 9,
+      "city": "Bishkek",
+      "country": "Kyrgyzstan",
+      "region": "Asia",
+      "subregion": "Central Asia",
+      "latitude": 42.8746,
+      "longitude": 74.5698,
+      "monthly_cost_usd": 800,
+      "lifestyle_label": "Budget",
+      "description": "The Tian Shan's compact capital \u2014 visa-free for most Western nationalities, extraordinary mountain trekking access, Soviet-era parks, and some of Asia's lowest costs of living.",
+      "tags": [
+        "Budget",
+        "Trekking",
+        "Mountains",
+        "Soviet Heritage",
+        "Visa-Free"
+      ],
+      "visa_ease_score": 9,
+      "healthcare_score": 4,
+      "safety_score": 6,
+      "climate_score": 6,
+      "expat_community_score": 4,
+      "internet_score": 6,
+      "overall_retirement_score": 5.8,
+      "climate_type": "Continental",
+      "language": "Kyrgyz, Russian",
+      "currency": "KGS",
+      "time_zone": "UTC+6",
+      "popular_neighborhoods": [
+        "Bishkek Center",
+        "Ak-Orgo",
+        "Asanbay",
+        "Jal",
+        "Tokmok area"
+      ],
+      "visa_notes": "Kyrgyzstan offers visa-free entry for 60+ countries and e-Visa for most others. Very accessible. No income tax on foreign-sourced income. Growing nomadic lifestyle and digital nomad community.",
+      "healthcare_notes": "Intermed and private Kyrgyz-Turkish Manas hospitals provide basic care. Serious cases go to Almaty or abroad.",
+      "best_for": [
+        "Extreme-budget adventurers",
+        "Trekkers and mountaineers",
+        "Those wanting nomadic culture access (yurt stays, horse trekking)"
+      ],
+      "avoid_if": [
+        "Those needing any medical infrastructure",
+        "Retirees wanting modern urban amenities"
+      ],
+      "expense_shares": {
+        "Rent": 0.22,
+        "Food": 0.28,
+        "Travel": 0.1,
+        "Healthcare": 0.14,
+        "Utilities": 0.08,
+        "Leisure": 0.12,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 10,
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 25.2048,
+      "longitude": 55.2708,
+      "monthly_cost_usd": 4500,
+      "lifestyle_label": "Upscale",
+      "description": "The world's most ambitious city \u2014 the Burj Khalifa, year-round sun, zero income tax, world-class malls and beaches, and an expatriate lifestyle that defines 21st-century Gulf living.",
+      "tags": [
+        "Luxury",
+        "Zero Tax",
+        "Shopping",
+        "Beach",
+        "Modern Infrastructure"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 9,
+      "safety_score": 9,
+      "climate_score": 7,
+      "expat_community_score": 10,
+      "internet_score": 10,
+      "overall_retirement_score": 8.0,
+      "climate_type": "Hot Desert",
+      "language": "Arabic (English universally spoken)",
+      "currency": "AED",
+      "time_zone": "UTC+4",
+      "popular_neighborhoods": [
+        "Dubai Marina",
+        "Jumeirah",
+        "Downtown Dubai",
+        "Palm Jumeirah",
+        "Arabian Ranches"
+      ],
+      "visa_notes": "UAE Retirement Visa (valid 5 years, renewable) available for those 55+ meeting one of: property worth AED 2M+, savings of AED 1M+, or monthly income of AED 20,000+. No income tax. Dubai is the world's leading expat city.",
+      "healthcare_notes": "Cleveland Clinic Abu Dhabi, Mediclinic, and American Hospital Dubai provide world-class care. JCI-accredited hospitals are numerous.",
+      "best_for": [
+        "Affluent tax-conscious retirees",
+        "Those wanting world-class English-language infrastructure",
+        "Beach and luxury lifestyle seekers"
+      ],
+      "avoid_if": [
+        "Budget retirees",
+        "Those who dislike extreme summer heat (50\u00b0C+)",
+        "Anyone prioritizing cultural authenticity over modernity"
+      ],
+      "expense_shares": {
+        "Rent": 0.42,
+        "Food": 0.18,
+        "Travel": 0.09,
+        "Healthcare": 0.08,
+        "Utilities": 0.08,
+        "Leisure": 0.11,
+        "Other": 0.04
+      }
+    },
+    {
+      "id": 11,
+      "city": "Abu Dhabi",
+      "country": "United Arab Emirates",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 24.4539,
+      "longitude": 54.3773,
+      "monthly_cost_usd": 4200,
+      "lifestyle_label": "Upscale",
+      "description": "The UAE's dignified capital \u2014 the Sheikh Zayed Grand Mosque, the Louvre Abu Dhabi, Yas Island's F1 circuit, and a more relaxed, family-oriented Gulf lifestyle than Dubai.",
+      "tags": [
+        "Luxury",
+        "Culture",
+        "Zero Tax",
+        "Modern",
+        "Islamic Architecture"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 10,
+      "safety_score": 9,
+      "climate_score": 7,
+      "expat_community_score": 9,
+      "internet_score": 10,
+      "overall_retirement_score": 8.1,
+      "climate_type": "Hot Desert",
+      "language": "Arabic (English universally spoken)",
+      "currency": "AED",
+      "time_zone": "UTC+4",
+      "popular_neighborhoods": [
+        "Al Reem Island",
+        "Khalidiyah",
+        "Al Mushrif",
+        "Saadiyat Island",
+        "Yas Island"
+      ],
+      "visa_notes": "UAE Retirement Visa (5-year, renewable) \u2014 same criteria as Dubai. Cleveland Clinic is in Abu Dhabi specifically, making healthcare even stronger here than Dubai.",
+      "healthcare_notes": "Cleveland Clinic Abu Dhabi is one of the world's best hospitals, full stop. Sheikh Khalifa Medical City also outstanding.",
+      "best_for": [
+        "Those wanting Dubai's benefits with more cultural substance",
+        "Healthcare-focused affluent retirees",
+        "Art and culture lovers"
+      ],
+      "avoid_if": [
+        "Budget retirees",
+        "Those wanting a walkable, car-free environment"
+      ],
+      "expense_shares": {
+        "Rent": 0.41,
+        "Food": 0.18,
+        "Travel": 0.09,
+        "Healthcare": 0.08,
+        "Utilities": 0.08,
+        "Leisure": 0.11,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 12,
+      "city": "Doha",
+      "country": "Qatar",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 25.2854,
+      "longitude": 51.531,
+      "monthly_cost_usd": 4000,
+      "lifestyle_label": "Upscale",
+      "description": "The Gulf's cultural ambition incarnate \u2014 the Museum of Islamic Art, Al Zubarah UNESCO fort, world-class dining, zero income tax, and a 2022 FIFA World Cup legacy of infrastructure.",
+      "tags": [
+        "Luxury",
+        "Culture",
+        "Zero Tax",
+        "Modern",
+        "Islamic Art"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 9,
+      "safety_score": 10,
+      "climate_score": 6,
+      "expat_community_score": 8,
+      "internet_score": 10,
+      "overall_retirement_score": 7.8,
+      "climate_type": "Hot Desert",
+      "language": "Arabic (English widely spoken)",
+      "currency": "QAR",
+      "time_zone": "UTC+3",
+      "popular_neighborhoods": [
+        "The Pearl",
+        "West Bay",
+        "Al Waab",
+        "Lusail City",
+        "Msheireb"
+      ],
+      "visa_notes": "Qatar Residence Permit for property owners (The Pearl) or through sponsorship. Qatar now offers 5-year multiple-entry tourist visas for 80+ countries. No income tax.",
+      "healthcare_notes": "Hamad Medical Corporation is Qatar's public system and genuinely world-class. Sidra Medicine (Boston Children's Hospital affiliate) is outstanding.",
+      "best_for": [
+        "Affluent retirees wanting Gulf lifestyle with cultural depth",
+        "Those valuing world-class safety",
+        "Museum and art lovers"
+      ],
+      "avoid_if": [
+        "Budget retirees",
+        "Those sensitive to extreme summer heat",
+        "Those wanting casual outdoor lifestyles"
+      ],
+      "expense_shares": {
+        "Rent": 0.41,
+        "Food": 0.18,
+        "Travel": 0.09,
+        "Healthcare": 0.08,
+        "Utilities": 0.08,
+        "Leisure": 0.11,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 13,
+      "city": "Muscat",
+      "country": "Oman",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 23.588,
+      "longitude": 58.3829,
+      "monthly_cost_usd": 2500,
+      "lifestyle_label": "Comfortable",
+      "description": "The Gulf's hidden gem \u2014 a clean, safe, and architecturally coherent Arab capital with dramatic mountain wadis, turtle nesting beaches, souk culture, and a far more affordable cost than Dubai.",
+      "tags": [
+        "Safe",
+        "Authentic Arab Culture",
+        "Outdoors",
+        "Wadis",
+        "Affordable (vs Gulf)"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 8,
+      "safety_score": 10,
+      "climate_score": 7,
+      "expat_community_score": 7,
+      "internet_score": 8,
+      "overall_retirement_score": 7.7,
+      "climate_type": "Hot Desert",
+      "language": "Arabic (English widely spoken)",
+      "currency": "OMR",
+      "time_zone": "UTC+4",
+      "popular_neighborhoods": [
+        "Muscat Hills",
+        "Al Mouj (The Wave)",
+        "Qurm",
+        "Shatti Al Qurum",
+        "Madinat As Sultan Qaboos"
+      ],
+      "visa_notes": "Oman Retirement Residency requires OMR 4,000/month income or OMR 250,000 in savings, plus property ownership. Most Western nationalities get 30-day visa-on-arrival extendable. No income tax.",
+      "healthcare_notes": "Royal Hospital and Khoula Hospital are the leading public facilities. Muscat Private Hospital and IMC provide strong private care.",
+      "best_for": [
+        "Those wanting Gulf living at lower cost",
+        "Outdoor and wadi explorers",
+        "Those wanting authentic Arab culture with safety"
+      ],
+      "avoid_if": [
+        "Budget retirees (Gulf costs apply)",
+        "Those wanting Dubai's cosmopolitan energy"
+      ],
+      "expense_shares": {
+        "Rent": 0.36,
+        "Food": 0.2,
+        "Travel": 0.09,
+        "Healthcare": 0.09,
+        "Utilities": 0.09,
+        "Leisure": 0.12,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 14,
+      "city": "Amman",
+      "country": "Jordan",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 31.9454,
+      "longitude": 35.9284,
+      "monthly_cost_usd": 2000,
+      "lifestyle_label": "Affordable",
+      "description": "The Levant's modern Arab capital \u2014 the Roman Citadel, Petra two hours away, extraordinary hummus and mansaf, a safe and cosmopolitan atmosphere, and a growing expat retiree scene.",
+      "tags": [
+        "History",
+        "Safe",
+        "Culinary",
+        "Petra Access",
+        "Cosmopolitan"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 8,
+      "safety_score": 8,
+      "climate_score": 8,
+      "expat_community_score": 6,
+      "internet_score": 7,
+      "overall_retirement_score": 7.4,
+      "climate_type": "Mediterranean",
+      "language": "Arabic (English widely spoken)",
+      "currency": "JOD",
+      "time_zone": "UTC+2/+3",
+      "popular_neighborhoods": [
+        "Abdoun",
+        "Swefieh",
+        "Jabal Amman",
+        "Khalda",
+        "Deir Ghbar"
+      ],
+      "visa_notes": "Jordan offers On-Arrival Visa (1\u20133 months) for most Western nationalities. Long-term residence available via property ownership or the Jordan Retirement Visa (for those with pension income). Jordan has historically been one of the Middle East's most politically stable countries.",
+      "healthcare_notes": "Jordan University Hospital and private Istishari and Khalidi Hospitals are genuinely strong \u2014 Jordan is a major medical tourism destination for the Arab world.",
+      "best_for": [
+        "Middle East adventurers",
+        "History and archaeology lovers (Petra, Jerash)",
+        "Those wanting an affordable, safe Arab capital"
+      ],
+      "avoid_if": [
+        "Those wanting coastal living (landlocked with one small Red Sea port)",
+        "Budget retirees struggling with JOD (not cheap)"
+      ],
+      "expense_shares": {
+        "Rent": 0.32,
+        "Food": 0.22,
+        "Travel": 0.1,
+        "Healthcare": 0.1,
+        "Utilities": 0.09,
+        "Leisure": 0.12,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 15,
+      "city": "Beirut",
+      "country": "Lebanon",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 33.8938,
+      "longitude": 35.5018,
+      "monthly_cost_usd": 1500,
+      "lifestyle_label": "Affordable",
+      "description": "The Paris of the Middle East \u2014 extraordinary food, multilingual sophistication, Mediterranean beaches backed by cedared mountains, and a city that has survived everything history threw at it.",
+      "tags": [
+        "Culinary",
+        "History",
+        "Mediterranean",
+        "Resilient",
+        "Multilingual"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 7,
+      "safety_score": 4,
+      "climate_score": 9,
+      "expat_community_score": 6,
+      "internet_score": 4,
+      "overall_retirement_score": 5.5,
+      "climate_type": "Mediterranean",
+      "language": "Arabic, French, English",
+      "currency": "LBP (USD widely used)",
+      "time_zone": "UTC+2/+3",
+      "popular_neighborhoods": [
+        "Achrafieh",
+        "Hamra",
+        "Gemmayzeh",
+        "Verdun",
+        "Rawda"
+      ],
+      "visa_notes": "Lebanon offers 1-month visa-on-arrival for most Western nationalities, extendable. The country is in severe economic crisis since 2019 \u2014 banking collapse, currency devaluation, and political instability. USD cash is the de facto currency.",
+      "healthcare_notes": "American University of Beirut Medical Center (AUBMC) is one of the Middle East's finest academic hospitals. Quality private sector exists but resources are strained by the economic crisis.",
+      "best_for": [
+        "Food and culture lovers willing to manage instability",
+        "Those with Lebanese heritage",
+        "Adventurous retirees who've researched the situation thoroughly"
+      ],
+      "avoid_if": [
+        "Those wanting stability, reliable utilities, or financial security",
+        "Most Western retirees \u2014 the economic and political crisis make this very high-risk"
+      ],
+      "expense_shares": {
+        "Rent": 0.28,
+        "Food": 0.25,
+        "Travel": 0.09,
+        "Healthcare": 0.13,
+        "Utilities": 0.09,
+        "Leisure": 0.11,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 16,
+      "city": "Tel Aviv",
+      "country": "Israel",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 32.0853,
+      "longitude": 34.7818,
+      "monthly_cost_usd": 4500,
+      "lifestyle_label": "Upscale",
+      "description": "The Mediterranean's startup capital \u2014 Bauhaus White City (UNESCO), world-class beaches, extraordinary food scene, vibrant LGBTQ+ culture, and one of the Middle East's highest living standards.",
+      "tags": [
+        "Tech Hub",
+        "Beach",
+        "LGBTQ+ Friendly",
+        "Culinary",
+        "Mediterranean"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 10,
+      "safety_score": 6,
+      "climate_score": 9,
+      "expat_community_score": 7,
+      "internet_score": 10,
+      "overall_retirement_score": 7.4,
+      "climate_type": "Mediterranean",
+      "language": "Hebrew (English widely spoken)",
+      "currency": "ILS",
+      "time_zone": "UTC+2/+3",
+      "popular_neighborhoods": [
+        "Neve Tzedek",
+        "Florentin",
+        "Ramat Aviv",
+        "Herzliya Pituah",
+        "Jaffa"
+      ],
+      "visa_notes": "Israel allows 3-month visa-free stays for most Western nationalities. Aliyah (Law of Return) allows Jewish retirees to immigrate with full citizenship. Non-Jewish non-citizen retirees face limited long-term visa options. The security situation requires careful assessment.",
+      "healthcare_notes": "Ichilov (Tel Aviv Sourasky Medical Center) and Sheba Medical Center are world-ranked. Israeli healthcare is widely regarded as the Middle East's finest.",
+      "best_for": [
+        "Jewish retirees making Aliyah",
+        "LGBTQ+ retirees",
+        "Tech and startup culture enthusiasts"
+      ],
+      "avoid_if": [
+        "Those concerned about regional security",
+        "Budget retirees (one of the world's most expensive cities for its size)"
+      ],
+      "expense_shares": {
+        "Rent": 0.43,
+        "Food": 0.18,
+        "Travel": 0.09,
+        "Healthcare": 0.08,
+        "Utilities": 0.08,
+        "Leisure": 0.1,
+        "Other": 0.04
+      }
+    },
+    {
+      "id": 17,
+      "city": "Jerusalem",
+      "country": "Israel",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 31.7683,
+      "longitude": 35.2137,
+      "monthly_cost_usd": 3500,
+      "lifestyle_label": "Comfortable",
+      "description": "The world's most contested sacred city \u2014 the Western Wall, the Church of the Holy Sepulchre, the Dome of the Rock, and 3,000 years of civilization layered on every stone.",
+      "tags": [
+        "Sacred",
+        "History",
+        "Three Religions",
+        "UNESCO",
+        "Unique"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 9,
+      "safety_score": 5,
+      "climate_score": 8,
+      "expat_community_score": 6,
+      "internet_score": 9,
+      "overall_retirement_score": 6.8,
+      "climate_type": "Mediterranean",
+      "language": "Hebrew, Arabic (English widely spoken)",
+      "currency": "ILS",
+      "time_zone": "UTC+2/+3",
+      "popular_neighborhoods": [
+        "German Colony",
+        "Rehavia",
+        "Talbieh",
+        "Ein Karem",
+        "Katamon"
+      ],
+      "visa_notes": "Same Israeli visa framework as Tel Aviv. Jerusalem carries additional security complexity given its political status. Aliyah route available for Jewish retirees.",
+      "healthcare_notes": "Hadassah Medical Center (Ein Karem campus) is a world-renowned academic hospital, particularly famous for its Chagall windows and exceptional medical care.",
+      "best_for": [
+        "Those drawn to the world's most spiritually significant city",
+        "History and religious pilgrimage enthusiasts",
+        "Jewish retirees making Aliyah"
+      ],
+      "avoid_if": [
+        "Those wanting a relaxed, beach-oriented retirement",
+        "Retirees sensitive to political and security tensions"
+      ],
+      "expense_shares": {
+        "Rent": 0.4,
+        "Food": 0.19,
+        "Travel": 0.1,
+        "Healthcare": 0.09,
+        "Utilities": 0.08,
+        "Leisure": 0.1,
+        "Other": 0.04
+      }
+    },
+    {
+      "id": 18,
+      "city": "Riyadh",
+      "country": "Saudi Arabia",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 24.7136,
+      "longitude": 46.6753,
+      "monthly_cost_usd": 3000,
+      "lifestyle_label": "Comfortable",
+      "description": "Saudi Arabia's rapidly transforming capital \u2014 Vision 2030's showpiece, new entertainment venues, Al-Ula desert heritage, and a society changing faster than almost anywhere on Earth.",
+      "tags": [
+        "Modern",
+        "Vision 2030",
+        "Desert",
+        "No Income Tax",
+        "Rapidly Changing"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 8,
+      "safety_score": 8,
+      "climate_score": 5,
+      "expat_community_score": 7,
+      "internet_score": 9,
+      "overall_retirement_score": 6.5,
+      "climate_type": "Hot Desert",
+      "language": "Arabic (English in business/expat circles)",
+      "currency": "SAR",
+      "time_zone": "UTC+3",
+      "popular_neighborhoods": [
+        "Diplomatic Quarter",
+        "Al Olaya",
+        "Al Malqa",
+        "Al Nakheel",
+        "Hittin"
+      ],
+      "visa_notes": "Saudi Arabia now offers tourist e-Visas for 50+ nationalities. Longer-term residence for retirees typically requires employer sponsorship or the new Saudi Premium Residency (SAR 800,000 one-time fee or SAR 100,000/year). Social norms and laws remain more conservative than Western standards.",
+      "healthcare_notes": "King Faisal Specialist Hospital and Research Centre is one of the world's finest academic hospitals. Saudi Arabia has invested heavily in healthcare infrastructure.",
+      "best_for": [
+        "Those working in Saudi Arabia retiring in place",
+        "Those intrigued by Vision 2030's transformation",
+        "High-income earners benefiting from zero income tax"
+      ],
+      "avoid_if": [
+        "Those wanting social freedoms similar to Western countries",
+        "Anyone bothered by extreme summer heat"
+      ],
+      "expense_shares": {
+        "Rent": 0.35,
+        "Food": 0.21,
+        "Travel": 0.09,
+        "Healthcare": 0.09,
+        "Utilities": 0.09,
+        "Leisure": 0.12,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 19,
+      "city": "Kuwait City",
+      "country": "Kuwait",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 29.3759,
+      "longitude": 47.9774,
+      "monthly_cost_usd": 3500,
+      "lifestyle_label": "Comfortable",
+      "description": "The Gulf's oil-rich original \u2014 a wealthy, conservative Arab capital with extraordinary souks, the Arabian Gulf waterfront (the Corniche), and one of the world's highest GDPs per capita.",
+      "tags": [
+        "Wealthy",
+        "Conservative",
+        "Gulf Culture",
+        "No Income Tax",
+        "Souks"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 8,
+      "safety_score": 8,
+      "climate_score": 5,
+      "expat_community_score": 7,
+      "internet_score": 9,
+      "overall_retirement_score": 6.4,
+      "climate_type": "Hot Desert",
+      "language": "Arabic (English widely spoken)",
+      "currency": "KWD",
+      "time_zone": "UTC+3",
+      "popular_neighborhoods": [
+        "Salmiya",
+        "Hawalli",
+        "Bayan",
+        "Mishref",
+        "Rumaithiya"
+      ],
+      "visa_notes": "Kuwait does not offer a retirement visa. Long-term residence typically requires employer sponsorship or family ties. Tourist visas (1 month) are available for most Western nationalities. Limited visa options make Kuwait difficult for independent retirees.",
+      "healthcare_notes": "Kuwait Hospital and Mubarak Al-Kabeer Hospital are the leading public facilities. Private Dar Al Shifa and American Hospital Kuwait provide better expat-oriented care.",
+      "best_for": [
+        "Those working in Kuwait retiring in place",
+        "Those with Kuwaiti family connections"
+      ],
+      "avoid_if": [
+        "Independent retirees without a visa sponsorship pathway",
+        "Those wanting social freedoms or entertainment beyond shopping"
+      ],
+      "expense_shares": {
+        "Rent": 0.38,
+        "Food": 0.19,
+        "Travel": 0.09,
+        "Healthcare": 0.09,
+        "Utilities": 0.08,
+        "Leisure": 0.12,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 20,
+      "city": "Manama",
+      "country": "Bahrain",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 26.2285,
+      "longitude": 50.586,
+      "monthly_cost_usd": 3000,
+      "lifestyle_label": "Comfortable",
+      "description": "The Gulf's most liberal capital \u2014 Bahrain's small island nation has the most relaxed social laws in the Gulf, a Formula 1 Grand Prix, weekend escape for Saudis, and no income tax.",
+      "tags": [
+        "Liberal (Gulf context)",
+        "Formula 1",
+        "No Income Tax",
+        "Financial Hub",
+        "Island"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 8,
+      "safety_score": 8,
+      "climate_score": 6,
+      "expat_community_score": 7,
+      "internet_score": 9,
+      "overall_retirement_score": 7.0,
+      "climate_type": "Hot Desert",
+      "language": "Arabic (English widely spoken)",
+      "currency": "BHD",
+      "time_zone": "UTC+3",
+      "popular_neighborhoods": [
+        "Adliya",
+        "Juffair",
+        "Saar",
+        "Riffa",
+        "Amwaj Islands"
+      ],
+      "visa_notes": "Bahrain offers a 1-year Retirement Visa for those 55+ with monthly income of $1,500+ or $135,000 in savings \u2014 one of the Gulf's most accessible retirement visas. No income tax.",
+      "healthcare_notes": "Bahrain Defence Force Hospital and American Mission Hospital provide good care. King Hamad University Hospital is the leading facility.",
+      "best_for": [
+        "Those wanting the Gulf's most socially relaxed environment",
+        "Financial services retirees",
+        "Formula 1 and motorsport enthusiasts"
+      ],
+      "avoid_if": [
+        "Those wanting lush green landscapes",
+        "Budget retirees"
+      ],
+      "expense_shares": {
+        "Rent": 0.37,
+        "Food": 0.2,
+        "Travel": 0.09,
+        "Healthcare": 0.09,
+        "Utilities": 0.09,
+        "Leisure": 0.11,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 21,
+      "city": "Larnaca",
+      "country": "Cyprus",
+      "region": "Asia",
+      "subregion": "Middle East",
+      "latitude": 34.9229,
+      "longitude": 33.6233,
+      "monthly_cost_usd": 1800,
+      "lifestyle_label": "Affordable",
+      "description": "Cyprus's second coastal city and main gateway \u2014 the Hala Sultan Tekke mosque, Finikoudes promenade, salt lake flamingos, and one of Cyprus's most authentically local atmospheres.",
+      "tags": [
+        "Beach",
+        "History",
+        "EU Living",
+        "Authentic",
+        "Affordable"
+      ],
+      "visa_ease_score": 8,
+      "healthcare_score": 7,
+      "safety_score": 9,
+      "climate_score": 10,
+      "expat_community_score": 7,
+      "internet_score": 8,
+      "overall_retirement_score": 8.0,
+      "climate_type": "Mediterranean",
+      "language": "Greek (English widely spoken)",
+      "currency": "EUR",
+      "time_zone": "UTC+2/+3",
+      "popular_neighborhoods": [
+        "Finikoudes",
+        "Mackenzie",
+        "Drosia",
+        "Oroklini",
+        "Pervolia"
+      ],
+      "visa_notes": "Cyprus EU and Schengen. Same Cyprus Category F Retirement Visa framework. Larnaca Airport is the main international gateway, making it very accessible.",
+      "healthcare_notes": "Larnaca General Hospital provides public care; private Apollonion and Limassol hospitals offer better specialist access.",
+      "best_for": [
+        "Those wanting authentic Cyprus over resort-heavy Limassol",
+        "Beach lovers",
+        "Budget EU Mediterranean retirees"
+      ],
+      "avoid_if": [
+        "Those needing full specialist medical care locally",
+        "Retirees wanting big-city entertainment"
+      ],
+      "expense_shares": {
+        "Rent": 0.3,
+        "Food": 0.22,
+        "Travel": 0.1,
+        "Healthcare": 0.1,
+        "Utilities": 0.09,
+        "Leisure": 0.13,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 22,
+      "city": "Mal\u00e9",
+      "country": "Maldives",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 4.1755,
+      "longitude": 73.5093,
+      "monthly_cost_usd": 2500,
+      "lifestyle_label": "Comfortable",
+      "description": "One of the world's most densely populated capital islands \u2014 a compact Muslim city surrounded by world-famous overwater bungalows, coral reefs, and the Indian Ocean's clearest waters.",
+      "tags": [
+        "Island",
+        "Diving",
+        "Overwater Bungalows",
+        "Coral Reefs",
+        "Tropical"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 5,
+      "safety_score": 8,
+      "climate_score": 8,
+      "expat_community_score": 5,
+      "internet_score": 7,
+      "overall_retirement_score": 6.2,
+      "climate_type": "Tropical",
+      "language": "Dhivehi (English widely spoken in tourism)",
+      "currency": "MVR",
+      "time_zone": "UTC+5",
+      "popular_neighborhoods": [
+        "Mal\u00e9 Center",
+        "Hulhumal\u00e9",
+        "Maafushi (nearby island)",
+        "Hulhumale Phase 2"
+      ],
+      "visa_notes": "Maldives grants 30-day visa-free stays on arrival, extendable to 90 days. No long-term retirement visa exists. Long-term residency typically requires work permit, marriage to a Maldivian, or significant property investment in designated areas. Islam is the state religion.",
+      "healthcare_notes": "ADK Hospital in Mal\u00e9 provides the best local private care. Serious cases require evacuation to India (Bangalore/Kochi) or Sri Lanka.",
+      "best_for": [
+        "Dive instructors and underwater enthusiasts retiring in place",
+        "Those wanting a unique Indian Ocean island base"
+      ],
+      "avoid_if": [
+        "Most conventional retirees \u2014 no retirement visa, limited medical care, and Islamic social restrictions make long-term living challenging"
+      ],
+      "expense_shares": {
+        "Rent": 0.34,
+        "Food": 0.24,
+        "Travel": 0.12,
+        "Healthcare": 0.12,
+        "Utilities": 0.08,
+        "Leisure": 0.07,
+        "Other": 0.03
+      }
+    },
+    {
+      "id": 23,
+      "city": "Colombo",
+      "country": "Sri Lanka",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 6.9271,
+      "longitude": 79.8612,
+      "monthly_cost_usd": 1200,
+      "lifestyle_label": "Budget",
+      "description": "Sri Lanka's commercial capital \u2014 colonial Dutch and British architecture, superb seafood, a recovering economy post-2022 crisis, and proximity to cultural Kandy and beach Galle at very low costs.",
+      "tags": [
+        "Budget",
+        "Colonial Heritage",
+        "Beach Access",
+        "Culinary",
+        "History"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 6,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 6,
+      "internet_score": 7,
+      "overall_retirement_score": 6.8,
+      "climate_type": "Tropical",
+      "language": "Sinhala, Tamil (English widely spoken)",
+      "currency": "LKR",
+      "time_zone": "UTC+5:30",
+      "popular_neighborhoods": [
+        "Colombo 3 (Kollupitiya)",
+        "Colombo 7 (Cinnamon Gardens)",
+        "Dehiwala",
+        "Nugegoda",
+        "Mount Lavinia"
+      ],
+      "visa_notes": "Sri Lanka offers visa-on-arrival or e-Visa (30 days, extendable to 6 months). No formal retirement visa but the 'Retirement Residence Visa' (RRV) is available for those 55+ with $1,500/month income or $15,000 in a Sri Lanka bank account.",
+      "healthcare_notes": "Asiri Hospital Group and Nawaloka Hospital provide good private care. Serious specialist care may require Chennai or Singapore.",
+      "best_for": [
+        "Budget retirees wanting tropical beauty",
+        "Tea and culinary enthusiasts",
+        "Those wanting beach access (Galle 2hrs) with city base"
+      ],
+      "avoid_if": [
+        "Those worried about economic stability (post-2022 crisis recovery ongoing)",
+        "Retirees needing advanced specialist care locally"
+      ],
+      "expense_shares": {
+        "Rent": 0.27,
+        "Food": 0.26,
+        "Travel": 0.09,
+        "Healthcare": 0.12,
+        "Utilities": 0.09,
+        "Leisure": 0.12,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 24,
+      "city": "Thimphu",
+      "country": "Bhutan",
+      "region": "Asia",
+      "subregion": "South Asia",
+      "latitude": 27.4728,
+      "longitude": 89.639,
+      "monthly_cost_usd": 2500,
+      "lifestyle_label": "Comfortable",
+      "description": "The world's only carbon-negative country's capital \u2014 Gross National Happiness policy, dzong fortresses, no traffic lights, Buddhist culture at its most intact, and mandatory $250/day tourist fee keeps crowds away.",
+      "tags": [
+        "Unique",
+        "Buddhist Culture",
+        "Eco-Tourism",
+        "Himalayan",
+        "Happiness"
+      ],
+      "visa_ease_score": 4,
+      "healthcare_score": 5,
+      "safety_score": 10,
+      "climate_score": 7,
+      "expat_community_score": 2,
+      "internet_score": 5,
+      "overall_retirement_score": 5.5,
+      "climate_type": "Subtropical Highland",
+      "language": "Dzongkha",
+      "currency": "BTN (pegged to INR)",
+      "time_zone": "UTC+6",
+      "popular_neighborhoods": [
+        "Norzin Lam",
+        "Chubachu",
+        "Motithang",
+        "Langjophakha",
+        "Kawajangsa"
+      ],
+      "visa_notes": "Bhutan requires a Sustainable Development Fee of USD 100/night (reduced from $250 in 2023) for all foreign tourists. Long-term residence is essentially impossible for non-Indian non-Bhutanese nationals. No retirement visa exists. One of the most restricted nations for long-term foreign residency.",
+      "healthcare_notes": "JDWNR Hospital is Bhutan's main referral hospital; resources are limited. Serious cases transfer to India.",
+      "best_for": [
+        "Those wanting a profound, unique cultural experience on extended visits",
+        "Buddhist practitioners"
+      ],
+      "avoid_if": [
+        "Anyone wanting to actually retire and live here long-term \u2014 this is essentially not possible for most Western nationals"
+      ],
+      "expense_shares": {
+        "Rent": 0.3,
+        "Food": 0.22,
+        "Travel": 0.18,
+        "Healthcare": 0.12,
+        "Utilities": 0.07,
+        "Leisure": 0.08,
+        "Other": 0.03
+      }
+    },
+    {
+      "id": 25,
+      "city": "Ulaanbaatar",
+      "country": "Mongolia",
+      "region": "Asia",
+      "subregion": "East Asia",
+      "latitude": 47.8864,
+      "longitude": 106.9057,
+      "monthly_cost_usd": 1200,
+      "lifestyle_label": "Budget",
+      "description": "The world's coldest capital and gateway to the Gobi Desert and endless steppes \u2014 Genghis Khan's homeland, a growing expat community around the mining boom, and one of Asia's most unique lifestyles.",
+      "tags": [
+        "Budget",
+        "Nomadic Culture",
+        "Gobi Desert",
+        "Unique",
+        "Steppe"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 4,
+      "safety_score": 6,
+      "climate_score": 3,
+      "expat_community_score": 4,
+      "internet_score": 6,
+      "overall_retirement_score": 5.1,
+      "climate_type": "Semi-Arid Continental (extreme)",
+      "language": "Mongolian",
+      "currency": "MNT",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Sukhbaatar District",
+        "Chingeltei",
+        "Bayanz\u00fcrkh",
+        "Khan-Uul",
+        "Songinokhairkhan"
+      ],
+      "visa_notes": "Mongolia offers 30-day visa-free entry for 60+ nationalities. Extendable residence permits available. No income tax on foreign-sourced income.",
+      "healthcare_notes": "SOS Medica Mongolia clinic and Intermed Hospital provide basic expat-quality care. Serious cases require Beijing or Seoul.",
+      "best_for": [
+        "The most adventurous retirees on earth",
+        "Nomadic culture enthusiasts",
+        "Horseback and outdoor extreme travelers"
+      ],
+      "avoid_if": [
+        "Almost everyone \u2014 winters reach -40\u00b0C, air quality in Ulaanbaatar is among the world's worst (coal-burning gers), and infrastructure is limited"
+      ],
+      "expense_shares": {
+        "Rent": 0.27,
+        "Food": 0.26,
+        "Travel": 0.1,
+        "Healthcare": 0.14,
+        "Utilities": 0.1,
+        "Leisure": 0.09,
+        "Other": 0.04
+      }
+    },
+    {
+      "id": 26,
+      "city": "Phnom Penh",
+      "country": "Cambodia",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 11.5564,
+      "longitude": 104.9282,
+      "monthly_cost_usd": 1100,
+      "lifestyle_label": "Budget",
+      "description": "Cambodia's complex, rising capital \u2014 the Royal Palace, the Mekong-Tonle Sap confluence, a rapidly developing riverfront, and very easy retirement visa access at some of Asia's lowest costs.",
+      "tags": [
+        "Budget",
+        "Easy Visa",
+        "Mekong",
+        "History",
+        "Emerging"
+      ],
+      "visa_ease_score": 9,
+      "healthcare_score": 5,
+      "safety_score": 6,
+      "climate_score": 7,
+      "expat_community_score": 7,
+      "internet_score": 7,
+      "overall_retirement_score": 6.9,
+      "climate_type": "Tropical Monsoon",
+      "language": "Khmer (English growing in expat areas)",
+      "currency": "KHR (USD widely used)",
+      "time_zone": "UTC+7",
+      "popular_neighborhoods": [
+        "BKK1",
+        "Tonle Bassac",
+        "Daun Penh",
+        "Toul Kork",
+        "Boeung Keng Kang"
+      ],
+      "visa_notes": "Cambodia's Ordinary Visa (Type E) is extendable indefinitely for $290/year \u2014 making it one of Asia's easiest long-term retirement visa solutions. USD is freely used alongside KHR. No income or capital gains tax on foreign-sourced income.",
+      "healthcare_notes": "Royal Phnom Penh Hospital and Calmette Hospital provide basic care. Raffles Medical Phnom Penh offers better private care. Serious cases go to Bangkok (1 hr by air).",
+      "best_for": [
+        "Ultra-budget retirees",
+        "Those wanting Asia's easiest retirement visa",
+        "Angkor Wat and Khmer culture enthusiasts"
+      ],
+      "avoid_if": [
+        "Those needing reliable medical care locally",
+        "Retirees wanting stable infrastructure and modern services"
+      ],
+      "expense_shares": {
+        "Rent": 0.28,
+        "Food": 0.27,
+        "Travel": 0.09,
+        "Healthcare": 0.12,
+        "Utilities": 0.09,
+        "Leisure": 0.1,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 27,
+      "city": "Vientiane",
+      "country": "Laos",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 17.9757,
+      "longitude": 102.6331,
+      "monthly_cost_usd": 1000,
+      "lifestyle_label": "Budget",
+      "description": "Asia's most laid-back capital \u2014 Buddhist temples, baguettes from French colonial days, the Mekong at sunset, and a sleepy pace that makes everything feel like it's happening in slow motion.",
+      "tags": [
+        "Budget",
+        "Laid-Back",
+        "Buddhist",
+        "French Colonial",
+        "Mekong"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 4,
+      "safety_score": 8,
+      "climate_score": 7,
+      "expat_community_score": 5,
+      "internet_score": 5,
+      "overall_retirement_score": 6.2,
+      "climate_type": "Tropical Savanna",
+      "language": "Lao (English limited)",
+      "currency": "LAK (Thai Baht widely accepted)",
+      "time_zone": "UTC+7",
+      "popular_neighborhoods": [
+        "Ban Phonthan",
+        "Mixay",
+        "Saylom",
+        "Sikhottabong",
+        "Chanthabouly"
+      ],
+      "visa_notes": "Laos offers 30-day visa-on-arrival or e-Visa for most nationalities. The Laos Retirement Visa (for 50+) requires $3,000/month income or $150,000 in a Lao bank. Typical expats use 30-day tourist visas with renewals or border runs to Thailand.",
+      "healthcare_notes": "Mahosot Hospital and Setthathirath Hospital are the main facilities. Medical evacuation to Bangkok (1 hr) is strongly recommended for serious conditions.",
+      "best_for": [
+        "Those wanting the slowest, most peaceful Asian capital",
+        "Budget retirees wanting near-zero stress living",
+        "Those happy with simple tropical lifestyle"
+      ],
+      "avoid_if": [
+        "Those needing any real medical infrastructure",
+        "Retirees wanting activity or cultural depth beyond Buddhist temples"
+      ],
+      "expense_shares": {
+        "Rent": 0.25,
+        "Food": 0.28,
+        "Travel": 0.09,
+        "Healthcare": 0.14,
+        "Utilities": 0.08,
+        "Leisure": 0.11,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 28,
+      "city": "Naypyidaw",
+      "country": "Myanmar",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 19.7633,
+      "longitude": 96.0785,
+      "monthly_cost_usd": 800,
+      "lifestyle_label": "Budget",
+      "description": "The world's most surreal capital \u2014 a purpose-built city of 20-lane empty highways, golf courses, and virtually no traffic, built by the military junta and now under continued military control post-2021 coup.",
+      "tags": [
+        "Unique",
+        "Empty City",
+        "Golf",
+        "Military Capital",
+        "Surreal"
+      ],
+      "visa_ease_score": 2,
+      "healthcare_score": 3,
+      "safety_score": 2,
+      "climate_score": 6,
+      "expat_community_score": 1,
+      "internet_score": 3,
+      "overall_retirement_score": 2.5,
+      "climate_type": "Tropical Monsoon",
+      "language": "Burmese",
+      "currency": "MMK",
+      "time_zone": "UTC+6:30",
+      "popular_neighborhoods": [
+        "Zabuthiri",
+        "Pyinmana",
+        "Ottarathiri",
+        "Pobbathiri",
+        "Dekkhinathiri"
+      ],
+      "visa_notes": "Myanmar is under military control following the February 2021 coup. Most Western governments advise against travel. Tourist visas are technically available but the political and security situation makes retirement here completely inadvisable.",
+      "healthcare_notes": "Naypyidaw General Hospital is the main facility but resources are extremely limited. The post-coup crisis has severely strained healthcare infrastructure.",
+      "best_for": [
+        "No one. Not a recommended retirement destination under any current circumstances."
+      ],
+      "avoid_if": [
+        "Everyone \u2014 Myanmar's military junta, ongoing civil conflict, international sanctions, and lack of any expat infrastructure make this entirely unsuitable for retirees"
+      ],
+      "expense_shares": {
+        "Rent": 0.25,
+        "Food": 0.3,
+        "Travel": 0.09,
+        "Healthcare": 0.15,
+        "Utilities": 0.08,
+        "Leisure": 0.08,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 29,
+      "city": "Bandar Seri Begawan",
+      "country": "Brunei",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 4.9031,
+      "longitude": 114.9398,
+      "monthly_cost_usd": 2500,
+      "lifestyle_label": "Comfortable",
+      "description": "The oil-rich sultanate's capital \u2014 the Omar Ali Saifuddien Mosque, the world's largest residential palace, zero income tax, and a quiet, conservative Islamic lifestyle subsidized by oil wealth.",
+      "tags": [
+        "Oil Wealth",
+        "Islamic Culture",
+        "No Income Tax",
+        "Conservative",
+        "Safe"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 7,
+      "safety_score": 9,
+      "climate_score": 6,
+      "expat_community_score": 4,
+      "internet_score": 7,
+      "overall_retirement_score": 5.8,
+      "climate_type": "Tropical Rainforest",
+      "language": "Malay (English co-official)",
+      "currency": "BND (pegged to SGD)",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Gadong",
+        "Kiulap",
+        "Menglait",
+        "Jerudong",
+        "Seria"
+      ],
+      "visa_notes": "Brunei offers 14\u201330 day visa-free stays for most Western nationalities. Long-term residence typically requires employment with a Bruneian company or family sponsorship. Very limited retirement visa pathway. Alcohol is illegal for Muslims; non-Muslims can import limited personal quantities.",
+      "healthcare_notes": "RIPAS Hospital (Raja Isteri Pengiran Anak Saleha) is a modern, well-funded public hospital. Care is generally adequate and free for residents.",
+      "best_for": [
+        "Those working in Brunei's oil sector retiring in place",
+        "Those wanting an exceptionally safe, quiet lifestyle"
+      ],
+      "avoid_if": [
+        "Those wanting social freedoms or nightlife (effectively none)",
+        "Independent retirees without a visa sponsorship pathway"
+      ],
+      "expense_shares": {
+        "Rent": 0.35,
+        "Food": 0.22,
+        "Travel": 0.1,
+        "Healthcare": 0.09,
+        "Utilities": 0.09,
+        "Leisure": 0.1,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 30,
+      "city": "Dili",
+      "country": "Timor-Leste",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": -8.5569,
+      "longitude": 125.5789,
+      "monthly_cost_usd": 1200,
+      "lifestyle_label": "Budget",
+      "description": "Southeast Asia's newest nation's capital \u2014 a frontier city still building itself on the Timor Sea, extraordinary diving, Portuguese colonial churches, and a people of exceptional warmth.",
+      "tags": [
+        "Frontier",
+        "Diving",
+        "Portuguese Heritage",
+        "Emerging",
+        "Unique"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 3,
+      "safety_score": 6,
+      "climate_score": 7,
+      "expat_community_score": 3,
+      "internet_score": 4,
+      "overall_retirement_score": 4.8,
+      "climate_type": "Tropical Savanna",
+      "language": "Tetum, Portuguese",
+      "currency": "USD",
+      "time_zone": "UTC+9",
+      "popular_neighborhoods": [
+        "Farol",
+        "Comoro",
+        "Bidau Lecidere",
+        "Cristo Rei area",
+        "D\u00edli Beach"
+      ],
+      "visa_notes": "Timor-Leste offers 30-day visa-on-arrival extendable once. No retirement visa. Long-term stays require business or NGO sponsorship. USD is the official currency. Infrastructure is very basic.",
+      "healthcare_notes": "Guido Valadares National Hospital is severely under-resourced. Medical evacuation to Darwin, Australia (1 hr) or Bali is essential for anything serious.",
+      "best_for": [
+        "NGO workers, adventurers, and divers wanting a true frontier experience"
+      ],
+      "avoid_if": [
+        "Virtually all retirees \u2014 infrastructure, healthcare, and services are far below any standard that supports comfortable retirement"
+      ],
+      "expense_shares": {
+        "Rent": 0.28,
+        "Food": 0.28,
+        "Travel": 0.12,
+        "Healthcare": 0.15,
+        "Utilities": 0.08,
+        "Leisure": 0.07,
+        "Other": 0.02
+      }
+    },
+    {
+      "id": 31,
+      "city": "Havana",
+      "country": "Cuba",
+      "region": "Americas",
+      "subregion": "Caribbean",
+      "latitude": 23.1136,
+      "longitude": -82.3666,
+      "monthly_cost_usd": 1500,
+      "lifestyle_label": "Budget",
+      "description": "The Caribbean's time-frozen capital \u2014 crumbling Baroque palaces, 1950s Chevrolets, salsa on every corner, mojitos, and one of the world's most unique and complex societies to experience as a long-term resident.",
+      "tags": [
+        "Unique",
+        "Music",
+        "History",
+        "Classic Cars",
+        "Caribbean"
+      ],
+      "visa_ease_score": 4,
+      "healthcare_score": 6,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 4,
+      "internet_score": 3,
+      "overall_retirement_score": 5.2,
+      "climate_type": "Tropical Savanna",
+      "language": "Spanish",
+      "currency": "CUP",
+      "time_zone": "UTC-5",
+      "popular_neighborhoods": [
+        "Vedado",
+        "Miramar",
+        "Habana Vieja (Old Havana)",
+        "Playa",
+        "Nuevo Vedado"
+      ],
+      "visa_notes": "Cuba's legal residency process for foreigners is extremely complex and rarely granted for retirement purposes. Most long-term stays use a successive tourist card (Tarjeta del Turista) system with exits required every 30\u201390 days. US citizens face additional restrictions due to the embargo. Not straightforward for retirement.",
+      "healthcare_notes": "Cuba's public healthcare system has strong fundamentals at the primary level but chronic shortages of medicines and equipment. La Cira-Garc\u00eda hospital in Havana provides better care for foreigners (payment in hard currency).",
+      "best_for": [
+        "Spanish-speaking adventurers wanting the world's most unique Caribbean experience",
+        "Music and culture aficionados"
+      ],
+      "avoid_if": [
+        "Those needing reliable internet, modern infrastructure, or US dollar banking",
+        "US citizens (legal complications)",
+        "Retirees wanting stability and comfort"
+      ],
+      "expense_shares": {
+        "Rent": 0.28,
+        "Food": 0.26,
+        "Travel": 0.1,
+        "Healthcare": 0.12,
+        "Utilities": 0.1,
+        "Leisure": 0.1,
+        "Other": 0.04
+      }
+    },
+    {
+      "id": 32,
+      "city": "Port Moresby",
+      "country": "Papua New Guinea",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": -9.4438,
+      "longitude": 147.1803,
+      "monthly_cost_usd": 2500,
+      "lifestyle_label": "Comfortable",
+      "description": "Melanesia's largest city and one of the world's most biodiverse nations' gateway \u2014 extraordinary tribal cultures, natural wonders, and significant expatriate infrastructure from the mining/LNG sector.",
+      "tags": [
+        "Adventure",
+        "Biodiversity",
+        "Tribal Culture",
+        "Mining Expats",
+        "Frontier"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 4,
+      "safety_score": 3,
+      "climate_score": 7,
+      "expat_community_score": 4,
+      "internet_score": 4,
+      "overall_retirement_score": 4.0,
+      "climate_type": "Tropical",
+      "language": "Tok Pisin, English, Motu",
+      "currency": "PGK",
+      "time_zone": "UTC+10",
+      "popular_neighborhoods": [
+        "Boroko",
+        "Waigani",
+        "Gerehu",
+        "Gordons",
+        "Hohola"
+      ],
+      "visa_notes": "Papua New Guinea requires visas for most nationalities. Retirement visa options are very limited. Expatriates typically enter via business or employment visas.",
+      "healthcare_notes": "Port Moresby General Hospital is the national referral hospital but severely under-resourced. Private Pacific International Hospital is significantly better. Evacuation to Brisbane or Cairns is essential for serious cases.",
+      "best_for": [
+        "Mining and resource-sector retirees in place",
+        "Extreme adventure travelers with extensive PNG experience"
+      ],
+      "avoid_if": [
+        "Most retirees \u2014 crime, poor infrastructure, limited healthcare, and extreme heat/humidity make Port Moresby very challenging"
+      ],
+      "expense_shares": {
+        "Rent": 0.35,
+        "Food": 0.23,
+        "Travel": 0.12,
+        "Healthcare": 0.14,
+        "Utilities": 0.09,
+        "Leisure": 0.05,
+        "Other": 0.02
+      }
+    },
+    {
+      "id": 33,
+      "city": "Honiara",
+      "country": "Solomon Islands",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": -9.4319,
+      "longitude": 160.0561,
+      "monthly_cost_usd": 1800,
+      "lifestyle_label": "Affordable",
+      "description": "Guadalcanal's WWII-storied capital \u2014 stunning Pacific diving, traditional Melanesian culture, a growing Chinese economic presence, and one of the South Pacific's most authentic small capitals.",
+      "tags": [
+        "WWII History",
+        "Diving",
+        "Authentic",
+        "Tropical",
+        "Pacific"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 3,
+      "safety_score": 5,
+      "climate_score": 7,
+      "expat_community_score": 3,
+      "internet_score": 3,
+      "overall_retirement_score": 4.3,
+      "climate_type": "Tropical",
+      "language": "Solomon Islands Pijin, English",
+      "currency": "SBD",
+      "time_zone": "UTC+11",
+      "popular_neighborhoods": [
+        "Point Cruz",
+        "Kukum",
+        "White River",
+        "Naha",
+        "Panatina"
+      ],
+      "visa_notes": "Solomon Islands offers 90-day visa-free entry for most nationalities. Long-term residence requires a permit. Limited infrastructure for independent retirees.",
+      "healthcare_notes": "National Referral Hospital is severely under-resourced. Medical evacuation to Brisbane or Port Moresby for all but basic care.",
+      "best_for": [
+        "WWII history enthusiasts (Guadalcanal campaign)",
+        "Divers wanting remote, pristine Pacific reefs"
+      ],
+      "avoid_if": [
+        "Almost all retirees \u2014 healthcare, infrastructure, internet, and services are far below any comfortable retirement standard"
+      ],
+      "expense_shares": {
+        "Rent": 0.28,
+        "Food": 0.27,
+        "Travel": 0.14,
+        "Healthcare": 0.15,
+        "Utilities": 0.08,
+        "Leisure": 0.06,
+        "Other": 0.02
+      }
+    },
+    {
+      "id": 34,
+      "city": "Suva",
+      "country": "Fiji",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": -18.1416,
+      "longitude": 178.4419,
+      "monthly_cost_usd": 1700,
+      "lifestyle_label": "Affordable",
+      "description": "The South Pacific's administrative capital \u2014 Fiji's cultural and political heart, lush rainforest, and access to the famous Coral Coast, while offering more infrastructure than Fiji's resort islands.",
+      "tags": [
+        "Pacific",
+        "Tropical",
+        "Cultural Capital",
+        "Affordable",
+        "Island"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 5,
+      "safety_score": 6,
+      "climate_score": 7,
+      "expat_community_score": 5,
+      "internet_score": 6,
+      "overall_retirement_score": 5.9,
+      "climate_type": "Tropical",
+      "language": "English, Fijian, Hindi",
+      "currency": "FJD",
+      "time_zone": "UTC+12",
+      "popular_neighborhoods": [
+        "Domain",
+        "Tamavua",
+        "Laucala Bay",
+        "Nasese",
+        "Muanikau"
+      ],
+      "visa_notes": "Fiji offers 4-month visa-free stays for most Western nationalities. Fiji's Retirement Visa (for 55+) requires FJD 2,000/month income or FJD 200,000 in savings, plus health insurance. One of the Pacific's most accessible retirement visas.",
+      "healthcare_notes": "Colonial War Memorial Hospital (CWM) is Fiji's main public hospital \u2014 resource-constrained. Private Pacific Private Hospital provides better care. Serious cases go to Australia or New Zealand.",
+      "best_for": [
+        "Pacific island lifestyle seekers",
+        "Those wanting Fiji's friendliness with more infrastructure than resort islands"
+      ],
+      "avoid_if": [
+        "Those needing reliable healthcare",
+        "Those wanting Western comfort levels"
+      ],
+      "expense_shares": {
+        "Rent": 0.28,
+        "Food": 0.26,
+        "Travel": 0.12,
+        "Healthcare": 0.13,
+        "Utilities": 0.09,
+        "Leisure": 0.08,
+        "Other": 0.04
+      }
+    },
+    {
+      "id": 35,
+      "city": "Nuku\u02bbalofa",
+      "country": "Tonga",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": -21.1393,
+      "longitude": -175.2049,
+      "monthly_cost_usd": 1500,
+      "lifestyle_label": "Affordable",
+      "description": "The Kingdom of Tonga's royal capital \u2014 the only Pacific island nation never colonized, whale swimming season (July\u2013October), friendly Polynesian culture, and a very small-town Pacific pace.",
+      "tags": [
+        "Royal Kingdom",
+        "Whale Swimming",
+        "Polynesian",
+        "Authentic",
+        "Pacific"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 3,
+      "safety_score": 8,
+      "climate_score": 7,
+      "expat_community_score": 3,
+      "internet_score": 4,
+      "overall_retirement_score": 4.8,
+      "climate_type": "Tropical",
+      "language": "Tongan, English",
+      "currency": "TOP",
+      "time_zone": "UTC+13",
+      "popular_neighborhoods": [
+        "Kolofo'ou",
+        "Kolomotu'a",
+        "Mu'a",
+        "Lapaha",
+        "Ha'ateiho"
+      ],
+      "visa_notes": "Tonga offers 31-day visa-free entry for most nationalities, extendable to 6 months. No formal retirement visa. Long-term residence requires business investment or family ties.",
+      "healthcare_notes": "Vaiola Hospital is the main public facility \u2014 very limited resources. Medical evacuation to Auckland (3 hrs) for serious cases.",
+      "best_for": [
+        "Whale-watching and ocean enthusiasts",
+        "Those wanting the most authentic, uncorrupted Polynesian experience"
+      ],
+      "avoid_if": [
+        "Those needing medical care",
+        "Retirees wanting modern amenities or reliable internet"
+      ],
+      "expense_shares": {
+        "Rent": 0.26,
+        "Food": 0.28,
+        "Travel": 0.14,
+        "Healthcare": 0.15,
+        "Utilities": 0.08,
+        "Leisure": 0.07,
+        "Other": 0.02
+      }
+    },
+    {
+      "id": 36,
+      "city": "Apia",
+      "country": "Samoa",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": -13.8506,
+      "longitude": -171.7513,
+      "monthly_cost_usd": 1400,
+      "lifestyle_label": "Budget",
+      "description": "Polynesia's most authentic capital \u2014 Robert Louis Stevenson's final home, Saturday flea market, fale beach houses, and a deeply communal Samoan fa'a Samoa culture of exceptional warmth.",
+      "tags": [
+        "Polynesian Culture",
+        "Authentic",
+        "Literature Heritage",
+        "Beach",
+        "Pacific"
+      ],
+      "visa_ease_score": 7,
+      "healthcare_score": 4,
+      "safety_score": 8,
+      "climate_score": 7,
+      "expat_community_score": 3,
+      "internet_score": 4,
+      "overall_retirement_score": 5.0,
+      "climate_type": "Tropical",
+      "language": "Samoan, English",
+      "currency": "WST",
+      "time_zone": "UTC+13",
+      "popular_neighborhoods": [
+        "Apia CBD",
+        "Vaimoso",
+        "Sogi",
+        "Moto'otua",
+        "Lepea"
+      ],
+      "visa_notes": "Samoa offers 60-day visa-free entry for most nationalities, extendable to 12 months. Long-term residence via Investment or work permits. Growing diasporic connections with New Zealand and Australia.",
+      "healthcare_notes": "Tupua Tamasese Meaole Hospital is the national referral hospital with very limited resources. Medical evacuation to Auckland for serious cases.",
+      "best_for": [
+        "Those wanting the most authentic Polynesian culture",
+        "Literature enthusiasts (Stevenson's Vailima estate)"
+      ],
+      "avoid_if": [
+        "Those needing healthcare infrastructure",
+        "Retirees wanting modern amenities"
+      ],
+      "expense_shares": {
+        "Rent": 0.25,
+        "Food": 0.29,
+        "Travel": 0.13,
+        "Healthcare": 0.14,
+        "Utilities": 0.09,
+        "Leisure": 0.07,
+        "Other": 0.03
+      }
+    },
+    {
+      "id": 37,
+      "city": "Port Vila",
+      "country": "Vanuatu",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": -17.7333,
+      "longitude": 168.3219,
+      "monthly_cost_usd": 1800,
+      "lifestyle_label": "Affordable",
+      "description": "The South Pacific's most accessible second passport hub \u2014 Vanuatu's Citizenship by Investment program is one of the fastest in the world, French and English co-official, active volcanoes, and diving.",
+      "tags": [
+        "Second Passport",
+        "Citizenship by Investment",
+        "Diving",
+        "French Culture",
+        "Active Volcanoes"
+      ],
+      "visa_ease_score": 8,
+      "healthcare_score": 4,
+      "safety_score": 7,
+      "climate_score": 7,
+      "expat_community_score": 5,
+      "internet_score": 5,
+      "overall_retirement_score": 5.9,
+      "climate_type": "Tropical",
+      "language": "Bislama, English, French",
+      "currency": "VUV",
+      "time_zone": "UTC+11",
+      "popular_neighborhoods": [
+        "Town Center",
+        "Seaside",
+        "Freshwota",
+        "Nambatu",
+        "Tagabe"
+      ],
+      "visa_notes": "Vanuatu offers 30-day visa-free entry for most nationalities. Vanuatu's Citizenship by Investment program (from $130,000 USD donation) is one of the world's fastest \u2014 60-day processing. Long-term residence available. No income, capital gains, or inheritance tax.",
+      "healthcare_notes": "Vila Central Hospital has very limited resources. Pacific International Hospital offers private care. Medical evacuation to Brisbane or Noumea for serious cases.",
+      "best_for": [
+        "Second citizenship/passport seekers",
+        "Divers (world-class wrecks and reefs)",
+        "Those wanting zero tax jurisdiction with Pacific lifestyle"
+      ],
+      "avoid_if": [
+        "Those needing healthcare infrastructure",
+        "Retirees wanting reliable internet or modern services"
+      ],
+      "expense_shares": {
+        "Rent": 0.28,
+        "Food": 0.27,
+        "Travel": 0.13,
+        "Healthcare": 0.14,
+        "Utilities": 0.09,
+        "Leisure": 0.07,
+        "Other": 0.02
+      }
+    },
+    {
+      "id": 38,
+      "city": "Funafuti",
+      "country": "Tuvalu",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": -8.5211,
+      "longitude": 179.1983,
+      "monthly_cost_usd": 1500,
+      "lifestyle_label": "Affordable",
+      "description": "The world's fourth-smallest and most climate-vulnerable nation \u2014 an atoll capital at risk of disappearing beneath rising seas, a place of extraordinary remoteness and community life.",
+      "tags": [
+        "Remote",
+        "Climate Crisis",
+        "Atoll",
+        "Unique",
+        "Disappearing Nation"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 2,
+      "safety_score": 8,
+      "climate_score": 6,
+      "expat_community_score": 1,
+      "internet_score": 2,
+      "overall_retirement_score": 3.2,
+      "climate_type": "Tropical",
+      "language": "Tuvaluan, English",
+      "currency": "AUD",
+      "time_zone": "UTC+12",
+      "popular_neighborhoods": [
+        "Funafuti town",
+        "Fogafale islet"
+      ],
+      "visa_notes": "Tuvalu offers 1-month visa-on-arrival for most nationalities. No retirement visa. Infrastructure is almost non-existent beyond basic government services.",
+      "healthcare_notes": "Princess Margaret Hospital is a very small facility with extremely limited resources. Medical evacuation to Fiji or New Zealand for any real medical issue.",
+      "best_for": [
+        "Extreme travelers and climate researchers wanting to experience a nation under existential threat"
+      ],
+      "avoid_if": [
+        "All retirees \u2014 this is not a viable retirement destination by any conventional metric"
+      ],
+      "expense_shares": {
+        "Rent": 0.22,
+        "Food": 0.32,
+        "Travel": 0.18,
+        "Healthcare": 0.16,
+        "Utilities": 0.07,
+        "Leisure": 0.04,
+        "Other": 0.01
+      }
+    },
+    {
+      "id": 39,
+      "city": "Tarawa",
+      "country": "Kiribati",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": 1.329,
+      "longitude": 172.979,
+      "monthly_cost_usd": 1400,
+      "lifestyle_label": "Budget",
+      "description": "One of the world's most remote and climate-threatened atolls \u2014 the site of a ferocious WWII battle, an extraordinary WWII history, and a nation straddling the dateline.",
+      "tags": [
+        "Remote",
+        "WWII History",
+        "Atoll",
+        "Climate Crisis",
+        "Unique"
+      ],
+      "visa_ease_score": 5,
+      "healthcare_score": 2,
+      "safety_score": 7,
+      "climate_score": 6,
+      "expat_community_score": 1,
+      "internet_score": 2,
+      "overall_retirement_score": 3.0,
+      "climate_type": "Tropical",
+      "language": "I-Kiribati (Gilbertese), English",
+      "currency": "AUD",
+      "time_zone": "UTC+12/+14",
+      "popular_neighborhoods": [
+        "South Tarawa",
+        "Bairiki",
+        "Betio",
+        "Bikenibeu"
+      ],
+      "visa_notes": "Kiribati requires a visa for most nationalities. No retirement visa. One of the world's most logistically challenging places to access and live in.",
+      "healthcare_notes": "Tungaru Central Hospital has minimal resources. No evacuation options are nearby \u2014 Fiji or Australia required.",
+      "best_for": [
+        "WWII historians wanting to visit Battle of Tarawa sites"
+      ],
+      "avoid_if": [
+        "All retirees \u2014 not a viable retirement destination"
+      ],
+      "expense_shares": {
+        "Rent": 0.22,
+        "Food": 0.33,
+        "Travel": 0.18,
+        "Healthcare": 0.16,
+        "Utilities": 0.07,
+        "Leisure": 0.03,
+        "Other": 0.01
+      }
+    },
+    {
+      "id": 40,
+      "city": "Majuro",
+      "country": "Marshall Islands",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": 7.0897,
+      "longitude": 171.3803,
+      "monthly_cost_usd": 1600,
+      "lifestyle_label": "Affordable",
+      "description": "The Marshall Islands' atoll capital \u2014 nuclear test history (Bikini Atoll nearby), Compact of Free Association with the US giving unique access rights, and some of the Pacific's best diving.",
+      "tags": [
+        "US Compact",
+        "Diving",
+        "Nuclear History",
+        "Remote",
+        "Atoll"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 3,
+      "safety_score": 7,
+      "climate_score": 6,
+      "expat_community_score": 2,
+      "internet_score": 4,
+      "overall_retirement_score": 3.8,
+      "climate_type": "Tropical",
+      "language": "Marshallese, English",
+      "currency": "USD",
+      "time_zone": "UTC+12",
+      "popular_neighborhoods": [
+        "Delap-Uliga-Djarrit (DUD)",
+        "Rita",
+        "Long Island"
+      ],
+      "visa_notes": "US citizens can enter and live in the Marshall Islands indefinitely under the Compact of Free Association \u2014 no visa required. Other nationalities get 90-day visa-free entry. USD is the official currency.",
+      "healthcare_notes": "Majuro Hospital has very limited resources but is somewhat better than other Pacific micro-states due to US Compact funding. Serious cases go to Hawaii.",
+      "best_for": [
+        "US retirees wanting a unique tax-free Pacific atoll life",
+        "Divers and nuclear history researchers"
+      ],
+      "avoid_if": [
+        "Non-US retirees without Compact advantages",
+        "Anyone needing medical care beyond basics"
+      ],
+      "expense_shares": {
+        "Rent": 0.25,
+        "Food": 0.3,
+        "Travel": 0.16,
+        "Healthcare": 0.14,
+        "Utilities": 0.09,
+        "Leisure": 0.05,
+        "Other": 0.01
+      }
+    },
+    {
+      "id": 41,
+      "city": "Palikir",
+      "country": "Federated States of Micronesia",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": 6.9248,
+      "longitude": 158.161,
+      "monthly_cost_usd": 1500,
+      "lifestyle_label": "Affordable",
+      "description": "A tiny governmental capital on Pohnpei island \u2014 lush rainforest, Nan Madol (mysterious ancient city), extraordinary diving at Truk Lagoon nearby, and US Compact free access for Americans.",
+      "tags": [
+        "Remote",
+        "Ancient Ruins",
+        "Diving",
+        "Rainforest",
+        "US Compact"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 3,
+      "safety_score": 7,
+      "climate_score": 6,
+      "expat_community_score": 2,
+      "internet_score": 3,
+      "overall_retirement_score": 3.6,
+      "climate_type": "Tropical Rainforest",
+      "language": "English (official), Pohnpeian",
+      "currency": "USD",
+      "time_zone": "UTC+11",
+      "popular_neighborhoods": [
+        "Palikir Government Center",
+        "Kolonia (town)",
+        "Sokehs"
+      ],
+      "visa_notes": "US citizens have unlimited right of entry under the Compact of Free Association. Other nationalities get 30-day visa-free entry. USD is the official currency.",
+      "healthcare_notes": "Pohnpei State Hospital has very limited resources. Guam or Hawaii for serious medical issues.",
+      "best_for": [
+        "US retirees wanting extreme Pacific remoteness and diving (Chuuk/Truk Lagoon is the world's top wreck diving site)"
+      ],
+      "avoid_if": [
+        "Non-US retirees",
+        "Those wanting any modern urban amenities"
+      ],
+      "expense_shares": {
+        "Rent": 0.24,
+        "Food": 0.31,
+        "Travel": 0.17,
+        "Healthcare": 0.14,
+        "Utilities": 0.08,
+        "Leisure": 0.05,
+        "Other": 0.01
+      }
+    },
+    {
+      "id": 42,
+      "city": "Yaren",
+      "country": "Nauru",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": -0.5477,
+      "longitude": 166.9209,
+      "monthly_cost_usd": 2000,
+      "lifestyle_label": "Affordable",
+      "description": "The world's smallest island nation and the only country with no official capital \u2014 a phosphate-stripped landscape, once the world's richest per capita, now one of the most isolated places on Earth.",
+      "tags": [
+        "World's Smallest Island Nation",
+        "Remote",
+        "Unique",
+        "Phosphate History",
+        "Isolated"
+      ],
+      "visa_ease_score": 3,
+      "healthcare_score": 2,
+      "safety_score": 7,
+      "climate_score": 6,
+      "expat_community_score": 1,
+      "internet_score": 2,
+      "overall_retirement_score": 2.5,
+      "climate_type": "Tropical",
+      "language": "Nauruan, English",
+      "currency": "AUD",
+      "time_zone": "UTC+12",
+      "popular_neighborhoods": [
+        "Yaren District",
+        "Aiwo",
+        "Denigomodu",
+        "Boe"
+      ],
+      "visa_notes": "Nauru requires a visa in advance for all nationalities \u2014 no visa on arrival. Very difficult to obtain. Only Air Nauru (limited schedule) provides access. No retirement visa of any kind.",
+      "healthcare_notes": "Nauru Hospital has minimal resources. Medical evacuation to Brisbane or Fiji for all real medical needs.",
+      "best_for": [
+        "Extreme collectors of unique destinations (one of the hardest places on Earth to visit)"
+      ],
+      "avoid_if": [
+        "All retirees without exception"
+      ],
+      "expense_shares": {
+        "Rent": 0.22,
+        "Food": 0.33,
+        "Travel": 0.2,
+        "Healthcare": 0.15,
+        "Utilities": 0.06,
+        "Leisure": 0.03,
+        "Other": 0.01
+      }
+    },
+    {
+      "id": 43,
+      "city": "Ngerulmud",
+      "country": "Palau",
+      "region": "Asia",
+      "subregion": "Pacific",
+      "latitude": 7.5006,
+      "longitude": 134.6242,
+      "monthly_cost_usd": 2000,
+      "lifestyle_label": "Affordable",
+      "description": "Palau's tiny administrative capital \u2014 a purpose-built government center on Babeldaob, but Palau's real draw is Koror and its Rock Islands, legendary diving, and extraordinary marine sanctuary.",
+      "tags": [
+        "Marine Sanctuary",
+        "Diving",
+        "Rock Islands",
+        "UNESCO",
+        "Remote"
+      ],
+      "visa_ease_score": 6,
+      "healthcare_score": 3,
+      "safety_score": 8,
+      "climate_score": 7,
+      "expat_community_score": 3,
+      "internet_score": 4,
+      "overall_retirement_score": 4.5,
+      "climate_type": "Tropical",
+      "language": "Palauan, English (co-official)",
+      "currency": "USD",
+      "time_zone": "UTC+9",
+      "popular_neighborhoods": [
+        "Koror (main hub)",
+        "Meyungs",
+        "Airai",
+        "Ngerulmud Government Area"
+      ],
+      "visa_notes": "Palau offers 30-day visa-free entry for most nationalities. Long-term residence requires investment or spousal connection. US Compact means Americans have certain additional rights.",
+      "healthcare_notes": "Belau National Hospital in Koror has very limited resources. Medical evacuation to Guam or Manila for serious cases.",
+      "best_for": [
+        "World-class divers (Palau's Rock Islands and Jellyfish Lake are bucket-list)",
+        "Those wanting a pristine Pacific marine environment"
+      ],
+      "avoid_if": [
+        "Those needing medical care or modern infrastructure for comfortable long-term retirement"
+      ],
+      "expense_shares": {
+        "Rent": 0.26,
+        "Food": 0.29,
+        "Travel": 0.16,
+        "Healthcare": 0.14,
+        "Utilities": 0.09,
+        "Leisure": 0.05,
+        "Other": 0.01
+      }
+    },
+    {
+      "id": 44,
+      "city": "Manila",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 14.5995,
+      "longitude": 120.9842,
+      "monthly_cost_usd": 1400,
+      "lifestyle_label": "Budget",
+      "description": "Southeast Asia's most overlooked megacity \u2014 a chaotic, vibrant capital of 14 million with world-class malls, excellent English, one of Asia's best retiree visa programs, and extraordinary affordability.",
+      "tags": [
+        "Budget",
+        "Easy Visa",
+        "English-Speaking",
+        "Megacity",
+        "Food"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 7,
+      "safety_score": 6,
+      "climate_score": 7,
+      "expat_community_score": 9,
+      "internet_score": 7,
+      "overall_retirement_score": 7.8,
+      "climate_type": "Tropical",
+      "language": "Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "BGC (Bonifacio Global City)",
+        "Makati",
+        "Alabang",
+        "Quezon City",
+        "Pasig"
+      ],
+      "visa_notes": "Philippines SRRV (Special Resident Retiree's Visa) \u2014 one of Asia's best retirement visas. For those 50+: $20,000 deposit (with pension) or $10,000 (with $800/month pension). Lifetime renewable, work rights, and multiple entry. The Philippine Retirement Authority (PRA) administers efficiently.",
+      "healthcare_notes": "Makati Medical Center, St. Luke's Medical Center (BGC), and The Medical City are world-class private hospitals at very affordable rates. Strong JCI-accredited network.",
+      "best_for": [
+        "Those wanting Asia's best retirement visa",
+        "English-speaking expats wanting affordable megacity life",
+        "Those with Filipino partners or family"
+      ],
+      "avoid_if": [
+        "Those sensitive to traffic, tropical heat, and occasional typhoons",
+        "Retirees wanting quiet small-town living"
+      ],
+      "expense_shares": {
+        "Rent": 0.3,
+        "Food": 0.24,
+        "Travel": 0.09,
+        "Healthcare": 0.1,
+        "Utilities": 0.09,
+        "Leisure": 0.13,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 45,
+      "city": "Cebu",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 10.3157,
+      "longitude": 123.8854,
+      "monthly_cost_usd": 1200,
+      "lifestyle_label": "Budget",
+      "description": "The Visayas' Queen City \u2014 the Philippines' oldest city, a booming IT-BPO hub, gateway to Malapascua and Moalboal diving, and a manageable city scale compared to Manila chaos.",
+      "tags": [
+        "History",
+        "Diving",
+        "Affordable",
+        "SRRV Visa",
+        "City-Island Balance"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 7,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 8,
+      "internet_score": 8,
+      "overall_retirement_score": 8.0,
+      "climate_type": "Tropical",
+      "language": "Cebuano, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Cebu City Metro",
+        "Lahug",
+        "IT Park",
+        "Banilad",
+        "Mactan Island"
+      ],
+      "visa_notes": "Philippines SRRV applies nationwide. Cebu City has its own PRA office. Mactan Island has a large expat community near the beach.",
+      "healthcare_notes": "Chong Hua Hospital and Cebu Doctors' University Hospital are strong regional medical centers. Affordable private specialist access.",
+      "best_for": [
+        "Those wanting Manila's amenities at smaller scale",
+        "Divers (Malapascua, Moalboal)",
+        "Those wanting easy beach-to-city balance"
+      ],
+      "avoid_if": [
+        "Those wanting complete tranquility (Cebu City is still busy)",
+        "Those avoiding urban traffic"
+      ],
+      "expense_shares": {
+        "Rent": 0.27,
+        "Food": 0.25,
+        "Travel": 0.09,
+        "Healthcare": 0.1,
+        "Utilities": 0.09,
+        "Leisure": 0.14,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 46,
+      "city": "Davao",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 7.1907,
+      "longitude": 125.4553,
+      "monthly_cost_usd": 1000,
+      "lifestyle_label": "Budget",
+      "description": "Mindanao's safest and most orderly city \u2014 the durian capital of the Philippines, Mount Apo trekking, consistently ranked the Philippines' most peaceful city, and extremely low costs.",
+      "tags": [
+        "Safe",
+        "Budget",
+        "Durian",
+        "Trekking",
+        "Orderly"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 7,
+      "safety_score": 8,
+      "climate_score": 8,
+      "expat_community_score": 6,
+      "internet_score": 7,
+      "overall_retirement_score": 7.6,
+      "climate_type": "Tropical",
+      "language": "Cebuano, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Lanang",
+        "Matina",
+        "Buhangin",
+        "Talomo",
+        "Toril"
+      ],
+      "visa_notes": "Philippines SRRV applies. Davao is outside the typhoon belt \u2014 a significant advantage for Philippines retirement. Once known as dangerous, it has had consistent safety rankings under strong local governance.",
+      "healthcare_notes": "Southern Philippines Medical Center and Davao Doctors Hospital provide strong regional care. More affordable than Manila's top hospitals.",
+      "best_for": [
+        "Budget retirees wanting the Philippines' safest city",
+        "Those wanting durian, trekking, and tropical nature",
+        "Those avoiding typhoon zones"
+      ],
+      "avoid_if": [
+        "Those wanting Manila's or Cebu's full urban amenity range",
+        "Those concerned about Mindanao's historical reputation (Davao itself is safe)"
+      ],
+      "expense_shares": {
+        "Rent": 0.25,
+        "Food": 0.26,
+        "Travel": 0.09,
+        "Healthcare": 0.1,
+        "Utilities": 0.09,
+        "Leisure": 0.15,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 47,
+      "city": "Boracay",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 11.9674,
+      "longitude": 121.9248,
+      "monthly_cost_usd": 1300,
+      "lifestyle_label": "Budget",
+      "description": "The Philippines' most famous beach island \u2014 White Beach's powder-white sand and turquoise water, kitesurfing at Bulabog, legendary sunsets, and a resort-town lifestyle that many retirees never leave.",
+      "tags": [
+        "Beach",
+        "Kitesurfing",
+        "Resort Island",
+        "White Sand",
+        "Island Living"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 5,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 7,
+      "internet_score": 7,
+      "overall_retirement_score": 7.4,
+      "climate_type": "Tropical",
+      "language": "Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "White Beach (Station 1\u20133)",
+        "Bulabog Beach",
+        "Yapak",
+        "Diniwid",
+        "Ilig-Iligan"
+      ],
+      "visa_notes": "Philippines SRRV applies. Boracay requires registration for long-term residents. The island was closed for rehabilitation in 2018 and reopened much cleaner.",
+      "healthcare_notes": "De Los Santos Medical Center (Boracay) provides basic care; serious cases transfer to Kalibo (Aklan) or Manila by air.",
+      "best_for": [
+        "Beach and water sports retirees",
+        "Those wanting a perpetual island vacation lifestyle",
+        "Kitesurfers"
+      ],
+      "avoid_if": [
+        "Those needing medical infrastructure",
+        "Those wanting cultural depth beyond resort life"
+      ],
+      "expense_shares": {
+        "Rent": 0.3,
+        "Food": 0.25,
+        "Travel": 0.1,
+        "Healthcare": 0.1,
+        "Utilities": 0.09,
+        "Leisure": 0.12,
+        "Other": 0.04
+      }
+    },
+    {
+      "id": 48,
+      "city": "Palawan (Puerto Princesa)",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 9.7392,
+      "longitude": 118.7353,
+      "monthly_cost_usd": 1000,
+      "lifestyle_label": "Budget",
+      "description": "The Philippines' last frontier \u2014 Puerto Princesa's underground river (UNESCO), El Nido's limestone karsts, world-class coral reefs, and an island of extraordinary nature with very low costs.",
+      "tags": [
+        "UNESCO",
+        "Nature",
+        "Diving",
+        "Limestone Karsts",
+        "Last Frontier"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 5,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 5,
+      "internet_score": 6,
+      "overall_retirement_score": 7.1,
+      "climate_type": "Tropical",
+      "language": "Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Puerto Princesa City",
+        "El Nido",
+        "Coron",
+        "San Vicente",
+        "Sabang"
+      ],
+      "visa_notes": "Philippines SRRV applies. Palawan is outside the typhoon belt's main track. Palawan province has specific environmental regulations on development \u2014 keeping it pristine.",
+      "healthcare_notes": "Ospital ng Palawan handles basic care in Puerto Princesa; El Nido and Coron have very limited medical facilities. Air evacuation to Manila for serious issues.",
+      "best_for": [
+        "Nature lovers and divers",
+        "Those wanting the Philippines' most pristine environment",
+        "UNESCO heritage and coral reef enthusiasts"
+      ],
+      "avoid_if": [
+        "Those needing urban amenities or reliable internet outside Puerto Princesa",
+        "Retirees needing medical access"
+      ],
+      "expense_shares": {
+        "Rent": 0.24,
+        "Food": 0.27,
+        "Travel": 0.1,
+        "Healthcare": 0.11,
+        "Utilities": 0.09,
+        "Leisure": 0.14,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 49,
+      "city": "Tagaytay",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 14.1153,
+      "longitude": 120.9621,
+      "monthly_cost_usd": 900,
+      "lifestyle_label": "Budget",
+      "description": "The Philippines' cool highland retreat south of Manila \u2014 Taal Volcano's drama, fresh bulalo beef soup, cooler temperatures than lowland Philippines, and a growing retiree community an hour from Metro Manila.",
+      "tags": [
+        "Highland",
+        "Cool Climate",
+        "Scenic",
+        "Affordable",
+        "Taal Volcano"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 6,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 6,
+      "internet_score": 7,
+      "overall_retirement_score": 7.3,
+      "climate_type": "Tropical Highland",
+      "language": "Filipino, Tagalog, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Aguinaldo Highway area",
+        "Tolentino",
+        "Sungay",
+        "Kaybagal",
+        "Alfonso (nearby)"
+      ],
+      "visa_notes": "Philippines SRRV applies. Note: Taal Volcano is active \u2014 the 2020 eruption displaced thousands. Retirees should be aware of volcanic risk and ash events.",
+      "healthcare_notes": "Tagaytay Medical Center and private clinics provide basic care; Manila hospitals are 1.5\u20132 hours for specialist care.",
+      "best_for": [
+        "Those wanting cooler temperatures within Philippine access",
+        "Scenic highland living seekers",
+        "Those wanting proximity to Manila without the chaos"
+      ],
+      "avoid_if": [
+        "Those concerned about volcanic activity (Taal erupted 2020)",
+        "Those needing immediate specialist medical access"
+      ],
+      "expense_shares": {
+        "Rent": 0.24,
+        "Food": 0.26,
+        "Travel": 0.1,
+        "Healthcare": 0.11,
+        "Utilities": 0.09,
+        "Leisure": 0.15,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 50,
+      "city": "Batangas",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 13.7565,
+      "longitude": 121.0583,
+      "monthly_cost_usd": 900,
+      "lifestyle_label": "Budget",
+      "description": "Luzon's southern gateway \u2014 Anilao's world-class macro-diving, Laiya Beach, affordable provincial living, and a stepping stone to Palawan and Mindoro by ferry.",
+      "tags": [
+        "Diving",
+        "Beach",
+        "Affordable",
+        "Provincial",
+        "Ferry Hub"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 6,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 5,
+      "internet_score": 6,
+      "overall_retirement_score": 7.0,
+      "climate_type": "Tropical",
+      "language": "Tagalog, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Batangas City",
+        "Anilao (Mabini)",
+        "Laiya",
+        "Lian",
+        "Calatagan"
+      ],
+      "visa_notes": "Philippines SRRV applies. Batangas offers a quieter, more authentic Philippine provincial lifestyle compared to Manila or Cebu.",
+      "healthcare_notes": "Batangas Medical Center and St. Patrick's Hospital provide local care. Manila is 2\u20133 hours for specialist needs.",
+      "best_for": [
+        "Divers (Anilao is one of Asia's best macro-diving spots)",
+        "Those wanting quiet provincial Philippines",
+        "Ferry travelers to the Visayas and Mindoro"
+      ],
+      "avoid_if": [
+        "Those wanting urban amenities",
+        "Retirees needing specialist medical access locally"
+      ],
+      "expense_shares": {
+        "Rent": 0.23,
+        "Food": 0.27,
+        "Travel": 0.1,
+        "Healthcare": 0.11,
+        "Utilities": 0.09,
+        "Leisure": 0.15,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 51,
+      "city": "Iloilo",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 10.7202,
+      "longitude": 122.5621,
+      "monthly_cost_usd": 900,
+      "lifestyle_label": "Budget",
+      "description": "The heart of Philippine civility \u2014 consistently ranked the Philippines' most liveable city, a university hub, gateway to pristine Guimaras island, and a proud culinary tradition of batchoy and fresh seafood.",
+      "tags": [
+        "Liveable",
+        "University Town",
+        "Culinary",
+        "Safe",
+        "Island Access"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 7,
+      "safety_score": 8,
+      "climate_score": 8,
+      "expat_community_score": 5,
+      "internet_score": 7,
+      "overall_retirement_score": 7.5,
+      "climate_type": "Tropical",
+      "language": "Hiligaynon (Ilonggo), Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Mandurriao",
+        "Jaro",
+        "La Paz",
+        "Molo",
+        "Divinagracia"
+      ],
+      "visa_notes": "Philippines SRRV applies. Iloilo is often overlooked by expats \u2014 resulting in lower costs and a more authentic local experience than Cebu or Manila.",
+      "healthcare_notes": "Western Visayas Medical Center and St. Paul's Hospital provide solid regional care with multiple universities maintaining hospital-quality standards.",
+      "best_for": [
+        "Those wanting the Philippines' most liveable provincial city",
+        "Culinary enthusiasts",
+        "Those wanting Guimaras island proximity (best mangoes in the world)"
+      ],
+      "avoid_if": [
+        "Those wanting the Philippines' broadest urban amenity range"
+      ],
+      "expense_shares": {
+        "Rent": 0.23,
+        "Food": 0.27,
+        "Travel": 0.09,
+        "Healthcare": 0.11,
+        "Utilities": 0.09,
+        "Leisure": 0.16,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 52,
+      "city": "Bacolod",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 10.6769,
+      "longitude": 122.9565,
+      "monthly_cost_usd": 800,
+      "lifestyle_label": "Budget",
+      "description": "The City of Smiles \u2014 Negros Occidental's sugar capital, MassKara Festival masks, the Philippines' chicken inasal capital, affordable real estate, and a genuinely warm and hospitable community.",
+      "tags": [
+        "Budget",
+        "Culinary (Chicken Inasal)",
+        "Festival Culture",
+        "Safe",
+        "Affordable"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 6,
+      "safety_score": 8,
+      "climate_score": 8,
+      "expat_community_score": 5,
+      "internet_score": 7,
+      "overall_retirement_score": 7.3,
+      "climate_type": "Tropical",
+      "language": "Hiligaynon, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Capitol Shopping Center area",
+        "Lacson Street",
+        "Mandalagan",
+        "Villamonte",
+        "Pahanocoy"
+      ],
+      "visa_notes": "Philippines SRRV applies. Bacolod is one of the Philippines' most underrated cities for retirement \u2014 lower costs than Cebu or Iloilo with a warm local community.",
+      "healthcare_notes": "Corazon Locsin Montelibano Memorial Regional Hospital and Riverside Medical Center provide solid care.",
+      "best_for": [
+        "Budget retirees wanting a genuine Philippine city experience",
+        "Culinary explorers",
+        "MassKara Festival lovers"
+      ],
+      "avoid_if": [
+        "Those wanting international-level amenities",
+        "Retirees needing a large established expat community"
+      ],
+      "expense_shares": {
+        "Rent": 0.22,
+        "Food": 0.28,
+        "Travel": 0.09,
+        "Healthcare": 0.11,
+        "Utilities": 0.09,
+        "Leisure": 0.16,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 53,
+      "city": "Cagayan de Oro",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 8.4542,
+      "longitude": 124.6319,
+      "monthly_cost_usd": 800,
+      "lifestyle_label": "Budget",
+      "description": "Mindanao's gateway and fastest-growing city \u2014 whitewater rafting on the Cagayan River, gateway to Camiguin island, a booming commercial hub, and Mindanao's safest major city.",
+      "tags": [
+        "Whitewater Rafting",
+        "Budget",
+        "Outdoors",
+        "Gateway City",
+        "Safe"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 6,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 5,
+      "internet_score": 7,
+      "overall_retirement_score": 7.0,
+      "climate_type": "Tropical",
+      "language": "Cebuano, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Divisoria",
+        "Limketkai",
+        "Carmen",
+        "Balulang",
+        "Puerto"
+      ],
+      "visa_notes": "Philippines SRRV applies. CDO is outside the typhoon belt and serves as the commercial hub for northern Mindanao and gateway to Camiguin and Bukidnon highlands.",
+      "healthcare_notes": "Northern Mindanao Medical Center and Capitol University Medical Center provide solid regional care.",
+      "best_for": [
+        "Adventure retirees (whitewater rafting, Camiguin volcano-island)",
+        "Budget Mindanao seekers"
+      ],
+      "avoid_if": [
+        "Those who conflate all of Mindanao's reputation with CDO (it is genuinely safe)",
+        "Retirees wanting beach-front city living"
+      ],
+      "expense_shares": {
+        "Rent": 0.22,
+        "Food": 0.28,
+        "Travel": 0.09,
+        "Healthcare": 0.11,
+        "Utilities": 0.09,
+        "Leisure": 0.16,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 54,
+      "city": "General Santos",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 6.1164,
+      "longitude": 125.1716,
+      "monthly_cost_usd": 750,
+      "lifestyle_label": "Budget",
+      "description": "The Philippines' tuna capital and Manny Pacquiao's hometown \u2014 South Cotabato's fast-growing city, the world's most active tuna port, affordable living, and a proud southern Mindanao identity.",
+      "tags": [
+        "Budget",
+        "Tuna Capital",
+        "Boxing Heritage",
+        "Affordable",
+        "Authentic"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 6,
+      "safety_score": 7,
+      "climate_score": 8,
+      "expat_community_score": 3,
+      "internet_score": 6,
+      "overall_retirement_score": 6.7,
+      "climate_type": "Tropical",
+      "language": "Cebuano, Hiligaynon, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Dadiangas West",
+        "City Heights",
+        "Calumpang",
+        "Lagao",
+        "Mabuhay"
+      ],
+      "visa_notes": "Philippines SRRV applies. GenSan is the Philippines' southernmost major city and perhaps its most underrated \u2014 extremely low costs and a self-sufficient provincial city.",
+      "healthcare_notes": "Mindanao Central Referral Hospital and GenSan Doctors Hospital provide regional care.",
+      "best_for": [
+        "Ultra-budget retirees",
+        "Seafood lovers (tuna straight from the dock)",
+        "Those wanting the Philippines' most off-the-beaten-path large city"
+      ],
+      "avoid_if": [
+        "Those wanting expat community or international amenities",
+        "Those not comfortable with the Philippines' deep south geography"
+      ],
+      "expense_shares": {
+        "Rent": 0.21,
+        "Food": 0.29,
+        "Travel": 0.09,
+        "Healthcare": 0.11,
+        "Utilities": 0.09,
+        "Leisure": 0.16,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 55,
+      "city": "Zamboanga",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 6.9214,
+      "longitude": 122.079,
+      "monthly_cost_usd": 700,
+      "lifestyle_label": "Budget",
+      "description": "The Asia of Asia \u2014 a unique Spanish-Chavacano culture, pink sand beaches at Santa Cruz islands, vintas (colorful outriggers), and an authentic city that few foreign retirees have discovered.",
+      "tags": [
+        "Unique Culture",
+        "Pink Sand Beach",
+        "Chavacano Spanish",
+        "Budget",
+        "Authentic"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 5,
+      "safety_score": 5,
+      "climate_score": 8,
+      "expat_community_score": 2,
+      "internet_score": 5,
+      "overall_retirement_score": 5.8,
+      "climate_type": "Tropical",
+      "language": "Chavacano (Spanish creole), Cebuano, Filipino",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Canelar",
+        "Tetuan",
+        "Mercedes",
+        "Divisoria area",
+        "Camino Nuevo"
+      ],
+      "visa_notes": "Philippines SRRV applies. The security situation in Zamboanga and the broader BARMM region requires careful research \u2014 periodic incidents have historically occurred though the city itself is often secure.",
+      "healthcare_notes": "Zamboanga City Medical Center and Brent Hospital provide local care. Serious cases transfer to Cebu or Manila.",
+      "best_for": [
+        "Adventurous retirees intrigued by Chavacano Spanish-creole culture",
+        "Those wanting the Philippines' most unique city"
+      ],
+      "avoid_if": [
+        "Those with safety concerns (security situation requires research)",
+        "Retirees wanting established expat infrastructure"
+      ],
+      "expense_shares": {
+        "Rent": 0.21,
+        "Food": 0.29,
+        "Travel": 0.09,
+        "Healthcare": 0.12,
+        "Utilities": 0.09,
+        "Leisure": 0.15,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 56,
+      "city": "Dumaguete",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 9.3068,
+      "longitude": 123.3054,
+      "monthly_cost_usd": 900,
+      "lifestyle_label": "Budget",
+      "description": "The Philippines' most beloved expat retirement city \u2014 Silliman University's tree-lined campus, whale shark and thresher shark diving at Oslob and Apo Island, and a genuinely liveable small city.",
+      "tags": [
+        "Expat Favorite",
+        "Diving",
+        "University Town",
+        "Affordable",
+        "Relaxed"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 7,
+      "safety_score": 8,
+      "climate_score": 8,
+      "expat_community_score": 8,
+      "internet_score": 7,
+      "overall_retirement_score": 8.1,
+      "climate_type": "Tropical",
+      "language": "Cebuano, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Rizal Boulevard",
+        "Silliman area",
+        "Tubtubon",
+        "Daro",
+        "Sibulan"
+      ],
+      "visa_notes": "Philippines SRRV applies. Dumaguete is consistently ranked among the Philippines' top retirement destinations for foreign retirees \u2014 a well-earned reputation.",
+      "healthcare_notes": "Silliman University Medical Center and Holy Child Hospital provide solid care. Cebu is 45 minutes by fast ferry for advanced specialist care.",
+      "best_for": [
+        "Divers (Apo Island is world-class, Oslob whale sharks)",
+        "Those wanting the Philippines' best small-city expat community",
+        "University-town atmosphere seekers"
+      ],
+      "avoid_if": [
+        "Those wanting big-city amenities",
+        "Retirees needing major hospital access locally"
+      ],
+      "expense_shares": {
+        "Rent": 0.24,
+        "Food": 0.26,
+        "Travel": 0.09,
+        "Healthcare": 0.1,
+        "Utilities": 0.09,
+        "Leisure": 0.16,
+        "Other": 0.06
+      }
+    },
+    {
+      "id": 57,
+      "city": "Vigan",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 17.5747,
+      "longitude": 120.3874,
+      "monthly_cost_usd": 700,
+      "lifestyle_label": "Budget",
+      "description": "The Philippines' best-preserved Spanish colonial city and a UNESCO World Heritage site \u2014 cobblestoned Calle Crisologo, kalesa horse-drawn carriages, longganisa sausages, and an Ilocos Norte cultural heritage unlike anywhere else in Asia.",
+      "tags": [
+        "UNESCO",
+        "Colonial Heritage",
+        "History",
+        "Budget",
+        "Unique"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 5,
+      "safety_score": 8,
+      "climate_score": 7,
+      "expat_community_score": 4,
+      "internet_score": 6,
+      "overall_retirement_score": 6.9,
+      "climate_type": "Tropical",
+      "language": "Ilocano, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Calle Crisologo area",
+        "Heritage Village",
+        "Barangay I-VI",
+        "Bantay",
+        "Santa Catalina"
+      ],
+      "visa_notes": "Philippines SRRV applies. Vigan is 8 hours north of Manila by bus \u2014 somewhat remote for a retirement base but extraordinary for cultural tourism.",
+      "healthcare_notes": "Gabriela Silang General Hospital provides basic care; serious cases go to Laoag (30 min) or Manila (8 hrs).",
+      "best_for": [
+        "History and colonial architecture lovers",
+        "Those wanting an extraordinarily unique and affordable Philippine city",
+        "Heritage tourism enthusiasts"
+      ],
+      "avoid_if": [
+        "Those wanting urban amenities or a large expat community",
+        "Retirees needing specialist healthcare locally"
+      ],
+      "expense_shares": {
+        "Rent": 0.2,
+        "Food": 0.29,
+        "Travel": 0.1,
+        "Healthcare": 0.12,
+        "Utilities": 0.09,
+        "Leisure": 0.15,
+        "Other": 0.05
+      }
+    },
+    {
+      "id": 58,
+      "city": "Baguio",
+      "country": "Philippines",
+      "region": "Asia",
+      "subregion": "Southeast Asia",
+      "latitude": 16.4023,
+      "longitude": 120.596,
+      "monthly_cost_usd": 900,
+      "lifestyle_label": "Budget",
+      "description": "The Philippines' Summer Capital \u2014 Luzon's cool highland city at 1,500m, pine trees, strawberry farms, Camp John Hay, and a refreshing escape from the tropical heat that has drawn Filipinos and expats for a century.",
+      "tags": [
+        "Cool Climate",
+        "Highland",
+        "Scenic",
+        "Pine Trees",
+        "Summer Capital"
+      ],
+      "visa_ease_score": 10,
+      "healthcare_score": 7,
+      "safety_score": 7,
+      "climate_score": 9,
+      "expat_community_score": 6,
+      "internet_score": 7,
+      "overall_retirement_score": 7.7,
+      "climate_type": "Tropical Highland",
+      "language": "Ilocano, Kankanaey, Filipino, English",
+      "currency": "PHP",
+      "time_zone": "UTC+8",
+      "popular_neighborhoods": [
+        "Session Road area",
+        "Camp John Hay",
+        "Burnham Park area",
+        "Marcos Highway",
+        "Legarda area"
+      ],
+      "visa_notes": "Philippines SRRV applies. Baguio's cooler climate (avg 18\u00b0C) is the primary draw \u2014 making it the Philippines' most comfortable city for those from temperate countries.",
+      "healthcare_notes": "Baguio General Hospital and Medical Center and Saint Louis University Hospital provide solid regional care.",
+      "best_for": [
+        "Those who find tropical heat oppressive",
+        "Highland lifestyle and cool climate lovers",
+        "Philippine summer capital culture enthusiasts"
+      ],
+      "avoid_if": [
+        "Those wanting beach access (inland, mountainous)",
+        "Retirees sensitive to traffic (Baguio's narrow mountain roads get very congested)"
+      ],
+      "expense_shares": {
+        "Rent": 0.24,
+        "Food": 0.26,
+        "Travel": 0.1,
+        "Healthcare": 0.1,
+        "Utilities": 0.09,
+        "Leisure": 0.15,
+        "Other": 0.06
+      }
+    }
+  ]
+}

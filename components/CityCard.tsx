@@ -20,6 +20,7 @@ type CityCardProps = {
   pinned: boolean;
   allowPin: boolean;
   onTogglePin: () => void;
+  onSelect: () => void;
 };
 
 
@@ -32,6 +33,7 @@ export default function CityCard({
   pinned,
   allowPin,
   onTogglePin,
+  onSelect,
 }: CityCardProps) {
   const countryLabel = displayCountry(city.country);
   const regionLabel = displayRegion(city.region);
@@ -136,6 +138,19 @@ export default function CityCard({
 
       <div className="mt-0">
         <CityDetail city={city} currency={currency} people={people} />
+      </div>
+
+      <div className="mt-4">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelect();
+          }}
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-sand bg-white px-3 py-2 text-sm font-medium text-ink transition hover:bg-sand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+        >
+          More details
+        </button>
       </div>
     </article>
   );

@@ -10,6 +10,12 @@ type RetirementCityRow = {
   description: string;
   tags: string[] | null;
   expense_shares: Record<string, number> | null;
+  language?: string | null;
+  popular_neighborhoods?: string[] | null;
+  visa_notes?: string | null;
+  healthcare_notes?: string | null;
+  best_for?: string[] | null;
+  avoid_if?: string[] | null;
 };
 
 const REGION_SET = new Set<Region>([
@@ -44,6 +50,12 @@ export function mapRowToCity(row: RetirementCityRow): City {
     description: row.description,
     tags: row.tags ?? [],
     expenseShares: row.expense_shares ?? undefined,
+    language: row.language ?? undefined,
+    popularNeighborhoods: row.popular_neighborhoods ?? undefined,
+    visaNotes: row.visa_notes ?? undefined,
+    healthcareNotes: row.healthcare_notes ?? undefined,
+    bestFor: row.best_for ?? undefined,
+    avoidIf: row.avoid_if ?? undefined,
   };
 }
 
@@ -59,7 +71,7 @@ export async function fetchCitiesFromDatabase(params?: {
   let query = supabase
     .from("retirement_cities")
     .select(
-      "city,country,region,monthly_cost_usd,lifestyle_label,description,tags,expense_shares"
+      "city,country,region,monthly_cost_usd,lifestyle_label,description,tags,expense_shares,language,popular_neighborhoods,visa_notes,healthcare_notes,best_for,avoid_if"
     )
     .order("monthly_cost_usd", { ascending: true })
     .order("city", { ascending: true });

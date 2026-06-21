@@ -3,6 +3,7 @@
 import { ArrowDown, ArrowUp, MapPinOff, Scale, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import CityCard from "@/components/CityCard";
+import CityModal from "@/components/CityModal";
 import ComparePanel from "@/components/ComparePanel";
 import FilterPanel, { type RegionFilter } from "@/components/FilterPanel";
 import { REGIONS, type City } from "@/data/cities";
@@ -61,6 +62,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // Pin / compare
   const [pinned, setPinned] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
+  const [selectedCityKey, setSelectedCityKey] = useState<string | null>(null);
   const MAX_COMPARE = 2;
   const togglePin = (key: string) =>
     setPinned((prev) => {
@@ -82,6 +84,11 @@ export default function HomeClient({ cities }: HomeClientProps) {
         .filter((item) => pinned.includes(item.key))
         .map((item) => item.city),
     [citiesWithKeys, pinned]
+  );
+
+  const selectedCity = useMemo(
+    () => citiesWithKeys.find((item) => item.key === selectedCityKey)?.city ?? null,
+    [citiesWithKeys, selectedCityKey]
   );
 
   const allTags = useMemo(
@@ -335,6 +342,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
                       pinned={pinned.includes(item.key)}
                       allowPin={!pinned.includes(item.key) && pinned.length < MAX_COMPARE}
                       onTogglePin={() => togglePin(item.key)}
+                      onSelect={() => setSelectedCityKey(item.key)}
                     />
                   </li>
                 );
@@ -453,6 +461,13 @@ export default function HomeClient({ cities }: HomeClientProps) {
           people={householdSize}
           onClose={() => setCompareOpen(false)}
           onUnpin={handleUnpin}
+        />
+      )}
+      {selectedCity && (
+        <CityModal
+          city={selectedCity}
+          open={true}
+          onClose={() => setSelectedCityKey(null)}
         />
       )}
     </main>

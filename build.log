@@ -1,0 +1,38 @@
+
+> retirement-cities@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.19
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 7.1s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/10) ...
+   Generating static pages (2/10) 
+   Generating static pages (4/10) 
+   Generating static pages (7/10) 
+ ✓ Generating static pages (10/10)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                    13.1 kB         116 kB
+├ ○ /_not-found                            992 B         103 kB
+├ ƒ /api/cities                            131 B         103 kB
+├ ƒ /api/feature-requests                  131 B         103 kB
+├ ○ /apple-icon.png                          0 B            0 B
+├ ○ /icon.png                                0 B            0 B
+├ ○ /manifest.webmanifest                  131 B         103 kB
+├ ○ /request-feature                     2.77 kB         109 kB
+└ ○ /tos                                   162 B         106 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-98a0bdaa30757bda.js       46.2 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)             2 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

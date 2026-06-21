@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed:supabase": "node scripts/seed-retirement-cities.mjs",
+    "seed:supabase:multi": "node scripts/seed-retirement-cities-multiple.mjs",
     "seed:supabase:oceania": "node scripts/seed-retirement-cities-oceania.mjs",
     "seed:supabase:north-america": "node scripts/seed-north-america-retirement-cities.mjs",
     "seed:supabase:europe": "node scripts/seed-europe-cities.mjs",

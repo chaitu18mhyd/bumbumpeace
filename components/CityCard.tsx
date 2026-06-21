@@ -43,7 +43,7 @@ export default function CityCard({
   const rating = cityRating(city);
 
   return (
-    <article className="group flex h-full flex-col rounded-3xl border border-sand bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg sm:p-6">
+    <article className="group flex h-full flex-col rounded-3xl border border-sand bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg lg:hover:translate-y-0 lg:hover:shadow-sm lg:duration-0 sm:p-6">
       <header className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <img
@@ -147,9 +147,9 @@ export default function CityCard({
             e.stopPropagation();
             onSelect();
           }}
-          className="inline-flex items-center justify-center gap-2 rounded-full border border-sand bg-white px-3 py-2 text-sm font-medium text-ink transition hover:bg-sand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+          className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-transparent bg-brand-500 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
         >
-          More details
+          Tap for more details
         </button>
       </div>
     </article>

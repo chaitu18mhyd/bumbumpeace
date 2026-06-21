@@ -8,9 +8,9 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BumBumSafe — Find Cities Where Your Retirement Money Goes Further",
+  title: "RETOPIAN - Retire in Utopian cities",
   description:
-    "Compare estimated monthly retirement expenses across popular cities and countries. Prototype estimates only — not financial advice.",
+    "Compare estimated monthly retirement expenses across popular cities and countries. Estimates only, not financial advice.",
 };
 
 export const viewport: Viewport = {

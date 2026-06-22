@@ -55,9 +55,11 @@ function caretFromDigits(formatted: string, digits: number): number {
 }
 
 /**
- * Controlled money input that formats with thousands separators while keeping
- * the caret in place (by counting digits to the left of the cursor instead of
- * snapping to the end). Returns props to spread onto an <input>.
+ * Money input that formats only on blur.
+ * - While typing: shows unformatted digits (e.g., "1234567")
+ * - On blur: formats with separators (e.g., "1,234,567")
+ * - On focus: shows unformatted digits again
+ * This avoids caret management issues and provides native editing experience.
  */
 function useMoneyInput(
   value: number,
@@ -65,25 +67,33 @@ function useMoneyInput(
   onChange: (n: number) => void
 ) {
   const ref = useRef<HTMLInputElement>(null);
-  const pendingCaret = useRef<number | null>(null);
-  const display = Number.isFinite(value) ? formatNumber(value, currency) : "";
+  const [isFocused, setIsFocused] = useState(false);
 
-  useIsoLayoutEffect(() => {
-    if (pendingCaret.current === null || !ref.current) return;
-    const pos = caretFromDigits(ref.current.value, pendingCaret.current);
-    ref.current.setSelectionRange(pos, pos);
-    pendingCaret.current = null;
-  });
+  // Show formatted when not focused, unformatted when focused
+  const display = isFocused
+    ? (Number.isFinite(value) ? value.toString() : "")
+    : (Number.isFinite(value) ? formatNumber(value, currency) : "");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const el = e.target;
-    const caret = el.selectionStart ?? el.value.length;
-    pendingCaret.current = countDigits(el.value.slice(0, caret));
-    const digits = el.value.replace(/[^0-9]/g, "");
+    const digits = e.target.value.replace(/[^0-9]/g, "");
     onChange(digits === "" ? NaN : Number(digits));
   };
 
-  return { ref, value: display, onChange: handleChange };
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  return {
+    ref,
+    value: display,
+    onChange: handleChange,
+    onBlur: handleBlur,
+    onFocus: handleFocus,
+  };
 }
 
 export const WITHDRAWAL_RATES = [
@@ -198,7 +208,7 @@ export default function FilterPanel({
             htmlFor="investableAssets"
             className="text-xs font-semibold tracking-wide text-muted"
           >
-            INVESTABLE ASSETS (brokerage, retirement accounts, cash) — exclude your home.
+            INVESTABLE ASSETS (brokerage, retirement accounts, cash) - exclude your home.
           </label>
           <div className="flex">
             <div className="relative">
@@ -213,7 +223,7 @@ export default function FilterPanel({
                   trackCurrencyChange(newCurrency);
                   onCurrencyChange(newCurrency);
                 }}
-                className="h-full cursor-pointer appearance-none rounded-l-2xl border border-r-0 border-sand bg-sand/60 py-3.5 pl-4 pr-9 text-sm font-bold text-ink outline-none transition hover:bg-sand focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+                className="h-full cursor-pointer appearance-none rounded-l-2xl border border-r-0 border-sand bg-sand/60 py-3.5 pl-4 pr-9 text-sm font-bold text-ink outline-none transition hover:bg-sand"
                 aria-label="Currency"
               >
                 {CURRENCIES.map((c) => (
@@ -241,7 +251,9 @@ export default function FilterPanel({
                 inputMode="numeric"
                 value={assetsInput.value}
                 onChange={assetsInput.onChange}
-                className="w-full rounded-r-2xl border border-sand bg-cream py-3.5 pl-10 pr-4 text-2xl font-extrabold tracking-tight text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+                onBlur={assetsInput.onBlur}
+                onFocus={assetsInput.onFocus}
+                className="w-full rounded-r-2xl border border-sand bg-cream py-3.5 pl-10 pr-4 text-2xl font-extrabold tracking-tight text-ink shadow-sm outline-none transition"
                 placeholder={formatNumber(1200000, currency)}
               />
             </div>
@@ -259,7 +271,7 @@ export default function FilterPanel({
             <Wallet aria-hidden="true" className="h-3.5 w-3.5" />
             Monthly budget
           </p>
-          <p className="text-2xl font-bold tracking-tight text-brand-700">
+          <p className="text-2xl font-bold tracking-tight text-under-700">
             {formatUsdAs(monthlyBudgetUsd, currency)}
             <span className="ml-1 text-sm font-medium text-muted">/mo</span>
           </p>
@@ -408,6 +420,8 @@ export default function FilterPanel({
                 inputMode="numeric"
                 value={incomeInput.value}
                 onChange={incomeInput.onChange}
+                onBlur={incomeInput.onBlur}
+                onFocus={incomeInput.onFocus}
                 tabIndex={filtersOpen ? 0 : -1}
                 className="w-full rounded-xl border border-sand bg-cream py-2.5 pl-9 pr-4 text-sm font-semibold text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
                 placeholder="0"

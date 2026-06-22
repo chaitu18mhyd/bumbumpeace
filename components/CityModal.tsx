@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { type City, displayCountry, flagFor } from "@/data/cities";
+import type { ReactElement } from "react";
 
 type CityModalProps = {
   city: City;
@@ -118,7 +119,7 @@ function DetailItem({
   label,
   value,
 }: {
-  icon: () => JSX.Element;
+  icon: () => ReactElement;
   label: string;
   value: React.ReactNode;
 }) {

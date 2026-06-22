@@ -18,7 +18,7 @@ import {
   trackCurrencyChange,
 } from "@/lib/analytics";
 
-type SortBy = "featured" | "rating" | "cost-asc" | "cost-desc";
+type SortBy = "recommended" | "rating" | "cost-asc" | "cost-desc";
 
 const DEFAULT_INVESTABLE_ASSETS = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
@@ -56,7 +56,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   // Household size — defaults to a couple.
   const [householdSize, setHouseholdSize] = useState(2);
-  const [sortBy, setSortBy] = useState<SortBy>("featured");
+  const [sortBy, setSortBy] = useState<SortBy>("recommended");
   const [hydrated, setHydrated] = useState(false);
 
   // Pin / compare
@@ -168,10 +168,19 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
   const sortedCities = useMemo(() => {
     const arr = [...filteredCities];
-    if (sortBy === "rating")
+    if (sortBy === "recommended") {
+      arr.sort(
+        (a, b) =>
+          (a.city.recommendationRank ?? Number.MAX_SAFE_INTEGER) -
+          (b.city.recommendationRank ?? Number.MAX_SAFE_INTEGER)
+      );
+    } else if (sortBy === "rating") {
       arr.sort((a, b) => cityRating(b.city) - cityRating(a.city));
-    else if (sortBy === "cost-asc") arr.sort((a, b) => costFor(a.city) - costFor(b.city));
-    else if (sortBy === "cost-desc") arr.sort((a, b) => costFor(b.city) - costFor(a.city));
+    } else if (sortBy === "cost-asc") {
+      arr.sort((a, b) => costFor(a.city) - costFor(b.city));
+    } else if (sortBy === "cost-desc") {
+      arr.sort((a, b) => costFor(b.city) - costFor(a.city));
+    }
     return arr;
   }, [filteredCities, sortBy, costFor]);
 
@@ -292,7 +301,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
 
           <div className="flex items-center gap-2">
             <label htmlFor="sort" className="text-xs font-medium text-muted">
-              Sort
+              Sort by
             </label>
             <select
               id="sort"
@@ -300,7 +309,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
               onChange={(e) => setSortBy(e.target.value as SortBy)}
               className="appearance-none rounded-lg border border-sand bg-cream px-3 py-1.5 text-sm font-medium text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
             >
-              <option value="featured">Featured</option>
+              <option value="recommended">Recommended</option>
               <option value="rating">Rating (high to low)</option>
               <option value="cost-asc">Cost (low to high)</option>
               <option value="cost-desc">Cost (high to low)</option>

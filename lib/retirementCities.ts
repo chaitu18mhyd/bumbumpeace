@@ -16,6 +16,7 @@ type RetirementCityRow = {
   healthcare_notes?: string | null;
   best_for?: string[] | null;
   avoid_if?: string[] | null;
+  recommendation_rank?: number | null;
 };
 
 const REGION_SET = new Set<Region>([
@@ -40,6 +41,10 @@ function normalizeLifestyle(value: string): Lifestyle {
     : "Comfortable";
 }
 
+function getFallbackRecommendationRank(row: RetirementCityRow): number | undefined {
+  return row.recommendation_rank ?? undefined;
+}
+
 export function mapRowToCity(row: RetirementCityRow): City {
   return {
     city: row.city,
@@ -56,6 +61,7 @@ export function mapRowToCity(row: RetirementCityRow): City {
     healthcareNotes: row.healthcare_notes ?? undefined,
     bestFor: row.best_for ?? undefined,
     avoidIf: row.avoid_if ?? undefined,
+    recommendationRank: getFallbackRecommendationRank(row),
   };
 }
 
@@ -71,7 +77,7 @@ export async function fetchCitiesFromDatabase(params?: {
   let query = supabase
     .from("retirement_cities")
     .select(
-      "city,country,region,monthly_cost_usd,lifestyle_label,description,tags,expense_shares,language,popular_neighborhoods,visa_notes,healthcare_notes,best_for,avoid_if"
+      "city,country,region,monthly_cost_usd,lifestyle_label,description,tags,expense_shares,language,popular_neighborhoods,visa_notes,healthcare_notes,best_for,avoid_if,recommendation_rank"
     )
     .order("monthly_cost_usd", { ascending: true })
     .order("city", { ascending: true });

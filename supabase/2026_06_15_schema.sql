@@ -50,6 +50,7 @@ create table if not exists public.retirement_cities (
   expat_community_score integer,
   internet_score integer,
   overall_retirement_score double precision,
+  recommendation_rank integer,
   climate_type text,
   language text,
   currency text,
@@ -85,6 +86,7 @@ create table if not exists public.retirement_cities (
 create index if not exists retirement_cities_region_idx on public.retirement_cities (region);
 create index if not exists retirement_cities_lifestyle_idx on public.retirement_cities (lifestyle_label);
 create index if not exists retirement_cities_monthly_cost_idx on public.retirement_cities (monthly_cost_usd);
+create index if not exists retirement_cities_recommendation_rank_idx on public.retirement_cities (recommendation_rank asc);
 create index if not exists retirement_cities_overall_score_idx on public.retirement_cities (overall_retirement_score desc);
 
 create or replace function public.set_updated_at()

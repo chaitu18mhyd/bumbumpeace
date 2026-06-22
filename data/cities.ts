@@ -25,6 +25,7 @@ export type City = {
   healthcareNotes?: string;
   bestFor?: string[];
   avoidIf?: string[];
+  recommendationRank?: number;
 };
 
 export const COUNTRY_FLAGS: Record<string, string> = {

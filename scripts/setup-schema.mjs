@@ -32,6 +32,9 @@ const response = await fetch(`${supabaseUrl}/rest/v1/rpc/exec`, {
       
       ALTER TABLE retirement_cities
       ADD COLUMN IF NOT EXISTS source_id INTEGER;
+
+      ALTER TABLE retirement_cities
+      ADD COLUMN IF NOT EXISTS recommendation_rank INTEGER;
     `,
   }),
 });
@@ -44,13 +47,14 @@ if (!response.ok) {
   console.log(`
     ALTER TABLE retirement_cities
     ADD COLUMN IF NOT EXISTS source TEXT DEFAULT 'retirement-cities.seed';
-    
+
     ALTER TABLE retirement_cities
     ADD COLUMN IF NOT EXISTS source_id INTEGER;
+
+    ALTER TABLE retirement_cities
+    ADD COLUMN IF NOT EXISTS recommendation_rank INTEGER;
   `);
-  console.log("");
-  console.log("Then re-run the seed scripts.");
   process.exit(1);
 }
 
-console.log("✓ Schema setup complete. The 'source' and 'source_id' columns are ready.");
+console.log("✓ Schema setup completed.");

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { trackMobileMenuToggle } from "@/lib/analytics";
 
 const navLinks = [
-  { label: "About me", href: "/#about", Icon: Info },
+  { label: "About me", href: "/about", Icon: Info },
   { label: "Request Feature", href: "/request-feature", Icon: MessageSquare },
 ];
 

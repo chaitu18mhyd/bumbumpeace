@@ -197,29 +197,22 @@ export default function RequestFeaturePage() {
                 <tr>
                   <th className="px-4 py-3 font-semibold">Request</th>
                   <th className="px-4 py-3 font-semibold">Details</th>
-                  <th className="px-4 py-3 font-semibold">Status</th>
-                  <th className="px-4 py-3 font-semibold">Submitted</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-sand bg-white">
                 {requests.map((request) => (
                   <tr key={request.id}>
                     <td className="px-4 py-4 align-top text-sm font-semibold text-ink">
-                      {request.title}
-                    </td>
-                    <td className="px-4 py-4 align-top text-sm text-muted whitespace-pre-line">
-                      {request.description}
-                    </td>
-                    <td className="px-4 py-4 align-top text-sm text-ink">
-                      {request.status}
-                    </td>
-                    <td className="px-4 py-4 align-top text-sm text-muted">
-                      {new Date(request.created_at).toLocaleDateString(undefined, {
+                      {request.title} - {new Date(request.created_at).toLocaleDateString(undefined, {
                         year: "numeric",
                         month: "short",
                         day: "numeric",
                       })}
                     </td>
+                    <td className="px-4 py-4 align-top text-sm text-muted whitespace-pre-line">
+                      {request.description}
+                    </td>
+                    
                   </tr>
                 ))}
               </tbody>

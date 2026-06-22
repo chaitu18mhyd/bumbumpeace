@@ -33,6 +33,29 @@ type HomeClientProps = {
   cities: City[];
 };
 
+const ALLOWED_TAGS = [
+  "Active",
+  "Affordable",
+  "Coastal",
+  "Culture",
+  "Easy Visa",
+  "English Speaking",
+  "EU Member",
+  "Expat Friendly",
+  "Fast Internet",
+  "Gastronomy",
+  "Healthcare",
+  "Mild Climate",
+  "Mountains",
+  "Peaceful",
+  "Quality of Life",
+  "Relaxed",
+  "Safe",
+  "Tax Friendly",
+  "Walkable",
+  "Warm",
+];
+
 export default function HomeClient({ cities }: HomeClientProps) {
   const citiesWithKeys = useMemo(
     () =>
@@ -92,7 +115,16 @@ export default function HomeClient({ cities }: HomeClientProps) {
   );
 
   const allTags = useMemo(
-    () => Array.from(new Set(cities.flatMap((c) => c.tags))).sort(),
+    () => {
+      const allowedTagSet = new Set(ALLOWED_TAGS);
+      return Array.from(
+        new Set(
+          cities
+            .flatMap((c) => c.tags)
+            .filter((tag) => allowedTagSet.has(tag))
+        )
+      ).sort();
+    },
     [cities]
   );
   const availableRegions = useMemo(

@@ -219,6 +219,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // Windowed pager: show PAGE_SIZE cities at a time.
   const [windowStart, setWindowStart] = useState(0);
   const listTopRef = useRef<HTMLDivElement | null>(null);
+  const firstPagerRenderRef = useRef(true);
   // Direction of the last page change, to slide the grid the right way.
   const [slideDir, setSlideDir] = useState<"next" | "prev" | null>(null);
   const slideClass =
@@ -269,7 +270,11 @@ export default function HomeClient({ cities }: HomeClientProps) {
   }, []);
 
   useEffect(() => {
-    if (!isMobile) return;
+    // Avoid auto-scrolling on the initial page load/refresh.
+    if (firstPagerRenderRef.current) {
+      firstPagerRenderRef.current = false;
+      return;
+    }
     if (listTopRef.current) {
       listTopRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }

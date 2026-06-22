@@ -36,7 +36,10 @@ export default function RequestFeaturePage() {
       }
 
       const result = await response.json();
-      setRequests(result.data ?? []);
+      const all = result.data ?? [];
+      setRequests(
+        all.filter((r: FeatureRequest) => (r.status ?? "").toLowerCase() !== "done")
+      );
     } catch (error) {
       setRequestError(
         error instanceof Error
@@ -188,7 +191,7 @@ export default function RequestFeaturePage() {
           <p className="text-sm text-red-700">{requestError}</p>
         ) : requests.length === 0 ? (
           <p className="text-sm text-muted">
-            No feature requests have been submitted yet.
+            All feature requests are under development.
           </p>
         ) : (
           <div className="overflow-hidden rounded-3xl border border-sand">

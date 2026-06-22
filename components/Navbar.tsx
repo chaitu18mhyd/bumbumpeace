@@ -58,6 +58,22 @@ export default function Navbar() {
             href="/"
             className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-ink"
             aria-label="BumBumSafe home"
+            onClick={(e) => {
+              try {
+                if (typeof window !== "undefined" && window.innerWidth < 768) {
+                  // On mobile/touch sizes, always perform a full reload when the
+                  // brand icon is clicked so users can refresh the main page.
+                  e.preventDefault();
+                  if (window.location.pathname === "/") {
+                    window.location.reload();
+                  } else {
+                    window.location.href = "/";
+                  }
+                }
+              } catch (err) {
+                // swallow any errors and allow Next.js navigation as a fallback
+              }
+            }}
           >
             <img
               src="/logo/bumbumsafe-logo-128.png"
@@ -66,7 +82,26 @@ export default function Navbar() {
               height={32}
               className="h-8 w-8 rounded-xl object-cover"
             />
-            <span className="hidden md:inline uppercase">Retopian</span>
+            <span
+              className="hidden md:inline uppercase"
+              onClick={(e) => {
+                try {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (typeof window !== "undefined") {
+                    if (window.location.pathname === "/") {
+                      window.location.reload();
+                    } else {
+                      window.location.href = "/";
+                    }
+                  }
+                } catch (err) {
+                  // fallback to normal navigation if anything goes wrong
+                }
+              }}
+            >
+              Retopian
+            </span>
           </Link>
 
           <ul className="hidden items-center gap-1 md:flex">

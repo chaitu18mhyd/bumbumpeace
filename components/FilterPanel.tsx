@@ -30,6 +30,8 @@ import {
   currencyInfo,
   formatNumber,
   formatUsdAs,
+  toUsd,
+  usdTo,
 } from "@/lib/currency";
 
 export type RegionFilter = "All" | Region;
@@ -69,10 +71,14 @@ function useMoneyInput(
   const ref = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
+  const normalizedValue = Number.isFinite(value) ? Math.round(value) : value;
+
   // Show formatted when not focused, unformatted when focused
   const display = isFocused
-    ? (Number.isFinite(value) ? value.toString() : "")
-    : (Number.isFinite(value) ? formatNumber(value, currency) : "");
+    ? (Number.isFinite(normalizedValue) ? normalizedValue.toString() : "")
+    : (Number.isFinite(normalizedValue)
+        ? formatNumber(normalizedValue, currency)
+        : "");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const digits = e.target.value.replace(/[^0-9]/g, "");
@@ -108,7 +114,7 @@ type FilterPanelProps = {
   monthlyIncome: number;
   currency: CurrencyCode;
   withdrawalRate: number;
-  monthlyBudgetUsd: number;
+  monthlyBudget: number;
   region: RegionFilter;
   availableRegions: Region[];
   searchQuery: string;
@@ -120,6 +126,7 @@ type FilterPanelProps = {
   onCurrencyChange: (value: CurrencyCode) => void;
   onWithdrawalRateChange: (value: number) => void;
   onRegionChange: (value: RegionFilter) => void;
+  onMonthlyBudgetChange: (budgetLocal: number) => void;
   onSearchChange: (value: string) => void;
   onHouseholdSizeChange: (value: number) => void;
   onToggleTag: (tag: string) => void;
@@ -144,7 +151,7 @@ export default function FilterPanel({
   monthlyIncome,
   currency,
   withdrawalRate,
-  monthlyBudgetUsd,
+  monthlyBudget,
   region,
   availableRegions,
   searchQuery,
@@ -156,6 +163,7 @@ export default function FilterPanel({
   onCurrencyChange,
   onWithdrawalRateChange,
   onRegionChange,
+  onMonthlyBudgetChange,
   onSearchChange,
   onHouseholdSizeChange,
   onToggleTag,
@@ -177,6 +185,15 @@ export default function FilterPanel({
 
   const ratePct = `${Math.round(withdrawalRate * 100 * 10) / 10}%`;
   const hasIncome = Number.isFinite(monthlyIncome) && monthlyIncome > 0;
+  const monthlyBudgetInput = useMoneyInput(
+    Math.round(monthlyBudget),
+    currency,
+    (amount) => {
+      const budgetLocal = Number.isFinite(amount) ? Math.round(amount) : 0;
+      onMonthlyBudgetChange(budgetLocal);
+      trackBudgetAdjustment(Number.isFinite(budgetLocal) ? toUsd(budgetLocal, currency) : 0);
+    }
+  );
   const activeCount =
     (region !== "All" ? 1 : 0) +
     (withdrawalRate !== DEFAULT_RATE ? 1 : 0) +
@@ -203,7 +220,7 @@ export default function FilterPanel({
     >
       {/* Primary input: investable assets (retirement corpus) */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-        <div className="flex flex-1 flex-col gap-1.5">
+        <div className="flex flex-1 flex-col gap-1.5 sm:max-w-[36rem]">
           <label
             htmlFor="investableAssets"
             className="text-xs font-semibold tracking-wide text-muted"
@@ -253,28 +270,52 @@ export default function FilterPanel({
                 onChange={assetsInput.onChange}
                 onBlur={assetsInput.onBlur}
                 onFocus={assetsInput.onFocus}
-                className="w-full rounded-r-2xl border border-sand bg-cream py-3.5 pl-10 pr-4 text-2xl font-extrabold tracking-tight text-ink shadow-sm outline-none transition"
+                className="w-full rounded-r-2xl border border-sand bg-cream py-3.5 pl-[65px] pr-4 text-2xl font-bold tracking-tight text-under-700 shadow-sm outline-none transition"
                 placeholder={formatNumber(1200000, currency)}
               />
             </div>
           </div>
           {amountInWords(investableAssets, currency) && (
-            <p className="text-sm font-semibold text-brand-700">
+            <p className="text-sm font-semibold text-under-700">
               {info.symbol}
               {amountInWords(investableAssets, currency)}
             </p>
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-4 rounded-2xl border border-brand-200 bg-brand-50 px-4 py-3 sm:flex-col sm:items-start sm:justify-center sm:py-3.5">
-          <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-700">
+        <div className="flex self-center items-center justify-center text-sm font-semibold uppercase tracking-wide text-muted sm:mx-2">
+          <span className="rounded-full border border-sand bg-cream px-4 py-2 shadow-sm">
+            OR
+          </span>
+        </div>
+
+        <div className="flex flex-1 items-center justify-between gap-4 rounded-2xl border border-brand-200 bg-brand-50 px-4 py-3 sm:flex-col sm:items-start sm:justify-center sm:py-3.5 sm:max-w-[24rem]">
+          <label
+            htmlFor="monthlyBudget"
+            className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-ink"
+          >
             <Wallet aria-hidden="true" className="h-3.5 w-3.5" />
             Monthly budget
-          </p>
-          <p className="text-2xl font-bold tracking-tight text-under-700">
-            {formatUsdAs(monthlyBudgetUsd, currency)}
-            <span className="ml-1 text-sm font-medium text-muted">/mo</span>
-          </p>
+          </label>
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-bold text-muted">
+              {info.symbol}
+            </span>
+            <input
+              id="monthlyBudget"
+              ref={monthlyBudgetInput.ref}
+              type="text"
+              inputMode="numeric"
+              value={monthlyBudgetInput.value}
+              onChange={monthlyBudgetInput.onChange}
+              onBlur={monthlyBudgetInput.onBlur}
+              onFocus={monthlyBudgetInput.onFocus}
+              className="w-full max-w-[10rem] rounded-xl border border-sand bg-cream py-2.5 px-3 text-2xl font-bold tracking-tight text-under-700 shadow-sm outline-none transition"
+              placeholder={formatNumber(4000, currency)}
+              aria-label="Monthly budget"
+            />
+            <span className="text-sm font-medium text-muted">/mo</span>
+          </div>
         </div>
       </div>
 
@@ -423,7 +464,7 @@ export default function FilterPanel({
                 onBlur={incomeInput.onBlur}
                 onFocus={incomeInput.onFocus}
                 tabIndex={filtersOpen ? 0 : -1}
-                className="w-full rounded-xl border border-sand bg-cream py-2.5 pl-9 pr-4 text-sm font-semibold text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+                className="w-full rounded-xl border border-sand bg-cream py-2.5 pl-12 pr-4 text-sm font-semibold text-ink shadow-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
                 placeholder="0"
               />
             </div>

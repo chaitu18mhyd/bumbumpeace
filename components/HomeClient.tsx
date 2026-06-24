@@ -157,7 +157,8 @@ export default function HomeClient({ cities }: HomeClientProps) {
   // monthly income (Social Security, pension, rental, etc.).
   const drawUsd = (toUsd(safeAssets, currency) * withdrawalRate) / 12;
   const incomeUsd = toUsd(safeIncome, currency);
-  const budgetUsd = Math.round(drawUsd + incomeUsd);
+  const budgetUsd = drawUsd + incomeUsd;
+  const monthlyBudget = Math.round(usdTo(budgetUsd, currency));
 
   // Switching currency keeps real values constant by converting the inputs.
   const handleCurrencyChange = (next: CurrencyCode) => {
@@ -173,6 +174,23 @@ export default function HomeClient({ cities }: HomeClientProps) {
     (city: City) =>
       scaledMonthlyCost(city.monthlyCost, city.expenseShares, householdSize),
     [householdSize]
+  );
+
+  const handleMonthlyBudgetChange = useCallback(
+    (budgetLocal: number) => {
+      const safeIncome = Number.isFinite(monthlyIncome)
+        ? Math.max(monthlyIncome, 0)
+        : 0;
+      const incomeUsd = toUsd(safeIncome, currency);
+      const budgetUsdLocal = Number.isFinite(budgetLocal)
+        ? toUsd(budgetLocal, currency)
+        : 0;
+      const drawUsd = Math.max(0, budgetUsdLocal - incomeUsd);
+      const nextAssetsUsd =
+        withdrawalRate > 0 ? (drawUsd * 12) / withdrawalRate : 0;
+      setInvestableAssets(Math.max(0, Math.round(usdTo(nextAssetsUsd, currency))));
+    },
+    [currency, monthlyIncome, withdrawalRate]
   );
 
   const filteredCities = useMemo(() => {
@@ -302,7 +320,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             monthlyIncome={monthlyIncome}
             currency={currency}
             withdrawalRate={withdrawalRate}
-            monthlyBudgetUsd={budgetUsd}
+            monthlyBudget={monthlyBudget}
             region={region}
             availableRegions={availableRegions}
             searchQuery={searchQuery}
@@ -315,6 +333,7 @@ export default function HomeClient({ cities }: HomeClientProps) {
             onCurrencyChange={handleCurrencyChange}
             onWithdrawalRateChange={setWithdrawalRate}
             onRegionChange={setRegion}
+            onMonthlyBudgetChange={handleMonthlyBudgetChange}
             onSearchChange={setSearchQuery}
             onToggleTag={toggleTag}
             onClearTags={() => setSelectedTags([])}

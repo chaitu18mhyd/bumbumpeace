@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUp, MapPinOff, Scale, X } from "lucide-react";
+import { MapPinOff, Scale, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import CityCard from "@/components/CityCard";
 import CityModal from "@/components/CityModal";
@@ -11,18 +11,15 @@ import { type CurrencyCode, toUsd, usdTo } from "@/lib/currency";
 import { scaledMonthlyCost } from "@/lib/expenses";
 import { cityRating } from "@/lib/rating";
 import {
-  trackPagination,
   trackComparePanel,
   trackClearFilters,
-  trackBudgetAdjustment,
-  trackCurrencyChange,
 } from "@/lib/analytics";
 
 type SortBy = "recommended" | "rating" | "cost-asc" | "cost-desc";
 
 const DEFAULT_INVESTABLE_ASSETS = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
-const PAGE_SIZE = 9;
+const LOAD_MORE_SIZE = 12;
 
 type CityItem = {
   city: City;
@@ -234,18 +231,11 @@ export default function HomeClient({ cities }: HomeClientProps) {
     return arr;
   }, [filteredCities, sortBy, costFor]);
 
-  // Windowed pager: show PAGE_SIZE cities at a time.
+  // Windowed pager: load LOAD_MORE_SIZE cities at a time with infinite scroll.
   const [windowStart, setWindowStart] = useState(0);
   const listTopRef = useRef<HTMLDivElement | null>(null);
-  const firstPagerRenderRef = useRef(true);
-  // Direction of the last page change, to slide the grid the right way.
-  const [slideDir, setSlideDir] = useState<"next" | "prev" | null>(null);
-  const slideClass =
-    slideDir === "next"
-      ? "animate-slide-in-up"
-      : slideDir === "prev"
-        ? "animate-slide-in-down"
-        : "animate-fade-slide";
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const firstLoadRef = useRef(true);
 
   // Reset to the first window whenever the filter/sort criteria change.
   useEffect(() => {
@@ -268,16 +258,11 @@ export default function HomeClient({ cities }: HomeClientProps) {
   );
 
   const total = sortedCities.length;
-  const clampedStart = Math.min(windowStart, Math.max(0, total - PAGE_SIZE));
-  const visibleCities = sortedCities.slice(
-    clampedStart,
-    clampedStart + PAGE_SIZE
-  );
-  const displayedCities = visibleCities;
-  const hasPrev = clampedStart > 0;
-  const hasNext = clampedStart + PAGE_SIZE < total;
-  const rangeStart = total === 0 ? 0 : clampedStart + 1;
-  const rangeEnd = Math.min(clampedStart + PAGE_SIZE, total);
+  const displayedCount = Math.min(windowStart + LOAD_MORE_SIZE, total);
+  const displayedCities = sortedCities.slice(0, displayedCount);
+  const hasMore = displayedCount < total;
+  const rangeStart = total === 0 ? 0 : 1;
+  const rangeEnd = displayedCount;
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
@@ -287,16 +272,22 @@ export default function HomeClient({ cities }: HomeClientProps) {
     return () => mediaQuery.removeEventListener("change", update);
   }, []);
 
+  // Infinite scroll: load more when sentinel becomes visible
   useEffect(() => {
-    // Avoid auto-scrolling on the initial page load/refresh.
-    if (firstPagerRenderRef.current) {
-      firstPagerRenderRef.current = false;
-      return;
-    }
-    if (listTopRef.current) {
-      listTopRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [windowStart, isMobile]);
+    if (!sentinelRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setWindowStart((prev) => prev + LOAD_MORE_SIZE);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(sentinelRef.current);
+    return () => observer.disconnect();
+  }, [hasMore]);
 
   return (
     <main id="top">
@@ -376,44 +367,37 @@ export default function HomeClient({ cities }: HomeClientProps) {
         {total > 0 ? (
           <>
             <div ref={listTopRef}>
-              {hasPrev && (
-                <div className="mt-5 flex justify-center">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSlideDir("prev");
-                      setWindowStart(Math.max(0, clampedStart - PAGE_SIZE));
-                    }}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-sand bg-white px-5 py-2.5 text-sm font-semibold text-muted shadow-sm transition hover:bg-sand hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-                  >
-                    <ArrowUp aria-hidden="true" className="h-4 w-4" />
-                    Show previous
-                  </button>
+              <ul
+                className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
+              >
+                {displayedCities.map((item) => {
+                  return (
+                    <li key={item.key} className="h-full">
+                      <CityCard
+                        city={item.city}
+                        budgetUsd={budgetUsd}
+                        currency={currency}
+                        people={householdSize}
+                        pinned={pinned.includes(item.key)}
+                        allowPin={!pinned.includes(item.key) && pinned.length < MAX_COMPARE}
+                        onTogglePin={() => togglePin(item.key)}
+                        onSelect={() => setSelectedCityKey(item.key)}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {/* Infinite scroll sentinel */}
+              {hasMore && (
+                <div
+                  ref={sentinelRef}
+                  className="mt-8 flex justify-center py-4"
+                >
+                  <div className="h-12 w-12 animate-spin rounded-full border-4 border-brand-300 border-t-brand-600" />
                 </div>
               )}
-
-              <ul
-                key={clampedStart}
-                className={`mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 ${slideClass}`}
-              >
-              {displayedCities.map((item) => {
-                return (
-                  <li key={item.key} className="h-full">
-                    <CityCard
-                      city={item.city}
-                      budgetUsd={budgetUsd}
-                      currency={currency}
-                      people={householdSize}
-                      pinned={pinned.includes(item.key)}
-                      allowPin={!pinned.includes(item.key) && pinned.length < MAX_COMPARE}
-                      onTogglePin={() => togglePin(item.key)}
-                      onSelect={() => setSelectedCityKey(item.key)}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+            </div>
           </>
         ) : (
           <div className="mt-8 rounded-3xl border border-dashed border-sand bg-white/60 px-6 py-16 text-center">
@@ -427,27 +411,6 @@ export default function HomeClient({ cities }: HomeClientProps) {
             <p className="mt-1 text-sm text-muted">
               Try raising your budget or widening the region or tag filters.
             </p>
-          </div>
-        )}
-
-
-        {hasNext && (
-          <div className="mt-8 flex justify-center">
-            <button
-              type="button"
-              onClick={() => {
-                trackPagination(
-                  Math.floor(clampedStart / PAGE_SIZE) + 2,
-                  filteredCities.length
-                );
-                setSlideDir("next");
-                setWindowStart(clampedStart + PAGE_SIZE);
-              }}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-300 bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-            >
-              <ArrowDown aria-hidden="true" className="h-4 w-4" />
-              Load more
-            </button>
           </div>
         )}
       </section>

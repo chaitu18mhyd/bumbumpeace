@@ -22,7 +22,7 @@ type SortBy = "recommended" | "rating" | "cost-asc" | "cost-desc";
 
 const DEFAULT_INVESTABLE_ASSETS = 1_200_000;
 const DEFAULT_WITHDRAWAL_RATE = 0.04;
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 9;
 
 type CityItem = {
   city: City;
